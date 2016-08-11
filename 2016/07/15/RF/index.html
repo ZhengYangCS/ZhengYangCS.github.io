@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          RF - Blog
+        
+    </title>
+
+    <link rel="canonical" href="/2016/07/15/RF/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">ZhengYang&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/line1.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#RF" title="RF">RF</a>
+                        
+                    </div>
+                    <h1>RF</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by ZhengYang on
+                        2016-07-15
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="RF-RandomForest"><a href="#RF-RandomForest" class="headerlink" title="RF(RandomForest)"></a>RF(RandomForest)</h2><p>RF是一个集成算法，是由多棵CART组成的，因实验需要，用c++实现了一个RF的demo。对比与sklearn上的随机森林，模型效果基本一致。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;random&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span>  </span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"stdafx.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"utils.h"</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> classK = <span class="number">3</span>; <span class="comment">// 共3类</span></div><div class="line"><span class="keyword">int</span> classList[<span class="number">3</span>] = &#123; <span class="number">1</span>,<span class="number">3</span>,<span class="number">6</span> &#125;; <span class="comment">// 每类的label</span></div><div class="line"><span class="keyword">float</span>* pk = <span class="keyword">new</span> <span class="keyword">float</span>[classK];</div><div class="line"></div><div class="line"><span class="keyword">int</span> ATTRS = <span class="number">19</span>; <span class="comment">// 共19个属性</span></div><div class="line"><span class="keyword">int</span> ROWS = <span class="number">117</span>;</div><div class="line"><span class="keyword">float</span>** data_X;</div><div class="line"><span class="keyword">float</span>** data_y;</div><div class="line"></div><div class="line"><span class="keyword">int</span> ntrace = <span class="number">821</span>;</div><div class="line"><span class="keyword">int</span> nSample = <span class="number">476</span>;</div><div class="line"><span class="keyword">int</span> SampleRate = <span class="number">2000</span>;</div><div class="line"><span class="keyword">int</span> headNum = <span class="number">120</span>;</div><div class="line"></div><div class="line"><span class="comment">// 节点</span></div><div class="line"><span class="keyword">struct</span> Node &#123;</div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ids;   <span class="comment">// 记录该节点的所包含的节点的索引</span></div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; attrs; <span class="comment">// 记录已经使用的属性[0-18]</span></div><div class="line"></div><div class="line">	<span class="keyword">int</span> attr;</div><div class="line">	<span class="keyword">float</span> value;</div><div class="line"></div><div class="line">	Node* left;</div><div class="line">	Node* right;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 初始化随机 ids，有放回抽样，同原数据集大小</span></div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ids_init_random() &#123;</div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ROWS; ++i) &#123;</div><div class="line">		vec.push_back(rand() % ROWS);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> vec;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 初始化随机 attr，无放回抽样，5个</span></div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; attrs_init_random() &#123;</div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</div><div class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> tmp = <span class="number">0</span>;</div><div class="line">	<span class="keyword">bool</span> flag = <span class="literal">false</span>; <span class="comment">// 是否重复</span></div><div class="line">	<span class="keyword">while</span> (i&lt;<span class="number">5</span>) &#123;   <span class="comment">// 每棵树只选5个属性</span></div><div class="line">		tmp = rand() % ATTRS;		</div><div class="line">		<span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = vec.begin(); it != vec.end(); it++) &#123;</div><div class="line">			<span class="keyword">if</span> (*it == tmp) &#123;</div><div class="line">				flag = <span class="literal">true</span>;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (!flag) &#123;</div><div class="line">			vec.push_back(tmp);</div><div class="line">			++i;		</div><div class="line">		&#125;</div><div class="line">		flag = <span class="literal">false</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> vec;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 传进来的是索引ids</span></div><div class="line"><span class="function"><span class="keyword">float</span> <span class="title">gini</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ids)</span> </span>&#123;</div><div class="line">	<span class="built_in">memset</span>(pk, <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="keyword">float</span>)*classK);</div><div class="line">	<span class="comment">// 计算每类的概率</span></div><div class="line">	<span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = ids.begin(); it != ids.end(); it++) &#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; classK; k++) &#123;</div><div class="line">			<span class="keyword">if</span> (data_y[*it][<span class="number">0</span>] == classList[k]) &#123;</div><div class="line">				pk[k] = pk[k] + <span class="number">1</span>;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">float</span> gini_p = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; classK; k++) &#123;</div><div class="line">		<span class="keyword">if</span> (ids.size() != <span class="number">0</span>)</div><div class="line">			pk[k] = pk[k] / ids.size();</div><div class="line">		gini_p = gini_p + pk[k] * (<span class="number">1</span> - pk[k]);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> gini_p;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 尝试将cart树换成id3，但效果一般</span></div><div class="line"><span class="comment">//float entropy(vector&lt;int&gt; ids) &#123;</span></div><div class="line"><span class="comment">//	memset(pk, 0, sizeof(float)*classK);</span></div><div class="line"><span class="comment">//	// 计算每类的概率</span></div><div class="line"><span class="comment">//	for (vector&lt;int&gt;::iterator it = ids.begin(); it != ids.end(); it++) &#123;</span></div><div class="line"><span class="comment">//		for (int k = 0; k &lt; classK; k++) &#123;</span></div><div class="line"><span class="comment">//			if (data_y[*it][0] == classList[k]) &#123;</span></div><div class="line"><span class="comment">//				pk[k] = pk[k] + 1;</span></div><div class="line"><span class="comment">//				break;</span></div><div class="line"><span class="comment">//			&#125;</span></div><div class="line"><span class="comment">//		&#125;</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//	float entropy_p = 0;</span></div><div class="line"><span class="comment">//	for (int k = 0; k &lt; classK; k++) &#123;</span></div><div class="line"><span class="comment">//		if (ids.size() != 0)</span></div><div class="line"><span class="comment">//			pk[k] = pk[k] / ids.size();</span></div><div class="line"><span class="comment">//		entropy_p = entropy_p - pk[k] * log(pk[k]);</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//	return entropy_p;</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//&#125;</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">cart</span><span class="params">(Node* root)</span> </span>&#123;</div><div class="line">	<span class="comment">// 计算该节点的准确率</span></div><div class="line">	<span class="built_in">memset</span>(pk, <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="keyword">float</span>)*classK);</div><div class="line">	<span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = root-&gt;ids.begin(); it != root-&gt;ids.end(); it++) &#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; classK; k++) &#123;</div><div class="line">			<span class="keyword">if</span> (data_y[*it][<span class="number">0</span>] == classList[k]) &#123;</div><div class="line">				pk[k] = pk[k] + <span class="number">1</span>;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">float</span> mostvote = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> mostid = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; classK; k++) &#123;</div><div class="line">		<span class="keyword">if</span> (pk[k] &gt; mostvote) &#123;</div><div class="line">			mostvote = pk[k];</div><div class="line">			mostid = k;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 终止条件,少于10个，或者准确率高</span></div><div class="line">	<span class="keyword">if</span> (mostvote / root-&gt;ids.size() &gt; <span class="number">0.8</span>) &#123;</div><div class="line">		root-&gt;value = classList[mostid];  <span class="comment">// 叶子节点的分类结果，为[1,3,6]</span></div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 先计算目前数据集的基尼指数</span></div><div class="line">	<span class="keyword">float</span> gini_p = gini(root-&gt;ids);</div><div class="line">	<span class="comment">// 再计算每个属性，每个分割点的基尼指数，越小越好</span></div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ids1;</div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ids2;</div><div class="line">	<span class="keyword">float</span> gini_p_min = FLT_MAX;  <span class="comment">// 目标是取最小的基尼指数</span></div><div class="line">	<span class="keyword">int</span> gini_p_attr = <span class="number">1</span>;</div><div class="line">	<span class="keyword">float</span> gini_p_value = <span class="number">0</span>;</div><div class="line">	<span class="keyword">float</span> gini_tmp = <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="keyword">bool</span> flag = <span class="literal">false</span>; <span class="comment">// 该属性是否已经使用过</span></div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it_attr = root-&gt;attrs.begin(); it_attr!=root-&gt;attrs.end(); it_attr++) &#123;</div><div class="line">		<span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it_value = root-&gt;ids.begin(); it_value != root-&gt;ids.end(); it_value++) &#123;</div><div class="line">			<span class="comment">//遍历分割点，然后遍历把元素都放 ids1和ids2 中</span></div><div class="line">			<span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = root-&gt;ids.begin(); it != root-&gt;ids.end(); it++) &#123;</div><div class="line">				<span class="keyword">if</span> (data_X[*it][*it_attr] &lt;= data_X[*it_value][*it_attr]) &#123;</div><div class="line">					ids1.push_back(*it);</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span> &#123;</div><div class="line">					ids2.push_back(*it);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="comment">// 计算gini_p_attr,并找出最优的attr和value</span></div><div class="line">			gini_tmp = gini(ids1)*ids1.size() / root-&gt;ids.size() + gini(ids2)*ids2.size() / root-&gt;ids.size();</div><div class="line">			<span class="keyword">if</span> (gini_tmp &lt; gini_p_min) &#123;</div><div class="line">				gini_p_min = gini_tmp;</div><div class="line">				gini_p_attr = *it_attr;</div><div class="line">				gini_p_value = data_X[*it_value][*it_attr];</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="comment">// 重新清理ids1，ids2，供下次循环使用</span></div><div class="line">			ids1.clear();</div><div class="line">			ids2.clear();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 将ids根据gini_p_attr和gini_n_value 分成ids1和ids2</span></div><div class="line">	<span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = root-&gt;ids.begin(); it != root-&gt;ids.end(); it++) &#123;</div><div class="line">		<span class="keyword">if</span> (data_X[*it][gini_p_attr] &lt;= gini_p_value) &#123;</div><div class="line">			ids1.push_back(*it);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			ids2.push_back(*it);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 如果其中有一部分非常少，那么直接合并返回</span></div><div class="line">	<span class="keyword">if</span> (ids2.size() &lt;= <span class="number">5</span> || ids1.size() &lt;= <span class="number">5</span>) &#123;</div><div class="line">		root-&gt;value = classList[mostid];</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 建立树节点</span></div><div class="line">	root-&gt;attr = gini_p_attr;</div><div class="line">	root-&gt;value = gini_p_value;</div><div class="line"></div><div class="line">	<span class="comment">// 递归建立左子树</span></div><div class="line">	root-&gt;left = <span class="keyword">new</span> Node;</div><div class="line">	*root-&gt;left = &#123; ids1, root-&gt;attrs, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span> &#125;;</div><div class="line">	cart(root-&gt;left);</div><div class="line"></div><div class="line">  <span class="comment">// 递归建立右子树</span></div><div class="line">	root-&gt;right = <span class="keyword">new</span> Node;</div><div class="line">	*root-&gt;right = &#123; ids2, root-&gt;attrs, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span> &#125;;</div><div class="line">	cart(root-&gt;right);</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">float</span> <span class="title">cart_predict</span><span class="params">(Node* root, <span class="keyword">float</span>* predict_X)</span> </span>&#123;</div><div class="line">	Node* cur = root;</div><div class="line">	<span class="keyword">while</span> (!(cur-&gt;left == <span class="literal">NULL</span> &amp;&amp; cur-&gt;right == <span class="literal">NULL</span>)) &#123;</div><div class="line">		<span class="keyword">if</span> (predict_X[cur-&gt;attr] &lt;= cur-&gt;value) &#123;</div><div class="line">			cur = cur-&gt;left;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			cur = cur-&gt;right;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 重新返回根节点</span></div><div class="line">	<span class="comment">//cur = root;</span></div><div class="line">	<span class="keyword">return</span> cur-&gt;value;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/07/17/logistic/" data-toggle="tooltip" data-placement="top" title="Logistic&Softmax">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/07/10/指针数组&数组指针/" data-toggle="tooltip" data-placement="top" title="指针数组&数组指针">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "/2016/07/15/RF/";
+    var disqus_url = "/2016/07/15/RF/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; ZhengYang&#39;s Blog 2016 
+                    <br>
+		Driver - <a href="https://hexo.io/">Hexo</a> | 
+                    Theme - <a href="https://github.com/Kaijun/hexo-theme-huxblog">Hux</a> 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'zhengyangcs.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
