@@ -97,14 +97,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -191,7 +191,15 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h2><p>SVM是一种非常有效的二分类模型，是在特种空间上的间隔最大分类器。</p>
+                <p>机器学习中，不同的模型，对待训练样本也不同</p>
+<ul>
+<li>有的是训练完得到参数后，就抛弃了，比如神经网络。</li>
+<li>有的还需要完整的训练样本，比如KNN</li>
+<li>有的是需要一部分训练样本，比如SVM</li>
+</ul>
+<p>SVM是一种非常有效的二分类模型，是在特种空间上的间隔最大分类器。</p>
+<p>将线性模型转换成对偶形式，就可以利用核函数来计算相似性，同时避免了直接做高维向量内积运算。</p>
+<p>支持向量是很少的，因此也可以理解为sparse kernel machines。也是用训练样本直接对新样本做预测，而且只使用了少量训练样本，所以具有稀疏性。</p>
 <p><img src="http://oavdwoegd.bkt.clouddn.com/svm1.jpg" alt=""><br><img src="http://oavdwoegd.bkt.clouddn.com/svm2.jpg" alt=""><br><img src="http://oavdwoegd.bkt.clouddn.com/svm3.jpg" alt=""><br><img src="http://oavdwoegd.bkt.clouddn.com/svm4.jpg" alt=""><br><img src="http://oavdwoegd.bkt.clouddn.com/svm5.jpg" alt=""><br><img src="http://oavdwoegd.bkt.clouddn.com/svm6.jpg" alt=""><br><img src="http://oavdwoegd.bkt.clouddn.com/svm7.jpg" alt=""></p>
 
 
