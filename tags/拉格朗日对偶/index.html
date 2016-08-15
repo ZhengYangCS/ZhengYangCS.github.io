@@ -13,11 +13,11 @@
 
     <title>
         
-          EM(PRML,cs229,统计学习方法) - ZhengYang&#39;s Blog
+          ZhengYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="/2016/07/21/EM-PRML-cs229-统计学习方法/">
+    <link rel="canonical" href="/tags/拉格朗日对偶/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -97,14 +97,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -147,161 +147,7 @@
 
 
     <!-- Main Content -->
-    
-<!-- Image to hack wechat -->
-<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
-
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        background-image: url('/img/line1.jpg')
-    }
-</style>
-<header class="intro-header" >
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                          <a class="tag" href="/tags/#EM" title="EM">EM</a>
-                        
-                    </div>
-                    <h1>EM(PRML,cs229,统计学习方法)</h1>
-                    <h2 class="subheading"></h2>
-                    <span class="meta">
-                        Posted by ZhengYang on
-                        2016-07-21
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <h2 id="EM"><a href="#EM" class="headerlink" title="EM"></a>EM</h2><p>EM算法是是一种非常有效的算法，分为求期望部分（E步）和求极大部分（M步），可以用在求混合高斯模型，隐马尔科夫模型等。不同的文章讲EM，会有不同的角度，我主要从PRML，cs229和统计学习方法中，总结了EM过程。</p>
-<h3 id="PRML"><a href="#PRML" class="headerlink" title="PRML"></a>PRML</h3><p><img src="http://oavdwoegd.bkt.clouddn.com/EM_PRML.jpg" alt="PRML_1"><br><img src="http://oavdwoegd.bkt.clouddn.com/EM_PRML2.jpg" alt="PRML_2"></p>
-<h3 id="cs229"><a href="#cs229" class="headerlink" title="cs229"></a>cs229</h3><p><img src="http://oavdwoegd.bkt.clouddn.com/EM_cs229.jpg" alt="cs229_1"><br><img src="http://oavdwoegd.bkt.clouddn.com/EM_cs229_2.jpg" alt="cs229_2"></p>
-<h3 id="统计学习方法"><a href="#统计学习方法" class="headerlink" title="统计学习方法"></a>统计学习方法</h3><p><img src="http://oavdwoegd.bkt.clouddn.com/EM_Stat.jpg" alt="stat"></p>
-
-
-                <hr>
-
-                
-
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2016/07/22/Comparable&Comparator/" data-toggle="tooltip" data-placement="top" title="Comparable & Comparator">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2016/07/17/logistic/" data-toggle="tooltip" data-placement="top" title="Logistic&Softmax">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                
-
-                
-                <!-- disqus 评论框 start -->
-                <div class="comment">
-                    <div id="disqus_thread" class="disqus-thread"></div>
-                </div>
-                <!-- disqus 评论框 end -->
-                
-
-            </div>
-    <!-- Side Catalog Container -->
-        
-
-    <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-
-        </div>
-    </div>
-</article>
-
-
-
-
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "/2016/07/21/EM-PRML-cs229-统计学习方法/";
-    var disqus_url = "/2016/07/21/EM-PRML-cs229-统计学习方法/";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus 公共JS代码 end -->
-
-
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
+    <!-- Default Archive layout, we use archives instead. -->
 
     <!-- Footer -->
     <!-- Footer -->

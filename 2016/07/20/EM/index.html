@@ -13,11 +13,11 @@
 
     <title>
         
-          Logistic&amp;Softmax - ZhengYang&#39;s Blog
+          EM - ZhengYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="/2016/07/17/logistic/">
+    <link rel="canonical" href="/2016/07/20/EM/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#logistic softmax" title="logistic softmax">logistic softmax</a>
+                          <a class="tag" href="/tags/#EM" title="EM">EM</a>
                         
                     </div>
-                    <h1>Logistic&amp;Softmax</h1>
+                    <h1>EM</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by ZhengYang on
-                        2016-07-17
+                        2016-07-20
                     </span>
                 </div>
             </div>
@@ -191,9 +191,23 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="Logistic-amp-Softmax"><a href="#Logistic-amp-Softmax" class="headerlink" title="Logistic &amp; Softmax"></a>Logistic &amp; Softmax</h2><p>logistic regression是对数几率回归，属于广义线性回归，是二分类问题。</p>
-<p>Softmax regression是logistic的多分类版本。</p>
-<h2 id="对比总结"><a href="#对比总结" class="headerlink" title="对比总结"></a>对比总结</h2><p><img src="http://oavdwoegd.bkt.clouddn.com/logistic.png" alt=""></p>
+                <h2 id="EM"><a href="#EM" class="headerlink" title="EM"></a>EM</h2><p>如果只有观测变量，那么可以直接用极大似然估计，或极大后验概率估计来估计参数。</p>
+<p>但如果样本中包含了隐变量，而隐变量的值不知道，所以没法计算概率，也就不能直接用极大似然估计或极大后验估计了。</p>
+<p>这也是EM算法的由来。EM算法是一种迭代算法，用来解决含有隐变量的概率模型的学习。</p>
+<p>EM算法分为求期望部分（E步）和求极大部分（M步），可以用在求混合高斯模型，隐马尔科夫模型等。不同的文章讲EM，会有不同的角度，我主要从PRML，cs229和统计学习方法中，总结了EM过程。</p>
+<p>为什么EM能使目标函数收敛到局部最优？</p>
+<p><img src="http://oavdwoegd.bkt.clouddn.com/EM1.png" alt=""></p>
+<p>L是q的泛函形式；KL是q和p的对比散度</p>
+<p><img src="http://oavdwoegd.bkt.clouddn.com/EM2.png" alt=""></p>
+<p>由于KL是大于等于0的，因此，L是目标函数的下界</p>
+<ol>
+<li>为了增大下界，即L等于目标函数，令KL为0，得到了q函数的具体形式，即等于当前的p</li>
+<li>将q代入L，调整L中的参数，极大化L，但同时KL大于0了，所以目标函数的增幅大于L</li>
+<li>此时，再次令KL为0，得到q，迭代，直至L收敛</li>
+</ol>
+<h3 id="PRML"><a href="#PRML" class="headerlink" title="PRML"></a>PRML</h3><p><img src="http://oavdwoegd.bkt.clouddn.com/EM_PRML.jpg" alt="PRML_1"><br><img src="http://oavdwoegd.bkt.clouddn.com/EM_PRML2.jpg" alt="PRML_2"></p>
+<h3 id="cs229"><a href="#cs229" class="headerlink" title="cs229"></a>cs229</h3><p><img src="http://oavdwoegd.bkt.clouddn.com/EM_cs229.jpg" alt="cs229_1"><br><img src="http://oavdwoegd.bkt.clouddn.com/EM_cs229_2.jpg" alt="cs229_2"></p>
+<h3 id="统计学习方法"><a href="#统计学习方法" class="headerlink" title="统计学习方法"></a>统计学习方法</h3><p><img src="http://oavdwoegd.bkt.clouddn.com/EM_Stat.jpg" alt="stat"></p>
 
 
                 <hr>
@@ -203,12 +217,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2016/07/20/EM/" data-toggle="tooltip" data-placement="top" title="EM">&larr; Previous Post</a>
+                            <a href="/2016/07/22/Comparable&Comparator/" data-toggle="tooltip" data-placement="top" title="Comparable & Comparator">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2016/07/15/C++&java键盘输入/" data-toggle="tooltip" data-placement="top" title="C++&Java 键盘输入">Next Post &rarr;</a>
+                            <a href="/2016/07/17/logistic/" data-toggle="tooltip" data-placement="top" title="Logistic&Softmax">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -252,8 +266,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "/2016/07/17/logistic/";
-    var disqus_url = "/2016/07/17/logistic/";
+    var disqus_identifier = "/2016/07/20/EM/";
+    var disqus_url = "/2016/07/20/EM/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -97,14 +97,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -181,6 +181,124 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/08/15/线性规划对偶问题/">
+        <h2 class="post-title">
+            线性规划之对偶问题
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            首先明确一下，很多凸优化问题都可以通过对偶问题来求解（SVM），线性规划只是一个特例。而且线性规划的对偶问题，可以用拉格朗日对偶理论导出。
+为什么要进行对偶问题？线性规划中，如果原始问题约束条件多，决策变量少，转换为对偶问题约束变少了，更好求解。
+一个对偶问题的例子
+
+
+产品
+产品A1
+产品A2
+资源量
+资源价格（影子价格）
+
+
+
+
+设备B1
+5
+10
+40台
+y1
+
+
+材料B2
+2
+0
+8......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-08-15
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/08/14/RBF/">
+        <h2 class="post-title">
+            RBF网络
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            RBF网络径向基函数网络(Radial basis function network)是一种使用径向基函数作为激活函数的人工神经网络。
+也可以看成是径向基函数做基函数，组合的线性模型。
+径向基函数可以看成核函数，因此，也可以看做是一种核方法。
+
+...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-08-14
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/08/13/SVM/">
+        <h2 class="post-title">
+            SVM
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            SVMSVM是一种非常有效的二分类模型，是在特种空间上的间隔最大分类器。
+
+...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-08-13
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/08/12/拉格朗日对偶/">
+        <h2 class="post-title">
+            拉格朗日对偶
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            拉格朗日对偶在约束最优化时，常常利用拉格朗日对偶性，将原始问题转化为对偶问题。
+最常见的就是在SVM中的使用，其实线性规划中的对偶问题也可以用拉格朗日对偶来解释。
+
+
+...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-08-12
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -346,120 +464,6 @@ instanceof
     <p class="post-meta">
         Posted by ZhengYang on
         2016-07-27
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/07/22/Comparable&Comparator/">
-        <h2 class="post-title">
-            Comparable & Comparator
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Comparable &amp; ComparatorComparable和Comparator都是接口
-java.lang.Comparable中只有一个未实现的方法，comparaTo。123public interface Comparable&lt;T&gt; &#123;    public int compareTo(T o);&#125;
-java.util.Comparato......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-07-22
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/07/21/EM-PRML-cs229-统计学习方法/">
-        <h2 class="post-title">
-            EM(PRML,cs229,统计学习方法)
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            EMEM算法是是一种非常有效的算法，分为求期望部分（E步）和求极大部分（M步），可以用在求混合高斯模型，隐马尔科夫模型等。不同的文章讲EM，会有不同的角度，我主要从PRML，cs229和统计学习方法中，总结了EM过程。
-PRML
-cs229
-统计学习方法
-...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-07-21
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/07/17/logistic/">
-        <h2 class="post-title">
-            Logistic&Softmax
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Logistic &amp; Softmaxlogistic regression是对数几率回归，属于广义线性回归，是二分类问题。
-Softmax regression是logistic的多分类版本。
-对比总结
-...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-07-17
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/07/15/C++&java键盘输入/">
-        <h2 class="post-title">
-            C++&Java 键盘输入
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            命令行中，可能要求有不同格式的输入，总结了多种情况，用c++，java，分别实现。
-C++键盘输入单个输入
-
-
-单个int的输入
-
-
-
-
-结束：（回车）换行
-
-
-特殊情况
-
-
-[a1，空格，tab，a2]，a1被保存到a中，a2输入无效。Eg. [123 \t456]
-
-
-[空格，tab，a1]，a1被保存到a中。Eg. [ \t123]
-
-
-[空格，tab，a1，’a’]，a1被保存到a中......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-07-15
     </p>
 
 </div>
