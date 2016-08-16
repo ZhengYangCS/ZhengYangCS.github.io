@@ -13,11 +13,11 @@
 
     <title>
         
-          线性规划之对偶问题 - ZhengYang&#39;s Blog
+          EM算法解高斯混合模型 - ZhengYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="/2016/08/15/线性规划对偶问题/">
+    <link rel="canonical" href="/2016/08/16/GMM/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#线性规划之对偶问题" title="线性规划之对偶问题">线性规划之对偶问题</a>
+                          <a class="tag" href="/tags/#EM GMM" title="EM GMM">EM GMM</a>
                         
                     </div>
-                    <h1>线性规划之对偶问题</h1>
+                    <h1>EM算法解高斯混合模型</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by ZhengYang on
-                        2016-08-15
+                        2016-08-16
                     </span>
                 </div>
             </div>
@@ -191,253 +191,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>首先明确一下，很多凸优化问题都可以通过对偶问题来求解（SVM），线性规划只是一个特例。而且线性规划的对偶问题，可以用拉格朗日对偶理论导出。</p>
-<h3 id="为什么要进行对偶问题？"><a href="#为什么要进行对偶问题？" class="headerlink" title="为什么要进行对偶问题？"></a>为什么要进行对偶问题？</h3><p>线性规划中，如果原始问题约束条件多，决策变量少，转换为对偶问题约束变少了，更好求解。</p>
-<h3 id="一个对偶问题的例子"><a href="#一个对偶问题的例子" class="headerlink" title="一个对偶问题的例子"></a>一个对偶问题的例子</h3><table>
-<thead>
-<tr>
-<th>产品</th>
-<th>产品A1</th>
-<th>产品A2</th>
-<th>资源量</th>
-<th>资源价格（影子价格）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>设备B1</td>
-<td>5</td>
-<td>10</td>
-<td>40台</td>
-<td>y1</td>
-</tr>
-<tr>
-<td>材料B2</td>
-<td>2</td>
-<td>0</td>
-<td>8吨</td>
-<td>y2</td>
-</tr>
-<tr>
-<td>材料B3</td>
-<td>0</td>
-<td>6</td>
-<td>18吨</td>
-<td>y3</td>
-</tr>
-<tr>
-<td>利润</td>
-<td>4万元</td>
-<td>6万元</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>产量</td>
-<td>x1</td>
-<td>x2</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong> 原问题</strong></p>
-<table>
-<thead>
-<tr>
-<th>Max：s = 4<em>x1 + 6</em>x2</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>s.t.</td>
-</tr>
-<tr>
-<td>5<em>x1 + 10</em>x2 &lt;= 40</td>
-</tr>
-<tr>
-<td>2*x1 &lt;= 8</td>
-</tr>
-<tr>
-<td>6*x2 &lt;= 18</td>
-</tr>
-<tr>
-<td>x1 &gt;= 0</td>
-</tr>
-<tr>
-<td>x2 &gt;= 0</td>
-</tr>
-</tbody>
-</table>
-<p><strong> 对偶问题</strong></p>
-<table>
-<thead>
-<tr>
-<th>Min: w = 40<em>y1 + 8</em>y2 + 18*y3</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>s.t.</td>
-</tr>
-<tr>
-<td>5<em>y1 + 2</em>y2 &gt;= 4</td>
-</tr>
-<tr>
-<td>10<em>y1 + 6</em>y3 &gt;= 6</td>
-</tr>
-<tr>
-<td>y1 &gt;= 0</td>
-</tr>
-<tr>
-<td>y2 &gt;= 0</td>
-</tr>
-<tr>
-<td>y3 &gt;= 0</td>
-</tr>
-</tbody>
-</table>
-<p><strong> 对偶问题的经济学解释</strong></p>
-<p><strong> 原问题 </strong></p>
-<ul>
-<li>直观解释：我自己加工，卖产品，得利润</li>
-<li>约束：每个产品里的成本量，必须满足小于资源总量</li>
-<li>目标：最大利润</li>
-</ul>
-<p><strong> 对偶问题</strong></p>
-<ul>
-<li>直观解释：别人委托我加工，付给我资源使用费</li>
-<li>约束：对于我来说，每个产品的资源使用费一定要高于该产品的利润，否则我会自己加工。</li>
-<li>目标：获得更多的委托，间接表示为资源使用费最小。<br>（从需求供给上来考虑，我的资源使用费必须尽可能的小，才能接收到更多的委托，才能得到更多的资源使用费）</li>
-</ul>
-<p><em>当委托加工的目标函数降到最小时，就等同于自己加工利润的最大值。所以说，上述对偶问题是原问题的上界。</em></p>
-<h3 id="影子价格？"><a href="#影子价格？" class="headerlink" title="影子价格？"></a>影子价格？</h3><p>对偶问题的解，相当于原规划中各种资源的价值，称为影子价格(Shadow price)，是对资源价值的一个估价。影子价格又称边际价值（Marginal Value）。</p>
-<ul>
-<li>影子价格为0的资源，是系统中的长线资源，其供应的继续扩大（对偶问题目标函数的资源量，eg，40），并不能使系统的最大收益有所增加；</li>
-<li>影子价格大于0的资源，则是系统中的短线资源，它的供应的扩大，将使系统中的最大收益增加。</li>
-</ul>
-<p>影子价格不是资源的市场价格，也不是会计帐面上的数字，而是经济分析中使用的一个概念，是用以分析某种资源在系统中所起的作用。</p>
-<h3 id="拉格朗日对偶中的理论解释"><a href="#拉格朗日对偶中的理论解释" class="headerlink" title="拉格朗日对偶中的理论解释"></a>拉格朗日对偶中的理论解释</h3><p><strong> 原问题</strong></p>
-<table>
-<thead>
-<tr>
-<th>Max：s = 4<em>x1 + 6</em>x2</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>s.t.</td>
-</tr>
-<tr>
-<td>5<em>x1 + 10</em>x2 &lt;= 40</td>
-</tr>
-<tr>
-<td>2*x1 &lt;= 8</td>
-</tr>
-<tr>
-<td>6*x2 &lt;= 18</td>
-</tr>
-<tr>
-<td>x1 &gt;= 0</td>
-</tr>
-<tr>
-<td>x2 &gt;= 0</td>
-</tr>
-</tbody>
-</table>
-<p>优化问题一般是求极小值，因此转化一下原问题的目标函数和约束，得到原问题1。</p>
-<p><strong> 原问题1</strong></p>
-<table>
-<thead>
-<tr>
-<th>Min：s = -4<em>x1 - 6</em>x2</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>s.t.</td>
-</tr>
-<tr>
-<td>5<em>x1 + 10</em>x2 - 40 &lt;= 0</td>
-</tr>
-<tr>
-<td>2*x1 - 8 &lt;= 0</td>
-</tr>
-<tr>
-<td>6*x2 - 18 &lt;= 0</td>
-</tr>
-<tr>
-<td>-x1 &lt;= 0</td>
-</tr>
-<tr>
-<td>-x2 &lt;= 0</td>
-</tr>
-</tbody>
-</table>
-<p>拉格朗日对偶问题，先min，后max</p>
-<p>构造拉格朗日函数，<br>Max L = -4*x1-6*x2 + y1*(5*x1+10*x2-40) + y2*(2*x1-8) + y3*(6*x2-18) + y4*(-x1) + y5*(-x2)</p>
-<p>分别对x1和x2求偏导，得到</p>
-<p>-4 + 5<em>y1 + 2</em>y2 - y4 = 0</p>
-<p>-6 + 10<em>y1 + 6</em>y3 – y5 = 0</p>
-<p>Y1,y2,y3,y4,y5&gt;=0</p>
-<p>将y4和y5用y1,y2,y3替换得</p>
-<p>y4 = -4 + 5<em>y1 + 2</em>y2 &gt;= 0</p>
-<p>y5 = -6 + 10<em>y1 + 6</em>y3 &gt;=0</p>
-<p>y1,y2,y3&gt;=0</p>
-<p>将L函数中的y4,y5用y1,y2,y3替换得</p>
-<p>L = -4*x1-6*x2 + y1*(5*x1+10*x2-40) + y2*(2*x1-8) + y3*(6*x2-18) +<br>(-4+5*y1+2*y2)*(-x1) + (-6+10*y1+6*y3)*(-x2)</p>
-<p>化简L，得<br>L=-40*y1-8*y2-18*y3</p>
-<p>所以，拉格朗日对偶问题为，</p>
-<table>
-<thead>
-<tr>
-<th>Max L = -40<em>y1 - 8</em>y2 - 18*y3</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>s.t.</td>
-</tr>
-<tr>
-<td>-4 + 5<em>y1 + 2</em>y2 &gt;= 0</td>
-</tr>
-<tr>
-<td>-6 + 10<em>y1 + 6</em>y3 &gt;=0</td>
-</tr>
-<tr>
-<td>y1,y2,y3 &gt;= 0</td>
-</tr>
-</tbody>
-</table>
-<p>整理一下，得线性规划对偶问题的形式</p>
-<table>
-<thead>
-<tr>
-<th>Min: L = 40<em>y1 + 8</em>y2 + 18*y3</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>s.t.</td>
-</tr>
-<tr>
-<td>5<em>y1 + 2</em>y2 &gt;= 4</td>
-</tr>
-<tr>
-<td>10<em>y1 + 6</em>y3 &gt;= 6</td>
-</tr>
-<tr>
-<td>y1 &gt;= 0</td>
-</tr>
-<tr>
-<td>y2 &gt;= 0</td>
-</tr>
-<tr>
-<td>y3 &gt;= 0</td>
-</tr>
-</tbody>
-</table>
-<p>所以，可以看出线性规划的对偶问题，是拉格朗日对偶的一个特例。</p>
+                <p>EM算法的一个重要应用是GMM的参数估计。因为GMM中包含一个隐变量，即可观测变量是来自哪个高斯的，因此，EM算法非常适合解决GMM的参数估计。</p>
+<p><img src="http://oavdwoegd.bkt.clouddn.com/EMGMM1.jpg" alt=""><br><img src="http://oavdwoegd.bkt.clouddn.com/EMGMM2.jpg" alt=""><br><img src="http://oavdwoegd.bkt.clouddn.com/EMGMM3.jpg" alt=""></p>
 
 
                 <hr>
@@ -446,13 +201,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/08/16/GMM/" data-toggle="tooltip" data-placement="top" title="EM算法解高斯混合模型">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/08/14/RBF/" data-toggle="tooltip" data-placement="top" title="RBF网络">Next Post &rarr;</a>
+                            <a href="/2016/08/15/线性规划对偶问题/" data-toggle="tooltip" data-placement="top" title="线性规划之对偶问题">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -496,8 +247,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "/2016/08/15/线性规划对偶问题/";
-    var disqus_url = "/2016/08/15/线性规划对偶问题/";
+    var disqus_identifier = "/2016/08/16/GMM/";
+    var disqus_url = "/2016/08/16/GMM/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
