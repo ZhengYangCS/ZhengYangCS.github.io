@@ -13,11 +13,11 @@
 
     <title>
         
-          常用优化方法 - ZhengYang&#39;s Blog
+          mathjax - ZhengYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="/2016/08/04/常用优化方法/">
+    <link rel="canonical" href="/2016/08/17/test/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#梯度下降 牛顿法 拟牛顿法" title="梯度下降 牛顿法 拟牛顿法">梯度下降 牛顿法 拟牛顿法</a>
+                          <a class="tag" href="/tags/#mathjax" title="mathjax">mathjax</a>
                         
                     </div>
-                    <h1>常用优化方法</h1>
+                    <h1>mathjax</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by ZhengYang on
-                        2016-08-04
+                        2016-08-17
                     </span>
                 </div>
             </div>
@@ -191,21 +191,53 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p><em>以下的优化方法，对于非凸问题，都不能保证求得的极小值为全局最小值。</em></p>
-<h2 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h2><p>梯度下降是求解无约束最优化问题，最常用的方法。<br>常用于回归，神经网络等中，优化极小目标函数。<br>目标函数的梯度，表示函数值增长最快的方向，因此，取负梯度的方向作为下一次取值的方向。<br>优点：算法简单，实现容易。<br>缺点：极小值附近梯度减小慢。</p>
-<h2 id="牛顿法"><a href="#牛顿法" class="headerlink" title="牛顿法"></a>牛顿法</h2><p>牛顿法也是求解无约束最优化问题，常用的方法。<br>牛顿法是泰勒二阶展开，求偏导为0。相比梯度下降，它的收敛速度快，迭代次数少于梯度下降。<br>缺点：每一步除了计算梯度，还要计算Hesse矩阵的逆，计算复杂。</p>
-<h3 id="为什么梯度下降和牛顿法能迭代降低目标函数值？"><a href="#为什么梯度下降和牛顿法能迭代降低目标函数值？" class="headerlink" title="为什么梯度下降和牛顿法能迭代降低目标函数值？"></a>为什么梯度下降和牛顿法能迭代降低目标函数值？</h3><p>这里不介绍梯度下降法和牛顿法的算法，仅说明为什么能迭代降低目标函数值。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/newton0.jpg" alt=""></p>
-<h2 id="拟牛顿法"><a href="#拟牛顿法" class="headerlink" title="拟牛顿法"></a>拟牛顿法</h2><p>牛顿法每次迭代都需要计算Hesse矩阵的逆，这也是计算负责的原因。为了解决这个问题，便出现了拟牛顿法。<br>拟牛顿法不是一种具体的算法，而是一些列的算法。如DFP，BFGS，Broyden类，SR1等。</p>
-<h3 id="拟牛顿法的主体思路"><a href="#拟牛顿法的主体思路" class="headerlink" title="拟牛顿法的主体思路"></a>拟牛顿法的主体思路</h3><p><img src="http://oavdwoegd.bkt.clouddn.com/newton2.jpg" alt=""></p>
-<h3 id="DFP"><a href="#DFP" class="headerlink" title="DFP"></a>DFP</h3><p>DFP是用G来逼近Hesse矩阵的逆。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/newton3.jpg" alt=""></p>
-<h3 id="BFGS"><a href="#BFGS" class="headerlink" title="BFGS"></a>BFGS</h3><p>BFGS是用B来逼近Hesse矩阵。但可以通过Sherman-Morrison公式，导出关于G的迭代公式。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/newton4.jpg" alt=""></p>
-<h3 id="Broyden类"><a href="#Broyden类" class="headerlink" title="Broyden类"></a>Broyden类</h3><p>Broyden类是DFP和BFGS的线性组合。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/newton5.jpg" alt=""></p>
-<p><em>BFGS的B迭代公式，通过SHerman-Morrison，导出BFGS关于G的迭代公式</em></p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/newton6.jpg" alt=""></p>
+                <h2 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h2><ul>
+<li>1</li>
+<li>2</li>
+<li>3</li>
+</ul>
+<ul>
+<li>4</li>
+</ul>
+<h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><ol>
+<li>1</li>
+<li>2</li>
+<li>2</li>
+<li>5</li>
+</ol>
+<blockquote>
+<p>这是引用</p>
+</blockquote>
+<p><a href="https://www.baidu.com" target="_blank" rel="external">baidu</a></p>
+<p>This is an example for $x_mu$ and $y_mu$.</p>
+<p>Simple inline $a = b + c$.</p>
+<p><em>abchello</em><br><strong>abchello</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tables</th>
+<th style="text-align:center">Are</th>
+<th style="text-align:right">Cool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>col 3 is</td>
+<td style="text-align:center">right-aligned</td>
+<td style="text-align:right">$1600</td>
+</tr>
+<tr>
+<td>col 2 is</td>
+<td style="text-align:center">centered</td>
+<td style="text-align:right">$12</td>
+</tr>
+<tr>
+<td>zebra stripes</td>
+<td style="text-align:center">are neat</td>
+<td style="text-align:right">$1</td>
+</tr>
+</tbody>
+</table>
 
 
                 <hr>
@@ -214,13 +246,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/08/07/DDL&DML&DCL/" data-toggle="tooltip" data-placement="top" title="DDL & DML & DCL">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/08/02/KKT/" data-toggle="tooltip" data-placement="top" title="KKT">Next Post &rarr;</a>
+                            <a href="/2016/08/16/GMM/" data-toggle="tooltip" data-placement="top" title="EM算法解高斯混合模型">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -264,8 +292,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "/2016/08/04/常用优化方法/";
-    var disqus_url = "/2016/08/04/常用优化方法/";
+    var disqus_identifier = "/2016/08/17/test/";
+    var disqus_url = "/2016/08/17/test/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

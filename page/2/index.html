@@ -3,7 +3,7 @@
 
 <!-- Head tag -->
 <head>
-    <meta charset="utf-8">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,14 +49,14 @@
     <![endif]-->
 
     <!-- ga & ba script hoook -->
-    <script></script>
+    <script></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
 
-    <!-- Navigation -->
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Navigation -->
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -181,6 +181,40 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/07/28/instanceof&isInstance()&isAssignableFrom()/">
+        <h2 class="post-title">
+            instanceof & isInstance() & isAssignableFrom()
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            instanceof &amp; isInstance() &amp; isAssignableFrom()instanceof：判断一个对象，是否属于一个类。
+isInstance：判断一个类，是否是一个实例的类或父类。
+isAssignableFrom： 判断一个类，是否等同另一个类，或者另一个类的父类。
+
+
+
+关键字or方法
+返回为true的用法
+
+
+
+
+instanceof
+(类实例......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-07-28
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -454,30 +488,6 @@ Gamma函数的定义为：
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2016/06/29/变分推断/">
-        <h2 class="post-title">
-            变分推断
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            变分推断为什么要进行推断？模型分为判别模型和生成模型，判别模型可以直接用来预测，但生成模型得到的是联合概率分布，因此需要进行概率推断，来进行预测。
-概率推断的任务是，计算某个函数的期望、或计算边缘概率分布、或条件概率分布等。
-近似推断分两个方向：抽样（MCMC,Gibbs）、确定性近似(Variational Inference,variational Bayesian)。
-变分法：从某个函......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-06-29
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -488,6 +498,10 @@ Gamma函数的定义为：
             <a href="/">&larr; Newer Posts</a>
         </li>
     
+    
+        <li class="next">
+            <a href="/page/3/">Older Posts &rarr;</a>
+        </li>
     
 </ul>
 
@@ -688,7 +702,24 @@ Gamma函数的定义为：
 
 <!-- Image to hack wechat -->
 <img src="/img/icon_wechat.png" width="0" height="0" />
-<!-- Migrate from head to bottom, no longer block render and still work -->
+<!-- Migrate from head to bottom, no longer block render and still work --><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 </body>
 

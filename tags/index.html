@@ -3,7 +3,7 @@
 
 <!-- Head tag -->
 <head>
-    <meta charset="utf-8">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,14 +49,14 @@
     <![endif]-->
 
     <!-- ga & ba script hoook -->
-    <script></script>
+    <script></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
 
-    <!-- Navigation -->
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Navigation -->
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -178,13 +178,13 @@
                 
                     <a href="#Entropy" title="Entropy" rel="1">Entropy</a>
                 
+                    <a href="#EM" title="EM" rel="1">EM</a>
+                
                     <a href="#EM GMM" title="EM GMM" rel="1">EM GMM</a>
                 
                     <a href="#HMM 前向后向算法 Baum-Welch Vertibi" title="HMM 前向后向算法 Baum-Welch Vertibi" rel="1">HMM 前向后向算法 Baum-Welch Vertibi</a>
                 
                     <a href="#Lagrange MUltipilers	KKT" title="Lagrange MUltipilers	KKT" rel="1">Lagrange MUltipilers	KKT</a>
-                
-                    <a href="#EM" title="EM" rel="1">EM</a>
                 
                     <a href="#RBF" title="RBF" rel="1">RBF</a>
                 
@@ -209,6 +209,8 @@
                     <a href="#线性规划之对偶问题" title="线性规划之对偶问题" rel="1">线性规划之对偶问题</a>
                 
                     <a href="#贝叶斯网络 概率图 有向图 推断" title="贝叶斯网络 概率图 有向图 推断" rel="1">贝叶斯网络 概率图 有向图 推断</a>
+                
+                    <a href="#mathjax" title="mathjax" rel="1">mathjax</a>
                 
             </div>
 
@@ -304,6 +306,28 @@
             </div>
             
             <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="EM">
+                    <span class="tag-text">EM</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2016/07/20/EM/">
+                        <h2 class="post-title">
+                            EM
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="EM GMM">
                     <span class="tag-text">EM GMM</span>
                 </span>
@@ -360,28 +384,6 @@
                      <a href="/2016/08/02/KKT/">
                         <h2 class="post-title">
                             KKT
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="EM">
-                    <span class="tag-text">EM</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2016/07/20/EM/">
-                        <h2 class="post-title">
-                            EM
                         </h2>
                         
                     </a>
@@ -655,6 +657,28 @@
                 
             </div>
             
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="mathjax">
+                    <span class="tag-text">mathjax</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2016/08/17/test/">
+                        <h2 class="post-title">
+                            mathjax
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
+            
 
 
         </div>
@@ -803,7 +827,24 @@
 
 <!-- Image to hack wechat -->
 <img src="/img/icon_wechat.png" width="0" height="0" />
-<!-- Migrate from head to bottom, no longer block render and still work -->
+<!-- Migrate from head to bottom, no longer block render and still work --><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 </body>
 

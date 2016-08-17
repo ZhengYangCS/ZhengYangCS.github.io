@@ -3,7 +3,7 @@
 
 <!-- Head tag -->
 <head>
-    <meta charset="utf-8">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,14 +49,14 @@
     <![endif]-->
 
     <!-- ga & ba script hoook -->
-    <script></script>
+    <script></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
 
-    <!-- Navigation -->
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Navigation -->
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -181,6 +181,64 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/08/17/test/">
+        <h2 class="post-title">
+            mathjax
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            无序列表
+1
+2
+3
+
+
+4
+
+有序列表
+1
+2
+2
+5
+
+
+这是引用
+
+baidu
+This is an example for $x_mu$ and $y_mu$.
+Simple inline $a = b + c$.
+abchelloabchello
+
+
+
+Tables
+Are
+Cool
+
+
+
+
+col 3 is
+right-aligned
+$1600
+
+
+col 2 is
+cente......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-08-17
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -442,40 +500,6 @@ g(x)&gt;=......
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2016/07/28/instanceof&isInstance()&isAssignableFrom()/">
-        <h2 class="post-title">
-            instanceof & isInstance() & isAssignableFrom()
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            instanceof &amp; isInstance() &amp; isAssignableFrom()instanceof：判断一个对象，是否属于一个类。
-isInstance：判断一个类，是否是一个实例的类或父类。
-isAssignableFrom： 判断一个类，是否等同另一个类，或者另一个类的父类。
-
-
-
-关键字or方法
-返回为true的用法
-
-
-
-
-instanceof
-(类实例......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-07-28
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -686,7 +710,24 @@ instanceof
 
 <!-- Image to hack wechat -->
 <img src="/img/icon_wechat.png" width="0" height="0" />
-<!-- Migrate from head to bottom, no longer block render and still work -->
+<!-- Migrate from head to bottom, no longer block render and still work --><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 </body>
 
