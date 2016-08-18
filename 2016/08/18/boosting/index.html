@@ -13,11 +13,11 @@
 
     <title>
         
-          常用优化方法 - ZhengYang&#39;s Blog
+          Boosting - ZhengYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="/2016/08/04/常用优化方法/">
+    <link rel="canonical" href="/2016/08/18/boosting/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#梯度下降 牛顿法 拟牛顿法" title="梯度下降 牛顿法 拟牛顿法">梯度下降 牛顿法 拟牛顿法</a>
+                          <a class="tag" href="/tags/#Boosting" title="Boosting">Boosting</a>
                         
                     </div>
-                    <h1>常用优化方法</h1>
+                    <h1>Boosting</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by ZhengYang on
-                        2016-08-04
+                        2016-08-18
                     </span>
                 </div>
             </div>
@@ -191,21 +191,45 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p><em>以下的优化方法，对于非凸问题，都不能保证求得的极小值为全局最小值。</em></p>
-<h2 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h2><p>梯度下降是求解无约束最优化问题，最常用的方法。<br>常用于回归，神经网络等中，优化极小目标函数。<br>目标函数的梯度，表示函数值增长最快的方向，因此，取负梯度的方向作为下一次取值的方向。<br>优点：算法简单，实现容易。<br>缺点：极小值附近梯度减小慢。</p>
-<h2 id="牛顿法"><a href="#牛顿法" class="headerlink" title="牛顿法"></a>牛顿法</h2><p>牛顿法也是求解无约束最优化问题，常用的方法。<br>牛顿法是泰勒二阶展开，求偏导为0。相比梯度下降，它的收敛速度快，迭代次数少于梯度下降。<br>缺点：每一步除了计算梯度，还要计算Hesse矩阵的逆，计算复杂。</p>
-<h3 id="为什么梯度下降和牛顿法能迭代降低目标函数值？"><a href="#为什么梯度下降和牛顿法能迭代降低目标函数值？" class="headerlink" title="为什么梯度下降和牛顿法能迭代降低目标函数值？"></a>为什么梯度下降和牛顿法能迭代降低目标函数值？</h3><p>这里不介绍梯度下降法和牛顿法的算法，仅说明为什么能迭代降低目标函数值。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/newton0.jpg" alt=""></p>
-<h2 id="拟牛顿法"><a href="#拟牛顿法" class="headerlink" title="拟牛顿法"></a>拟牛顿法</h2><p>牛顿法每次迭代都需要计算Hesse矩阵的逆，这也是计算负责的原因。为了解决这个问题，便出现了拟牛顿法。<br>拟牛顿法不是一种具体的算法，而是一些列的算法。如DFP，BFGS，Broyden类，SR1等。</p>
-<h3 id="拟牛顿法的主体思路"><a href="#拟牛顿法的主体思路" class="headerlink" title="拟牛顿法的主体思路"></a>拟牛顿法的主体思路</h3><p><img src="http://oavdwoegd.bkt.clouddn.com/newton2.jpg" alt=""></p>
-<h3 id="DFP"><a href="#DFP" class="headerlink" title="DFP"></a>DFP</h3><p>DFP是用G来逼近Hesse矩阵的逆。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/newton3.jpg" alt=""></p>
-<h3 id="BFGS"><a href="#BFGS" class="headerlink" title="BFGS"></a>BFGS</h3><p>BFGS是用B来逼近Hesse矩阵。但可以通过Sherman-Morrison公式，导出关于G的迭代公式。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/newton4.jpg" alt=""></p>
-<h3 id="Broyden类"><a href="#Broyden类" class="headerlink" title="Broyden类"></a>Broyden类</h3><p>Broyden类是DFP和BFGS的线性组合。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/newton5.jpg" alt=""></p>
-<p><em>BFGS的B迭代公式，通过SHerman-Morrison，导出BFGS关于G的迭代公式</em></p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/newton6.jpg" alt=""></p>
+                <p>Boosting是一类提升算法的总称，包括AdaBoost，提升树，梯度提升等。不同Boosting算法的提升方式不太相同，但主要学习步骤是先从初始训练集中训练出一个基学习器，然后下一个基学习器更多地关注分类错误的样本点，迭代多次，直到误差达到要求以内，最后将每次训练的基学习器组合起来。</p>
+<h2 id="AdaBoost"><a href="#AdaBoost" class="headerlink" title="AdaBoost"></a>AdaBoost</h2><p>AdaBoost是Freund和Schapire于1995年提出的。每次迭代更改的是样例的权值，不同资料中对于权值更改的方式略有不同，以PRML和The Elements of Statistical Learning为准，即每次只调整错误样例的权值。</p>
+<h3 id="AdaBoost算法"><a href="#AdaBoost算法" class="headerlink" title="AdaBoost算法"></a>AdaBoost算法</h3><p><img src="http://oavdwoegd.bkt.clouddn.com/Boosting.png" alt=""><br>$J_m$是目标函数，表示最小加权误差，这里的误差是0-1误差。<br>$\epsilon_m$是加权的分类错误样本，与$J_m$的区别仅仅是分母归一化，因为在步骤2(c)中，$w_n^{(m+1)}$的更新，并没有归一化。<br>$\alpha_m$表示此次迭代的基分类器的权重，可以理解为对数几率，即ln{分类正确率/分类错误率}。<br><em>该基分类器的$\epsilon_m$误差越小，则$\alpha_m$权重越大，当错误率小于1/2时，$\alpha_m\gt0$；<br>该基分类器的$\epsilon_m$误差越大，则$\alpha_m$权重越小，当错误率大于1/2时，$\alpha_m\lt0$。</em><br>$w_n^{(m+1)}$表示更新样本点$\mathbf{x_n}$更新后的权值。<br><em>当基分类器的错误率$\epsilon_m\lt1/2$时，$\alpha_m\gt0$，则错误样本点的权值会变大；<br>当基分类器的错误率$\epsilon_m\gt1/2$时，$\alpha_m\lt0$，则错误样本点的权值会变小。可以理解为，该基分类器太关注错误的样例，导致大多数都没分对，所以要降低错误样例的权重，更关注大多数的样例</em></p>
+<p>再次强调，只有在初始化时，所有样例的权重等于1/N，且和为1。以后迭代，每次只调整分类错误的样例的权值，分类正确的样例的权值不管，所以权值和基本都不为1。<br><em>当加权分类错误率$\epsilon_m\lt1/2$，即$\alpha\gt0$时，那些被分错的样例的权值会变大；<br>当加权分类错误率$\epsilon_m\gt1/2$，即$\alpha\lt0$时，那些被分错的样例的权值会变小。</em></p>
+<h3 id="AdaBoost的指数函数损失解释"><a href="#AdaBoost的指数函数损失解释" class="headerlink" title="AdaBoost的指数函数损失解释"></a>AdaBoost的指数函数损失解释</h3><p>AdaBoost算法可以用另一种方法解释。模型为基学习器的线性组合，损失函数为指数损失，学习算法为前向分步算法的二分类模型。<br>模型：<br>$$f_m(x)=\frac{1}{2}\sum_{l=1}^{m}\alpha_ly_l$$<br>损失函数：<br>$$E=\sum_{n=1}^{N}exp\{-t_nf_m(\mathbf{x_n})\}$$<br>将损失函数中的模型拆分为两部分：<br>$$\begin{align}<br>E&amp;=\sum_{n=1}^{N}exp\left\{-t_nf_{m-1}(\mathbf{x_n})-\frac12t_n\alpha_my_m(\mathbf{x_n})\right\} \\<br>&amp;=\sum_{n=1}^{N}w_n^{(m)}exp\left\{-\frac12t_n\alpha_my_m(\mathbf{x_n})\right\}<br>\end{align}$$<br>其中，$w_n^{(m)}=exp\left\{-t_nf_{m-1}(\mathbf{x_n})\right\}$<br>将迭代m次的数据集，分为分类正确的部分$T_m$和分类错误的部分$F_m$，继续拆分$E$<br>$$\begin{align}<br>E&amp;=\sum_{n=1}^{N}exp\left\{-t_nf_{m-1}(\mathbf{x_n})-\frac12t_n\alpha_my_m(\mathbf{x_n})\right\} \\<br>&amp;=\sum_{n=1}^{N}w_n^{(m)}exp\left\{-\frac12t_n\alpha_my_m(\mathbf{x_n})\right\} \\<br>&amp;=e^{-\alpha_m/2}\sum_{n\in T_m}w_n^{(m)}+e^{\alpha_m/2}\sum_{n\in F_m}w_n^{(m)} \\<br>&amp;=e^{-\alpha_m/2}\sum_{n\in T_m}w_n^{(m)}+e^{-\alpha_m/2}\sum_{n\in F_m}w_n^{(m)}+e^{\alpha_m/2}\sum_{n\in F_m}w_n^{(m)}-e^{-\alpha_m/2}\sum_{n\in F_m}w_n^{(m)} \\<br>&amp;=e^{-\alpha_m/2}\sum_{n=1}^Nw_n^{(m)}+(e^{\alpha_m/2}-e^{-\alpha_m/2})\sum_{n\in F_m}w_n^{(m)} \\<br>&amp;=e^{-\alpha_m/2}\sum_{n=1}^Nw_n^{(m)}+(e^{\alpha_m/2}-e^{-\alpha_m/2})\sum_{n=1}^Nw_n^{(m)}I(y_m(\mathbf{x_n})\neq t_n)<br>\end{align}$$</p>
+<p>现在优化参数，一共有两个参数，一个是$y_m(\mathbf{x})$，一个是$\alpha_m$<br>上式中的第一项相对于$y_m(\mathbf{x})$为常数，所以可以去掉，第二项的系数并不影响$y_m(\mathbf{x})$的优化，因此关于$y_m(\mathbf{x})$的目标函数为：<br>$$E=\sum_{n=1}^Nw_n^{(m)}I(y_m(\mathbf{x_n})\neq t_n)$$<br>等同于AdaBoost算法中的目标函数(最小加权误差函数)，接下来优化$\alpha_m$，对$E$关于$\alpha_m$求偏导，<br>$$\begin{align}<br>\frac{\partial E}{\partial\alpha_m}&amp;=-\frac12e^{-\alpha_m/2}\sum_{n=1}^Nw_n^{(m)}+\frac12(e^{\alpha_m/2}+e^{-\alpha_m/2})\sum_{n=1}^Nw_n^{(m)}I(y_m(\mathbf{x_n})\neq t_n) = 0\\<br>&amp;=-e^{-\alpha_m/2}\sum_{n=1}^Nw_n^{(m)}+(e^{\alpha_m/2}+e^{-\alpha_m/2})\sum_{n=1}^Nw_n^{(m)}I(y_m(\mathbf{x_n})\neq t_n) = 0\\<br>&amp;=-\sum_{n=1}^Nw_n^{(m)}+(e^{\alpha_m}+1)\sum_{n=1}^Nw_n^{(m)}I(y_m(\mathbf{x_n})\neq t_n) = 0\\<br>\end{align}$$<br>$$\begin{align}<br>(e^{\alpha_m}+1)\sum_{n=1}^Nw_n^{(m)}I(y_m(\mathbf{x_n})\neq t_n)&amp;=\sum_{n=1}^Nw_n^{(m)}\\<br>(e^{\alpha_m}+1)&amp;=\frac{\sum_{n=1}^Nw_n^{(m)}}{\sum_{n=1}^Nw_n^{(m)}I(y_m(\mathbf{x_n})\neq t_n)}\\<br>e^{\alpha_m}&amp;=\frac{\sum_{n=1}^Nw_n^{(m)}}{\sum_{n=1}^Nw_n^{(m)}I(y_m(\mathbf{x_n})\neq t_n)}-1\\<br>e^{\alpha_m}&amp;=\frac{1}{\epsilon_m}-1\\<br>e^{\alpha_m}&amp;=\frac{1-\epsilon_m}{\epsilon_m}\\<br>\alpha_m&amp;=ln\frac{1-\epsilon_m}{\epsilon_m}<br>\end{align}$$<br>可以看出$\alpha_m$也等同于AdaBoost算法的中此次迭代的基分类器的权重。接下来，更新$w_n^{(m+1)}$,<br>$w_n^{(m)}=exp\left\{-t_nf_{m-1}(\mathbf{x_n})\right\}$<br>$f_m(x)=\frac{1}{2}\sum_{l=1}^{m}\alpha_ly_l$</p>
+<p>$$\begin{align}<br>w_n^{(m+1)}&amp;=exp\left\{-t_nf_{m}(\mathbf{x_n})\right\} \\<br>&amp;=exp\left\{-t_nf_{m-1}(\mathbf{x_n})-\frac12t_n\alpha_my_m(\mathbf{x_n})\right\}\\<br>&amp;=exp\left\{-t_nf_{m-1}(\mathbf{x_n})\right\} exp\left\{-\frac12t_n\alpha_my_m(\mathbf{x_n})\right\}\\<br>&amp;=w_n^{(m)} exp\left\{-\frac12t_n\alpha_my_m(\mathbf{x_n})\right\}<br>\end{align}$$<br>替换 $t_ny_m(\mathbf{x_n})=1-2I(y_m(\mathbf{x_n})\neq t_n)$<br>所以，$$w_n^{(m+1)}=w_n^{(m)} exp(-\alpha_m/2)exp\left\{\alpha_mI(y_m(\mathbf{x_n})\neq t_n)\right\}$$<br>对于任何$w_n^{(m+1)}$而言，$exp(-\alpha_m/2)$都对$w_n^{(m+1)}$进行了同样的更新，因此$exp(-\alpha_m/2)$并不影响$w_n^{(m+1)}$的更新，所以可以忽略，因此，得到$w_n^{(m+1)}$最终的更新公式为，<br>$$w_n^{(m+1)}=w_n^{(m)}exp\left\{\alpha_mI(y_m(\mathbf{x_n})\neq t_n)\right\}$$<br>等同于AdaBoost算法中的$w_n^{(m+1)}$更新公式。<br>最后，预测函数为$f_m(x)=\frac{1}{2}\sum_{l=1}^{m}\alpha_ly_l$，因为系数1/2并不影响二分类预测符号的改变，因此去掉后等同于AdaBoost的预测函数。</p>
+<h2 id="提升树-Boosting-Trees"><a href="#提升树-Boosting-Trees" class="headerlink" title="提升树(Boosting Trees)"></a>提升树(Boosting Trees)</h2><p>Boosting Trees是将Boosting中的基函数换成分类树或回归树，最常用的是GBDT(Gradient Boosting Decision Tree)，需要注意的是，GBDT中的Tree是回归树，不是分类树，因为要求每次迭代要求负梯度。<br>另外，Boosting Trees相对于AdaBoost也有明显的区别。AdaBoost每次迭代，样例的权值在不断变化，更具体说是错误样例的权值在变化，但GBDT中每次迭代的样本都是不变的，变的是每个样例的回归目标值。</p>
+<h3 id="提升分类树"><a href="#提升分类树" class="headerlink" title="提升分类树"></a>提升分类树</h3><p>将Adaboost中的基函数换成决策树(ID3,C4.5,CART)，就可以得到最基本的Boosting Decision Tree。</p>
+<h3 id="提升回归树"><a href="#提升回归树" class="headerlink" title="提升回归树"></a>提升回归树</h3><p>每次迭代，需要拟合一棵回归树，目标值为上次累计预测的残差，最后将所有的树的预测结果加起来。</p>
+<ul>
+<li>损失函数一般为均方误差</li>
+<li>最后预测是求和，不是加权求和</li>
+</ul>
+<p><strong>算法</strong></p>
+<ol>
+<li>初始化 $f_0(x)=argmin_\gamma\sum_{i=1}^NL(y_i,\gamma)$</li>
+<li>对于 m = 1 to M:<br>(a) 对i=1,2,…,N 计算所有样本点的残差 $$r_i=y_i-f_{m-1}(x_i)$$<br>(b) 以$r_i$为目标值，拟合一棵回归树，得到叶节点区域$R_{mj}$和每个叶节点的值 $\gamma_{mj}, j=1,2,…,J_m$<br>(c) 更新$f_m(x)=f_{m-1}(x)+\sum_{j=1}^{J_m}\gamma_{mj}I(x\in R_{jm})$</li>
+<li>得到最终的提升回归树$\hat f(x)=f_M(x)$</li>
+</ol>
+<p><em>步骤2(b)中，回归树的损失函数为均方误差，梯度恰好为残差的形式，多了一个系数1/2</em><br><em>步骤2(c)中，$x$只能属于一个$R_{mj}$，因此只有一个有效，其他的为0</em><br><em>可以理解为，对于一个值的预测，是每棵树的不同叶节点值的累加</em></p>
+<h3 id="Gradient-Boosting-Regression-Tree"><a href="#Gradient-Boosting-Regression-Tree" class="headerlink" title="Gradient Boosting Regression Tree"></a>Gradient Boosting Regression Tree</h3><p>当损失函数不是指数损失和均方误差损失时，常用负梯度来代替残差。GBRT每次迭代的树在生成时，分为两部分，</p>
+<ul>
+<li>根据回归树生成叶节点</li>
+<li>并重新评价叶节点的值，使损失函数最小</li>
+</ul>
+<p><strong>算法</strong></p>
+<ol>
+<li>初始化 $f_0(x)=argmin_\gamma\sum_{i=1}^{N}L(y_i,\gamma)$</li>
+<li>对于m = 1 to M:<br>(a) 对于i=1,2,…,N 计算每个样本点的近似残差$$r_{mi}=-[\frac{\partial L(y_i,f_{m-1}(x_i))}{\partial f_{m-1}(x_i)}]$$<br>(b) 以上一步计算的$r_{mi}$作为目标值，拟合一棵回归树，得到叶节点区域$R_{mj}, j=1,2,…,J_m$<br>(c) 对于$j=1,2,…,J_m$ 计算每个叶节点的值$$\gamma_{mj}=argmin_\gamma\sum_{x_i \in R_{mj}}L(y_i,f_{m-1}(x_i)+\gamma)$$<br>(d) 更新$f_m(x)=f_{m-1}(x)+\sum_{j=1}^{J_m}\gamma_{mj}I(x\in R_{mj})$</li>
+<li>得到最终的提升回归树$\hat f(x)=f_M(x)$</li>
+</ol>
+<p><em>步骤2(b)中，回归树的损失函数为均方误差，梯度恰好为残差的形式，多了一个系数1/2</em><br><em>不同于Boosting Regression Tree的地方有两个</em><br><em>1.用负梯度近似真正的残差</em><br><em>2.先用回归树拟合出叶节点区域，再重新调整出叶节点的值</em></p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ol>
+<li>PRML</li>
+<li>The Elements of Statistical Learning</li>
+<li><a href="https://en.wikipedia.org/wiki/Gradient_boosting" target="_blank" rel="external">https://en.wikipedia.org/wiki/Gradient_boosting</a></li>
+<li><a href="http://blog.csdn.net/kunlong0909/article/details/17587101" target="_blank" rel="external">http://blog.csdn.net/kunlong0909/article/details/17587101</a></li>
+</ol>
 
 
                 <hr>
@@ -214,13 +238,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/08/07/DDL&DML&DCL/" data-toggle="tooltip" data-placement="top" title="DDL & DML & DCL">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/08/02/KKT/" data-toggle="tooltip" data-placement="top" title="KKT">Next Post &rarr;</a>
+                            <a href="/2016/08/17/mathjax/" data-toggle="tooltip" data-placement="top" title="mathjax总结">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -264,8 +284,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "/2016/08/04/常用优化方法/";
-    var disqus_url = "/2016/08/04/常用优化方法/";
+    var disqus_identifier = "/2016/08/18/boosting/";
+    var disqus_url = "/2016/08/18/boosting/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
