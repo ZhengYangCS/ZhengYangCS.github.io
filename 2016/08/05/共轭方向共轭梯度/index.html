@@ -13,11 +13,11 @@
 
     <title>
         
-          常用优化方法 - ZhengYang&#39;s Blog
+          共轭方向 共轭梯度 - ZhengYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="/2016/08/04/常用优化方法/">
+    <link rel="canonical" href="/2016/08/05/共轭方向共轭梯度/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#梯度下降 牛顿法 拟牛顿法" title="梯度下降 牛顿法 拟牛顿法">梯度下降 牛顿法 拟牛顿法</a>
+                          <a class="tag" href="/tags/#共轭梯度" title="共轭梯度">共轭梯度</a>
                         
                     </div>
-                    <h1>常用优化方法</h1>
+                    <h1>共轭方向 共轭梯度</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by ZhengYang on
-                        2016-08-04
+                        2016-08-05
                     </span>
                 </div>
             </div>
@@ -191,21 +191,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p><em>以下的优化方法，对于非凸问题，都不能保证求得的极小值为全局最小值。</em></p>
-<h2 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h2><p>梯度下降是求解无约束最优化问题，最常用的方法。<br>常用于回归，神经网络等中，优化极小目标函数。<br>目标函数的梯度，表示函数值增长最快的方向，因此，取负梯度的方向作为下一次取值的方向。<br>优点：算法简单，实现容易。<br>缺点：极小值附近梯度减小慢。</p>
-<h2 id="牛顿法"><a href="#牛顿法" class="headerlink" title="牛顿法"></a>牛顿法</h2><p>牛顿法也是求解无约束最优化问题，常用的方法。<br>牛顿法是泰勒二阶展开，求偏导为0。相比梯度下降，它的收敛速度快，迭代次数少于梯度下降。<br>缺点：每一步除了计算梯度，还要计算Hesse矩阵的逆，计算复杂。</p>
-<h3 id="为什么梯度下降和牛顿法能迭代降低目标函数值？"><a href="#为什么梯度下降和牛顿法能迭代降低目标函数值？" class="headerlink" title="为什么梯度下降和牛顿法能迭代降低目标函数值？"></a>为什么梯度下降和牛顿法能迭代降低目标函数值？</h3><p>这里不介绍梯度下降法和牛顿法的算法，仅说明为什么能迭代降低目标函数值。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/newton0.jpg" alt=""></p>
-<h2 id="拟牛顿法"><a href="#拟牛顿法" class="headerlink" title="拟牛顿法"></a>拟牛顿法</h2><p>牛顿法每次迭代都需要计算Hesse矩阵的逆，这也是计算负责的原因。为了解决这个问题，便出现了拟牛顿法。<br>拟牛顿法不是一种具体的算法，而是一些列的算法。如DFP，BFGS，Broyden类，SR1等。</p>
-<h3 id="拟牛顿法的主体思路"><a href="#拟牛顿法的主体思路" class="headerlink" title="拟牛顿法的主体思路"></a>拟牛顿法的主体思路</h3><p><img src="http://oavdwoegd.bkt.clouddn.com/newton2.jpg" alt=""></p>
-<h3 id="DFP"><a href="#DFP" class="headerlink" title="DFP"></a>DFP</h3><p>DFP是用G来逼近Hesse矩阵的逆。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/newton3.jpg" alt=""></p>
-<h3 id="BFGS"><a href="#BFGS" class="headerlink" title="BFGS"></a>BFGS</h3><p>BFGS是用B来逼近Hesse矩阵。但可以通过Sherman-Morrison公式，导出关于G的迭代公式。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/newton4.jpg" alt=""></p>
-<h3 id="Broyden类"><a href="#Broyden类" class="headerlink" title="Broyden类"></a>Broyden类</h3><p>Broyden类是DFP和BFGS的线性组合。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/newton5.jpg" alt=""></p>
-<p><em>BFGS的B迭代公式，通过SHerman-Morrison，导出BFGS关于G的迭代公式</em></p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/newton6.jpg" alt=""></p>
+                <p>牛顿法只需要迭代一次便可得到正定二次的极小值，而梯度下降需要迭代很多次，因此可以认为牛顿法对于二次函数是有效，但牛顿法每步迭代的计算量大，所以有了共轭方向法。<br>共轭方向法建立在二次模型的基础上，有效次迭代终止，介于梯度下降和牛顿法之间，既能克服梯度下降的收敛慢，又避免了牛顿法计算量大的缺点。<br>共轭方向法是在共轭方向法和梯度下降法之间建立一种联系，得到一个既有效又有较好收敛性的算法</p>
+<h2 id="共轭方向法"><a href="#共轭方向法" class="headerlink" title="共轭方向法"></a>共轭方向法</h2><p><img src="http://oavdwoegd.bkt.clouddn.com/conjugate1.jpg" alt=""></p>
+<h2 id="共轭梯度法"><a href="#共轭梯度法" class="headerlink" title="共轭梯度法"></a>共轭梯度法</h2><p><img src="http://oavdwoegd.bkt.clouddn.com/conjugate2.jpg" alt=""></p>
 
 
                 <hr>
@@ -215,12 +203,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2016/08/05/共轭方向共轭梯度/" data-toggle="tooltip" data-placement="top" title="共轭方向 共轭梯度">&larr; Previous Post</a>
+                            <a href="/2016/08/07/DDL&DML&DCL/" data-toggle="tooltip" data-placement="top" title="DDL & DML & DCL">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2016/08/02/KKT/" data-toggle="tooltip" data-placement="top" title="KKT">Next Post &rarr;</a>
+                            <a href="/2016/08/04/常用优化方法/" data-toggle="tooltip" data-placement="top" title="常用优化方法">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -264,8 +252,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "/2016/08/04/常用优化方法/";
-    var disqus_url = "/2016/08/04/常用优化方法/";
+    var disqus_identifier = "/2016/08/05/共轭方向共轭梯度/";
+    var disqus_url = "/2016/08/05/共轭方向共轭梯度/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
