@@ -90,7 +90,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -104,7 +104,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -184,6 +184,54 @@
 
 <div class="post-preview">
 
+    <a href="/2016/08/20/参数估计方法/">
+        <h2 class="post-title">
+            参数估计方法
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            几个参数估计的策略
+
+期望损失(expected loss) 风险函数(risk function)是模型$f(X)$关于联合分布$P(X,Y)$的期望
+经验风险最小化 ERM(Empirical Risk Minimization)是关于训练样本的平均损失
+结构风险最小化 SRM(Structural Risk Minimization)是加了正则项的经验风险最小化
+
+P(x)与p(x)区......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-08-20
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/08/19/朴素贝叶斯/">
+        <h2 class="post-title">
+            朴素贝叶斯
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            朴素贝叶斯朴素贝叶斯是基于贝叶斯定理和属性条件独立的分类器。其中，”朴素”指的是一个很naive的假设，即属性条件独立。$$\begin{align}y&amp;=argmax_kP(c_k|x)\\&amp;=argmax_k\frac{P(c_k)P(x|c_k)}{P(x)}\\&amp;=argmax_kP(c_k)P(x|c_k)\\&amp;=argmax_kP(c_k)\pro......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-08-19
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/08/18/boosting/">
         <h2 class="post-title">
             Boosting
@@ -217,7 +265,8 @@ AdaBoostAdaBoost是Freund和Schapire于1995年提出的。每次迭代更改的�
             
 hexo写markdown中_与*一样，表示斜体或粗体，但mathjax中_表示下标，因此，mathjax中下标_，在markdown改写成\_mathjax中下标\{，在markdown改写成\\{mathjax中下标\}，在markdown改写成\\}mathjax中换行\\，在markdown中写成\\\\
 
-行中公式inline &amp; 独立公式displayed行中公式 in......
+公式右键-Show Math As-Tex Commands可以查看编辑
+......
         </div>
     </a>
     <p class="post-meta">
@@ -401,51 +450,6 @@ SVM是一种非常有效的二分类模型，是在特种空间上的间隔最�
     <p class="post-meta">
         Posted by ZhengYang on
         2016-08-09
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/08/07/DDL&DML&DCL/">
-        <h2 class="post-title">
-            DDL & DML & DCL
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            之前学习sql，并没有注意DDL，DML的区别。上网查了，发现很多版本相互矛盾的。最疑惑的是wiki和oracle里的竟然有不一致的。最后发现，oracle将GRANT和REVOKE也算到DDL里。所以，最终也算统一了，按wiki为准。
-DDLA data definition language or data description language (DDL) is a syntax s......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-08-07
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/08/04/常用优化方法/">
-        <h2 class="post-title">
-            常用优化方法
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            以下的优化方法，对于非凸问题，都不能保证求得的极小值为全局最小值。
-梯度下降梯度下降是求解无约束最优化问题，最常用的方法。常用于回归，神经网络等中，优化极小目标函数。目标函数的梯度，表示函数值增长最快的方向，因此，取负梯度的方向作为下一次取值的方向。优点：算法简单，实现容易。缺点：极小值附近梯度减小慢。
-牛顿法牛顿法也是求解无约束最优化问题，常用的方法。牛顿法是泰勒二阶展开，求偏导为0。相比......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-08-04
     </p>
 
 </div>
