@@ -90,6 +90,13 @@
 
                         
                         <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -98,13 +105,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -197,7 +197,7 @@
 <h2 id="Bias-Variance-Decomposition"><a href="#Bias-Variance-Decomposition" class="headerlink" title="Bias-Variance Decomposition"></a>Bias-Variance Decomposition</h2><p>偏差 表示模型的期望预测 和 真实值的偏离程度。<br>方差 表示模型的预测 和 模型的预测的偏离程度。</p>
 <p>多个训练集，分别为$D_1,D_2,…$<br>一个测试用例，($\mathbf x,y$)<br>观测变量$y$会存在误差，$y=y_t+\epsilon$，$y_t$为$\mathbf x$真正的值，$\epsilon$为噪声变量，$E[\epsilon]=0$，$var(\epsilon)=\sigma^2$<br>$f(\mathbf x;D_i)$表示在训练集$D_i$上得到模型$f$，在测试用例$\mathbf x$上的输出<br>$f$对$\mathbf x$的期望预测为$E_D[f(\mathbf x;D_i)]$</p>
 <p>过程：给定一个$D_i$,训练出一个模型$f$，然后给定测试样例$(\mathbf x,y)$，得到测试结果$f(\mathbf x;D_i)$，循环多次。</p>
-<h3 id="期望泛化误差"><a href="#期望泛化误差" class="headerlink" title="期望泛化误差"></a>期望泛化误差</h3><p>$$\begin{align}<br>E(f;D)&amp;=E_D[(f(\mathbf x;D)-y)^2]\\<br>&amp;=E_D[(f(\mathbf x;D)-E_D[f(\mathbf x;D)]+E_D[f(\mathbf x;D)]-y)^2]\\<br>&amp;=E_D[(f(\mathbf x;D)-E_D[f(\mathbf x;D)])^2]+E_D[(E_D[(f(\mathbf x;D)]-y)^2]+E_D[2(f(\mathbf x;D)-E_D[f(\mathbf x;D)])(E_D[f(\mathbf x;D)]-y)]\\<br>&amp;=E_D[(f(\mathbf x;D)-E_D[f(\mathbf x;D)])^2]+E_D[(E_D[(f(\mathbf x;D)]-y)^2]\\<br>&amp;=E_D[(f(\mathbf x;D)-E_D[f(\mathbf x;D)])^2]+E_D[(E_D[(f(\mathbf x;D)]-y_t-\epsilon)^2]\\<br>&amp;=var(\mathbf x)+E_D[(E_D[(f(\mathbf x;D)]-y_t)^2]+E_D[\epsilon^2]-2E_D[(E_D[(f(\mathbf x;D)]-y_t)\epsilon)]\\<br>&amp;=var(\mathbf x)+(E_D[(f(\mathbf x;D)]-y_t)^2+E_D[\epsilon^2]\\<br>&amp;=var(\mathbf x)+bias^2(\mathbf x)+var(\epsilon)+E_D^2[\epsilon]\\<br>&amp;=var(\mathbf x)+bias^2(\mathbf x)+var(\epsilon)\\<br>&amp;=var(\mathbf x)+bias^2(\mathbf x)+\sigma^2<br>\end{align}$$</p>
+<h3 id="期望泛化误差"><a href="#期望泛化误差" class="headerlink" title="期望泛化误差"></a>期望泛化误差</h3><p>$$\begin{align}<br>E(f;D)=&amp;E_D[(f(\mathbf x;D)-y)^2]\\<br>=&amp;E_D[(f(\mathbf x;D)-E_D[f(\mathbf x;D)]+E_D[f(\mathbf x;D)]-y)^2]\\<br>=&amp;E_D[(f(\mathbf x;D)-E_D[f(\mathbf x;D)])^2]+E_D[(E_D[(f(\mathbf x;D)]-y)^2]\\&amp;+E_D[2(f(\mathbf x;D)-E_D[f(\mathbf x;D)])(E_D[f(\mathbf x;D)]-y)]\\<br>=&amp;E_D[(f(\mathbf x;D)-E_D[f(\mathbf x;D)])^2]+E_D[(E_D[(f(\mathbf x;D)]-y)^2]\\<br>=&amp;E_D[(f(\mathbf x;D)-E_D[f(\mathbf x;D)])^2]+E_D[(E_D[(f(\mathbf x;D)]-y_t-\epsilon)^2]\\<br>=&amp;var(\mathbf x)+E_D[(E_D[(f(\mathbf x;D)]-y_t)^2]+E_D[\epsilon^2]-2E_D[(E_D[(f(\mathbf x;D)]-y_t)\epsilon)]\\<br>=&amp;var(\mathbf x)+(E_D[(f(\mathbf x;D)]-y_t)^2+E_D[\epsilon^2]\\<br>=&amp;var(\mathbf x)+bias^2(\mathbf x)+var(\epsilon)+E_D^2[\epsilon]\\<br>=&amp;var(\mathbf x)+bias^2(\mathbf x)+var(\epsilon)\\<br>=&amp;var(\mathbf x)+bias^2(\mathbf x)+\sigma^2<br>\end{align}$$</p>
 <p>第三步最后一项化简，$y,\epsilon$ 独立于D<br>$$ \begin{align}<br>&amp;E_D[2(f(\mathbf x;D)-E_D[f(\mathbf x;D)])(E_D[f(\mathbf x;D)]-y)]\\<br>=&amp;2E_D[(f(\mathbf x;D)-E_D[f(\mathbf x;D)])(E_D[f(\mathbf x;D)]-y)]\\<br>=&amp;2E_D[f(\mathbf x;D)-E_D[f(\mathbf x;D)]]\cdot E_D[E_D[f(\mathbf x;D)]-y]\\<br>=&amp;2(E_D[f(\mathbf x;D)]-E_D[f(\mathbf x;D)])\cdot E_D[(E_D[f(\mathbf x;D)]-y)]\\<br>=&amp;0<br>\end{align}$$</p>
 <p><strong>泛化能力由方差，偏差和噪声之和决定</strong></p>
 <ol>
