@@ -13,11 +13,11 @@
 
     <title>
         
-          参数估计方法 - ZhengYang&#39;s Blog
+          偏差方差分解 - ZhengYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="/2016/08/20/参数估计方法/">
+    <link rel="canonical" href="/2016/08/21/偏差方差分解/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#MLE &amp; MAP estimator &amp; Bayesian estimator" title="MLE &amp; MAP estimator &amp; Bayesian estimator">MLE &amp; MAP estimator &amp; Bayesian estimator</a>
+                          <a class="tag" href="/tags/#Bias-Variance Decomposition" title="Bias-Variance Decomposition">Bias-Variance Decomposition</a>
                         
                     </div>
-                    <h1>参数估计方法</h1>
+                    <h1>偏差方差分解</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by ZhengYang on
-                        2016-08-20
+                        2016-08-21
                     </span>
                 </div>
             </div>
@@ -191,79 +191,39 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p><strong>几个参数估计的策略</strong></p>
+                <blockquote>
+<p>这里说的都是对泛化而言</p>
+</blockquote>
+<h2 id="Bias-Variance-Decomposition"><a href="#Bias-Variance-Decomposition" class="headerlink" title="Bias-Variance Decomposition"></a>Bias-Variance Decomposition</h2><p>偏差 表示模型的期望预测 和 真实值的偏离程度。<br>方差 表示模型的预测 和 模型的预测的偏离程度。</p>
+<p>多个训练集，分别为$D_1,D_2,…$<br>一个测试用例，($\mathbf x,y$)<br>观测变量$y$会存在误差，$y=y_t+\epsilon$，$y_t$为$\mathbf x$真正的值，$\epsilon$为噪声变量，$E[\epsilon]=0$，$var(\epsilon)=\sigma^2$<br>$f(\mathbf x;D_i)$表示在训练集$D_i$上得到模型$f$，在测试用例$\mathbf x$上的输出<br>$f$对$\mathbf x$的期望预测为$E_D[f(\mathbf x;D_i)]$</p>
+<p>过程：给定一个$D_i$,训练出一个模型$f$，然后给定测试样例$(\mathbf x,y)$，得到测试结果$f(\mathbf x;D_i)$，循环多次。</p>
+<h3 id="期望泛化误差"><a href="#期望泛化误差" class="headerlink" title="期望泛化误差"></a>期望泛化误差</h3><p>$$\begin{align}<br>E(f;D)&amp;=E_D[(f(\mathbf x;D)-y)^2]\\<br>&amp;=E_D[(f(\mathbf x;D)-E_D[f(\mathbf x;D)]+E_D[f(\mathbf x;D)]-y)^2]\\<br>&amp;=E_D[(f(\mathbf x;D)-E_D[f(\mathbf x;D)])^2]+E_D[(E_D[(f(\mathbf x;D)]-y)^2]+E_D[2(f(\mathbf x;D)-E_D[f(\mathbf x;D)])(E_D[f(\mathbf x;D)]-y)]\\<br>&amp;=E_D[(f(\mathbf x;D)-E_D[f(\mathbf x;D)])^2]+E_D[(E_D[(f(\mathbf x;D)]-y)^2]\\<br>&amp;=E_D[(f(\mathbf x;D)-E_D[f(\mathbf x;D)])^2]+E_D[(E_D[(f(\mathbf x;D)]-y_t-\epsilon)^2]\\<br>&amp;=var(\mathbf x)+E_D[(E_D[(f(\mathbf x;D)]-y_t)^2]+E_D[\epsilon^2]-2E_D[(E_D[(f(\mathbf x;D)]-y_t)\epsilon)]\\<br>&amp;=var(\mathbf x)+(E_D[(f(\mathbf x;D)]-y_t)^2+E_D[\epsilon^2]\\<br>&amp;=var(\mathbf x)+bias^2(\mathbf x)+var(\epsilon)+E_D^2[\epsilon]\\<br>&amp;=var(\mathbf x)+bias^2(\mathbf x)+var(\epsilon)\\<br>&amp;=var(\mathbf x)+bias^2(\mathbf x)+\sigma^2<br>\end{align}$$</p>
+<p>第三步最后一项化简，$y,\epsilon$ 独立于D<br>$$ \begin{align}<br>&amp;E_D[2(f(\mathbf x;D)-E_D[f(\mathbf x;D)])(E_D[f(\mathbf x;D)]-y)]\\<br>=&amp;2E_D[(f(\mathbf x;D)-E_D[f(\mathbf x;D)])(E_D[f(\mathbf x;D)]-y)]\\<br>=&amp;2E_D[f(\mathbf x;D)-E_D[f(\mathbf x;D)]]\cdot E_D[E_D[f(\mathbf x;D)]-y]\\<br>=&amp;2(E_D[f(\mathbf x;D)]-E_D[f(\mathbf x;D)])\cdot E_D[(E_D[f(\mathbf x;D)]-y)]\\<br>=&amp;0<br>\end{align}$$</p>
+<p><strong>泛化能力由方差，偏差和噪声之和决定</strong></p>
 <ol>
-<li>期望损失(expected loss) 风险函数(risk function)<br>是模型$f(X)$关于联合分布$P(X,Y)$的期望</li>
-<li>经验风险最小化 ERM(Empirical Risk Minimization)<br>是关于训练样本的平均损失</li>
-<li>结构风险最小化 SRM(Structural Risk Minimization)<br>是加了正则项的经验风险最小化</li>
+<li>方差：同样大小的训练集所得到的模型，在测试集上的变动。体现数据的充分性。</li>
+<li>偏差：模型的期望预测与真实结果的偏离，模型本身的拟合能力。体现模型的学习能力。</li>
+<li>噪声：期望泛化误差的下界。体现学习任务本身固有的难度。</li>
 </ol>
-<p><strong>P(x)与p(x)区别</strong></p>
-<ol>
-<li>大写$P(x)$表示概率质量函数 pmf (probability mass function)</li>
-<li>小写$p(x)$表示概率密度函数 pdf (probability density function)</li>
+<h3 id="Bias-Variance-tradeoff"><a href="#Bias-Variance-tradeoff" class="headerlink" title="Bias-Variance tradeoff"></a>Bias-Variance tradeoff</h3><p>正则项可以控制模型的复杂度，也可以说控制方差和偏差。</p>
+<ul>
+<li>正则系数越大，模型越简单，数据集导致的方差越小，偏差越大；</li>
+<li>正则系数越小，模型越复杂，数据集导致的方差越大，偏差越小。</li>
+</ul>
+<p>模型学习的目的是使泛化误差最小，因此需要做一个方差和偏差之间做一个权衡，使总和最小。</p>
+<h3 id="数据量对模型复杂度的影响"><a href="#数据量对模型复杂度的影响" class="headerlink" title="数据量对模型复杂度的影响"></a>数据量对模型复杂度的影响</h3><ul>
+<li>数据量较少时，不同数据集间的差别较大，局部特征相对于全局特征较多，因此，为了使模型尽可能只学习到全局特征，需要尽可能简单，防止过拟合；</li>
+<li>数据量较大时，不同数据集间的差别较小，局部特征相对于全局特征较少，因此，可以使模型复杂些，尽可能学习到数据集的特征，减小偏差。</li>
+</ul>
+<h3 id="模型训练过程"><a href="#模型训练过程" class="headerlink" title="模型训练过程"></a>模型训练过程</h3><ol>
+<li>在训练不足时，模型的拟合能力不强，偏差是主要的泛化误差。</li>
+<li>随着训练的加深，模型的拟合能力加强，训练集的轻微变化渐渐被模型学习到。所以，因训练集导致的方差渐渐成为主要的泛化误差。</li>
+<li>训练充足后，模型的拟合能力已经非常强，数据发生的轻微变化，都会使结果发生较大的变化。则此时模型不仅学到了训练集的全局特征，还可能学到了训练集的局部特征，发生过拟合。</li>
 </ol>
-<p><strong>贝叶斯公式</strong><br>$$P(\theta|X)=\frac{P(X|\theta)\cdot P(\theta)}{P(X)}$$<br>$$posterior=\frac{likelihood\cdot prior}{evidence}$$</p>
-<h2 id="最大似然ML-Maximum-likelihood-估计"><a href="#最大似然ML-Maximum-likelihood-估计" class="headerlink" title="最大似然ML(Maximum likelihood)估计"></a>最大似然ML(Maximum likelihood)估计</h2><p>$$P(\theta|X)=P(X|\theta)$$<br>$$posterior=likelihood$$<br>wiki上面的词条将MLE翻译为最大似然估计，从图上来看，MLE的确也应该翻译为最大似然估计，而不是极大似然估计。但在实际求解时，常求的是极大值。<br><img src="http://oavdwoegd.bkt.clouddn.com/minimal_minimum.jpg" alt=""><br>$$\begin{align}<br>\hat \theta_{ML}&amp;=argmax_{\theta}logL \\<br>&amp;=argmax_{\theta}logP(X|\theta) \\<br>&amp;=argmax_{\theta}log\prod_xP(x|\theta) \\<br>&amp;=argmax_{\theta}\sum_xlogP(x|\theta) \\<br>\end{align}$$</p>
-<p>在实际应用中，模型分判别模型和生产模型，如果模型是判别模型，则似然估计为，<br>$$\hat \theta_{ML}=argmax_{\theta}\sum_{i=1}^NlogP(y_i|x_i,\theta) $$<br>如果模型是生成模型，则似然估计为，<br>$$\hat \theta_{ML}=argmax_{\theta}\sum_{i=1}^NlogP(y_i,x_i|\theta) $$</p>
-<h4 id="经验风险最小化-ERM-Empirical-Risk-Minimization"><a href="#经验风险最小化-ERM-Empirical-Risk-Minimization" class="headerlink" title="经验风险最小化 ERM(Empirical Risk Minimization)"></a>经验风险最小化 ERM(Empirical Risk Minimization)</h4><p>当模型是条件概率分布，损失函数是对数损失时，判别模型的最大似然估计等同于经验风险最小化。<br>$$\begin{align}<br>\hat \theta_{ERM}&amp;=argmin_{f}\frac{1}{N}\sum_{i=1}^NL(y_i,f(x_i)) \\<br>&amp;=argmin_{\theta}\frac{1}{N}\sum_{i=1}^NL(y_i,P(y_i|x_i,\theta)) \\<br>&amp;=argmin_{\theta}\frac{1}{N}\sum_{i=1}^N\{-logP(y_i|x_i,\theta)\} \\<br>&amp;=argmax_{\theta}\frac{1}{N}\sum_{i=1}^NlogP(y_i|x_i,\theta) \\<br>&amp;=argmax_{\theta}\sum_{i=1}^NlogP(y_i|x_i,\theta)<br>\end{align}$$</p>
-<h2 id="最大后验概率MAP-maximum-a-posteriori-估计"><a href="#最大后验概率MAP-maximum-a-posteriori-估计" class="headerlink" title="最大后验概率MAP(maximum a posteriori)估计"></a>最大后验概率MAP(maximum a posteriori)估计</h2><p>$$P(\theta|X)=P(X|\theta)\cdot P(\theta)$$<br>$$posterior=likelihood\cdot prior$$<br>相比于最大似然估计，最大后验估计加入一个先验，根据贝叶斯公式计算出的整个后验概率最大。但因为只需要求使$P(\theta|X)$最大的$\theta$，这里$P(X)$与参数$\theta$无关，因此等价于使分子最大。<br><em>最大后验概率估计是不完整的后验概率估计；后面的贝叶斯估计是完整的后验概率估计</em></p>
-<p>$$\begin{align}<br>\hat \theta_{MAP}&amp;=argmax_{\theta}logP(\theta|X) \\<br>&amp;=argmax_{\theta}log\frac{P(X|\theta)\cdot P(\theta)}{P(X)} \\<br>&amp;=argmax_{\theta}log(P(X|\theta)\cdot P(\theta)) \\<br>&amp;=argmax_{\theta}\{logP(X|\theta)+logP(\theta)\} \\<br>&amp;=argmax_{\theta}\{log\prod_xP(x|\theta)+logP(\theta)\} \\<br>&amp;=argmax_{\theta}\{\sum_xlogP(x|\theta)+logP(\theta)\}<br>\end{align}$$</p>
-<p>同样，在实际应用中，模型分判别模型和生产模型，如果模型是判别模型，则MAP估计为，<br>$$\hat \theta_{MAP}=argmax_{\theta}\left\{\sum_{i=1}^NlogP(y_i|x_i,\theta)+logP(\theta)\right\} $$<br>如果模型是生成模型，则MAP估计为，<br>$$\hat \theta_{MAP}=argmax_{\theta}\left\{\sum_{i=1}^NlogP(y_i,x_i|\theta)+logP(\theta)\right\} $$</p>
-<h4 id="结构风险最小化-SRM-Structural-Risk-Minimization"><a href="#结构风险最小化-SRM-Structural-Risk-Minimization" class="headerlink" title="结构风险最小化 SRM(Structural Risk Minimization)"></a>结构风险最小化 SRM(Structural Risk Minimization)</h4><p>当模型是条件概率分布，损失函数是对数损失，正则项为负log先验时，判别模型的MAP估计等同于结构风险最小化。<br>$$\begin{align}<br>\hat \theta_{SRM}&amp;=argmin_{f}\{\frac{1}{N}\sum_{i=1}^NL(y_i,f(x_i))+\lambda J(f)\} \\<br>&amp;=argmin_{\theta}\{\frac{1}{N}\sum_{i=1}^NL(y_i,P(y_i|x_i,\theta))-\frac1NlogP(\theta)\} \\<br>&amp;=argmin_{\theta}\{\frac{1}{N}\sum_{i=1}^N\{-logP(y_i|x_i,\theta)\}-\frac1NlogP(\theta)\} \\<br>&amp;=argmax_{\theta}\{\frac{1}{N}\sum_{i=1}^NlogP(y_i|x_i,\theta)+\frac1NlogP(\theta)\} \\<br>&amp;=argmax_{\theta}\{\sum_{i=1}^NlogP(y_i|x_i,\theta)+logP(\theta)\}<br>\end{align}$$</p>
-<h2 id="贝叶斯估计-Bayesian-estimator"><a href="#贝叶斯估计-Bayesian-estimator" class="headerlink" title="贝叶斯估计(Bayesian estimator)"></a>贝叶斯估计(Bayesian estimator)</h2><p>$$P(\theta|X)=\frac{P(X|\theta)\cdot P(\theta)}{P(X)}$$<br>$$posterior=\frac{likelihood\cdot prior}{evidence}$$<br>Bayesian估计是后验的完整形式。<br>在MAP估计中，只取了后验$P(\theta|X)$的最大值作为$\theta$的估计，忽略了$\theta$的其他可能性，可能丢失信息。而Bayesian估计则把$\theta$的所有可能取值(分母部分)考虑进来，即，<br>$$P(\theta|X)=\frac{P(X|\theta)\cdot P(\theta)}{P(X)}=\frac{P(X|\theta)\cdot P(\theta)}{\int_{\theta}P(X,\theta)d\theta}<br>=\frac{P(X|\theta)\cdot P(\theta)}{\int_{\theta}P(X|\theta)\cdot P(\theta)d\theta}$$<br>因此，Bayesian估计要比MAP估计更可靠些，但随着数据越多，Bayesian估计，MAP估计和ML估计越趋于一致。</p>
-<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ol>
-<li>Bayesian估计不仅可以得到后验的期望，还可以得到后验的方差，表示对这个期望值的确信程度。常用共轭先验作先验，可以根据分布的参数直接得到方差。</li>
-<li>Bayesian估计可以估计$\theta$后验分布上的某个具体的$\theta$值，而不是最大值，也就是Bayesian Inference。</li>
-</ol>
-<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>Bayesian估计比较复杂，原因是分母$P(X)$不能在忽略，需要对$P(X|\theta)$在$P(\theta)$上求期望，<br>$$P(\theta|X)=\frac{P(X|\theta)\cdot P(\theta)}{\int_{\theta}P(X|\theta)\cdot P(\theta)d\theta}$$<br>通常计算比较困难，采用conjugate先验，可避免积分，直接得到后验分布。</p>
-<h3 id="共轭先验"><a href="#共轭先验" class="headerlink" title="共轭先验"></a>共轭先验</h3><p>Bayesian估计的分母$P(X)$，与后验无关，因此可以作为常数看待，所以，如果分子(似然*先验)计算后，与分母再结合后，得到的形式恰好为先验的形式，即先验后验同分布，只是改变了超参数，则称$P(\theta)$是似然函数$P(X|\theta)$的共轭先验。</p>
-<h4 id="共轭先验第一种定义-wiki"><a href="#共轭先验第一种定义-wiki" class="headerlink" title="共轭先验第一种定义 (wiki)"></a>共轭先验第一种定义 (wiki)</h4><p>In Bayesian probability theory, if the posterior distributions P(θ|x) are in the same family as the prior probability distribution P(θ), the prior and posterior are then called conjugate distributions, and the prior is called a conjugate prior for the likelihood function.</p>
-<h4 id="共轭先验第二种定义"><a href="#共轭先验第二种定义" class="headerlink" title="共轭先验第二种定义"></a>共轭先验第二种定义</h4><p>For a given likelihood function P(X|Θ), a prior P(Θ) is called a conjugate prior if the posterior P(Θ|X) has the same algebraic form as the prior.</p>
-<h4 id="常见的共轭先验"><a href="#常见的共轭先验" class="headerlink" title="常见的共轭先验"></a>常见的共轭先验</h4><table>
-<thead>
-<tr>
-<th>Distribution</th>
-<th>Conjugate Prior</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Bernoulli</td>
-<td>Beta</td>
-</tr>
-<tr>
-<td>Multinomial</td>
-<td>Dirichlet</td>
-</tr>
-<tr>
-<td>Gaussian(given mean, var unknown)</td>
-<td>Gaussian</td>
-</tr>
-<tr>
-<td>Gaussian(given var, mean unknown)</td>
-<td>Gaussian</td>
-</tr>
-<tr>
-<td>Gaussian(both mean and var unknown)</td>
-<td>Gaussian-Gamma</td>
-</tr>
-</tbody>
-</table>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
-<li>估计的复杂程度，ML&lt;MAP&lt;Bayesian</li>
-<li>ML估计最简单，$posteriori=likelihood$</li>
-<li>MAP估计，$posteriori=likelihood\cdot prior$</li>
-<li>Bayesian估计，$posteriori=\frac{likelihood\cdot prior}{evidence}$</li>
-<li>ML估计和MAP估计都是点估计，返回的是参数变量$\theta$的特定值</li>
-<li>MAP估计和Bayesian估计都需要先验。MAP估计只需要得到最大值，并不需要得到完整的后验，因此，可以不计算$P(X)$。而Bayesian估计是要得到完整的后验，所以需要计算$P(X)$。</li>
-<li>MAP估计的后验是一个不完整的后验，因此，不能说得到的后验与先验共轭。而Bayesian估计是后验的完整形式，所以先验和后验关于似然共轭，这也是共轭先验的由来。</li>
-<li>Bayesian估计可以求方差，表示确信度(confidence)，而且可以做推断(Inference)。</li>
-</ol>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li><a href="https://zh.wikipedia.org/wiki/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation" target="_blank" rel="external">https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation</a></li>
-<li><a href="https://engineering.purdue.edu/kak/Trinity.pdf" target="_blank" rel="external">https://engineering.purdue.edu/kak/Trinity.pdf</a></li>
-<li><a href="http://blog.csdn.net/yangliuy/article/details/8296481" target="_blank" rel="external">http://blog.csdn.net/yangliuy/article/details/8296481</a></li>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ol>
+<li>PRML</li>
+<li>《机器学习》周志华</li>
+<li><a href="https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff" target="_blank" rel="external">https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff</a></li>
 </ol>
 
 
@@ -273,13 +233,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/08/21/偏差方差分解/" data-toggle="tooltip" data-placement="top" title="偏差方差分解">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/08/19/朴素贝叶斯/" data-toggle="tooltip" data-placement="top" title="朴素贝叶斯">Next Post &rarr;</a>
+                            <a href="/2016/08/20/参数估计方法/" data-toggle="tooltip" data-placement="top" title="参数估计方法">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -323,8 +279,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "/2016/08/20/参数估计方法/";
-    var disqus_url = "/2016/08/20/参数估计方法/";
+    var disqus_identifier = "/2016/08/21/偏差方差分解/";
+    var disqus_url = "/2016/08/21/偏差方差分解/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
