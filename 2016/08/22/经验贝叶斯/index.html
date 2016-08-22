@@ -13,11 +13,11 @@
 
     <title>
         
-          线性判别分析 - ZhengYang&#39;s Blog
+          经验贝叶斯 - ZhengYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="/2016/08/22/线性判别分析/">
+    <link rel="canonical" href="/2016/08/22/经验贝叶斯/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,10 +165,10 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#LDA" title="LDA">LDA</a>
+                          <a class="tag" href="/tags/#Empirical Bayes" title="Empirical Bayes">Empirical Bayes</a>
                         
                     </div>
-                    <h1>线性判别分析</h1>
+                    <h1>经验贝叶斯</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by ZhengYang on
@@ -191,89 +191,15 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <blockquote>
-<p>区别于话题模型的LDA (Latent Dirichlet Allocation)</p>
-</blockquote>
-<h2 id="二类LDA-Linear-Discriminant-Analysis"><a href="#二类LDA-Linear-Discriminant-Analysis" class="headerlink" title="二类LDA(Linear Discriminant Analysis)"></a>二类LDA(Linear Discriminant Analysis)</h2><table>
-<thead>
-<tr>
-<th>二类</th>
-<th>原空间D维</th>
-<th>投影空间1维</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>点</td>
-<td>向量$\mathbf{x}$</td>
-<td>标量$y$</td>
-</tr>
-<tr>
-<td>类中心</td>
-<td>向量$\mathbf{m_k}$</td>
-<td>标量$\mu_k$</td>
-</tr>
-</tbody>
-</table>
-<p>如果原始特征数太多，想将D维特征降到只有1维，即这1维就能决定每个样例的类别。<br>记这个最佳的向量为$\mathbf w$ (D维)，那么样例$\mathbf x$ (D维)到$\mathbf w$上的投影表示为<br>$$y=\mathbf w^T\mathbf x$$<br>这里得到的$y$值不是0/1值，而是$\mathbf x$投影到$\mathbf w$上的点到原点的距离。<br><em>注意：这个式子并不是超平面，只是向量内积。</em></p>
-<h3 id="D维原空间"><a href="#D维原空间" class="headerlink" title="D维原空间"></a>D维原空间</h3><ol>
-<li>寻找每类样例的均值（中心点）<br>$\mathbf m_0=\frac{1}{N_0}\sum_{\mathbf x\in C_0}\mathbf x$<br>$\mathbf m_1=\frac{1}{N_1}\sum_{\mathbf x\in C_1}\mathbf x$</li>
-<li>得到投影后，两类的中心<br>$\mu_0=w^T\mathbf m_0$<br>$\mu_1=w^T\mathbf m_1$</li>
-<li>投影前的协方差<br>$S_0=\sum_{\mathbf x\in C_0}\mathbf{(x-m_0)(x-m_0)}^T$<br>$S_1=\sum_{\mathbf x\in C_1}\mathbf{(x-m_1)(x-m_1)}^T$</li>
-<li>投影后的方差<br>$s_0^2=\sum_{y\in C_0}(y-\mu_0)^2$<br>$s_1^2=\sum_{y\in C_1}(y-\mu_1)^2$</li>
-</ol>
-<h3 id="目标值优化"><a href="#目标值优化" class="headerlink" title="目标值优化"></a>目标值优化</h3><p>使类间距尽可能大，类内部的距离尽可能小<br>$$max_w J(\mathbf{w})=\frac{(\mu_0-\mu_1)^2}{s_0^2+s_1^2}$$</p>
-<ul>
-<li><p>分子化简<br>$(\mu_0-\mu_1)^2=\mathbf {(w^Tm_0-w^Tm_1)}^2$<br>$=\mathbf{w^T(m_0-m_1)(m_0-m_1)^Tw}$<br>$=\mathbf w^TS_B\mathbf w$<br>其中，$S_B$ 称为between-class covariance matrix<br>$S_B=\mathbf {(m_0-m_1)(m_0-m_1)}^T$</p>
-</li>
-<li><p>分母化简<br>$s_k^2=\sum_{y\in C_k}(y-\mu_k)^2$<br>$=\sum_{\mathbf x\in C_k}\mathbf {(w^Tx-w^Tm_k)}^2$<br>$=\sum_{\mathbf x\in C_k}\mathbf {w^T(x-m_k)(x-m_k)}^T\mathbf w$<br>$=\mathbf w^T\{\sum_{\mathbf x\in C_k}\mathbf {(x-m_k)(x-m_k)}^T\}\mathbf w$<br>$=\mathbf w^TS_k\mathbf w$<br>其中，$S_k=\sum_{\mathbf x\in C_k}\mathbf {(x-m_k)(x-m_k)}^T$<br>$S_W$ 称为within-class convariance matrix<br>$S_W=S_0+S_1$<br>$=\sum_{\mathbf x\in C_0}\mathbf {(x-m_0)(x-m_0)}^T+\sum_{\mathbf x\in C_1}\mathbf {(x-m_1)(x-m_1)}^T$</p>
-</li>
-</ul>
-<h3 id="改写后的目标值优化"><a href="#改写后的目标值优化" class="headerlink" title="改写后的目标值优化"></a>改写后的目标值优化</h3><p>$$J(\mathbf{w})=\frac{\mathbf w^TS_B\mathbf w}{\mathbf w^TS_W\mathbf w}$$</p>
-<h3 id="求解w"><a href="#求解w" class="headerlink" title="求解w"></a>求解w</h3><p>分子分母都是关于$\mathbf w$的二次形式，如果$\mathbf w$是解，那么$\alpha \mathbf w$也是解。因此固定分母为1，求分子的最大。<br>$$min_\mathbf w -\mathbf w^TS_B\mathbf w$$<br>$$s.t. \mathbf w^TS_W\mathbf w=1$$<br>解：<br>$L(\mathbf w)=-\mathbf w^TS_B\mathbf w+\lambda(\mathbf w^TS_W\mathbf w-1)=0$<br>$\frac{\partial L(\mathbf w)}{\partial \mathbf w}=2S_B\mathbf w-2\lambda S_W\mathbf w=0$<br>$S_B\mathbf w=\lambda S_W\mathbf w$<br>${S_W}^{-1}S_B\mathbf w=\lambda \mathbf w$</p>
-<p><em>因为 $S_B=\mathbf {(m_0-m_1)(m_0-m_1)}^T$，</em><br><em>两边同时乘$w$，得 $S_B\mathbf w=\mathbf {(m_0-m_1)(m_0-m_1)}^T\mathbf w$</em><br><em>令$\lambda = \mathbf {(m_0-m_1)}^T\mathbf w$，而且这里的$\lambda$等同于拉格朗日中的$\lambda$，则此时$\mathbf w$已定，</em><br><em>$S_B\mathbf w=\mathbf {(m_0-m_1)}\lambda$，代入上式，得，</em></p>
-<p>${S_W}^{-1}\mathbf {(m_0-m_1)}\lambda=\lambda \mathbf w$<br>${S_W}^{-1}\mathbf {(m_0-m_1)}=\mathbf w$</p>
-<p>因此，只需要求出原始样本的均值和方差就可以求出最佳的方向，<br>$$\mathbf w={S_W}^{-1}(\mathbf m_0-\mathbf m_1)$$<br>实际求解过程中，对$S_W$进行奇异值分解，即$S_W=U\Sigma V^T$，$\Sigma$是一个实对角线矩阵，其对角线上的元素是$S_W$的奇异值。然后在有$S_W^{-1}=V\Sigma^{-1} U^T$得到$S_W^{-1}$</p>
-<h2 id="多类LDA"><a href="#多类LDA" class="headerlink" title="多类LDA"></a>多类LDA</h2><table>
-<thead>
-<tr>
-<th>多类</th>
-<th>原空间D维</th>
-<th>投影空间d维</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>点</td>
-<td>向量$\mathbf{x}$</td>
-<td>向量$\mathbf y$</td>
-</tr>
-<tr>
-<td>类中心</td>
-<td>向量$\mathbf{m_k}$</td>
-<td>向量$\mathbf{\mu_k}$</td>
-</tr>
-<tr>
-<td>总中心</td>
-<td>向量$\mathbf{m}$</td>
-<td>向量$\mathbf{\mu}$</td>
-</tr>
-</tbody>
-</table>
-<p>之前讨论的是如何将D维降到1维，现在类别多了，1维可能已经不满足要求。假设有K个类别，需要投影到d维空间。<br>$y_i=\mathbf {w_i}^T\mathbf x$， 其中$i=1,2,…,d$，$\mathbf {w_i}$可以称作基向量。<br>$\mathbf y=\mathbf W^T\mathbf x$，其中$W$的第$i$列为$w_i$<br>$\mathbf W$的维数$D\times d$</p>
-<h3 id="D-维原空间"><a href="#D-维原空间" class="headerlink" title="$D$维原空间"></a>$D$维原空间</h3><h4 id="within-class-convariance-matirx"><a href="#within-class-convariance-matirx" class="headerlink" title="within-class convariance matirx"></a>within-class convariance matirx</h4><p>$S_W=\sum_{k=1}^{K}\sum_{\mathbf x\in C_k}\mathbf {(x-m_k)(x-m_k)}^T$<br>其中，$\mathbf {m_k}=\frac{1}{N_k}\sum_{\mathbf x\in C_k}\mathbf x$ ，$C_k$为$k$类数据子集<br>$S_W$的维数$D\times D$</p>
-<h4 id="total-covariance-matrix"><a href="#total-covariance-matrix" class="headerlink" title="total covariance matrix"></a>total covariance matrix</h4><p>$S_T=\sum_{\mathbf x\in C}\mathbf {(x-m)(x-m)}^T$<br>其中，$\mathbf m=\frac{1}{N}\sum_{\mathbf x\in C}\mathbf x$ ，$C$为数据全集<br>$S_T$的维数$D\times D$</p>
-<h4 id="between-class-convariance-matrix"><a href="#between-class-convariance-matrix" class="headerlink" title="between-class convariance matrix"></a>between-class convariance matrix</h4><p>$S_B$需一些改变，原来度量的是两个均值点的散列情况，现在度量的是每类均值点相对于样本中心的散列情况。<br>$S_B=\sum_{k=1}^KN_k\mathbf {(m_k-m)(m_k-m)}^T$<br>$S_B$的维数$D\times D$</p>
-<p>对于多类问题，$S_T=S_W+S_B$；但对于二类问题，$S_T\neq S_W+S_B$，因为$S_B$的定义不同</p>
-<h3 id="d-维投影空间"><a href="#d-维投影空间" class="headerlink" title="$d$维投影空间"></a>$d$维投影空间</h3><h4 id="within-class-convariance-matirx-1"><a href="#within-class-convariance-matirx-1" class="headerlink" title="within-class convariance matirx"></a>within-class convariance matirx</h4><p>$S_W=\sum_{k=1}^K\sum_{\mathbf y\in C_k}\mathbf {(y-\mu_k)(y-\mu_k)}^T$<br>其中，$\mathbf {\mu_k}=\frac{1}{N_k}\sum_{\mathbf y\in C_k}\mathbf y$ ，$C_k$为$k$类数据子集<br>$S_W$的维数$d\times d$</p>
-<h4 id="between-class-convariance-matrix-1"><a href="#between-class-convariance-matrix-1" class="headerlink" title="between-class convariance matrix"></a>between-class convariance matrix</h4><p>$S_B=\sum_{k=1}^KN_k\mathbf{(\mu_k-\mu)(\mu_k-\mu)}^T$<br>其中，$\mathbf {\mu}=\frac{1}{N}\sum_{\mathbf y\in C}\mathbf y$ ，$C$为数据全集<br>$S_B$的维数$d\times d$</p>
-<h3 id="目标值优化-1"><a href="#目标值优化-1" class="headerlink" title="目标值优化"></a>目标值优化</h3><p>$$max_W\frac{tr(\mathbf W^TS_B\mathbf W)}{tr(\mathbf W^TS_W\mathbf W)}$$<br>通过广义特征值来求解，<br>$$S_W^{-1}S_B\mathbf W=\lambda \mathbf W$$<br>$\mathbf W$的闭式解释是$S_W^{-1}S_B$的前$d$个最大的特征值对应的特征向量，所组成的$N\times d$维的$\mathbf W$。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>LDA可以分类，也可以用于有监督的降维。<br>而PCA，ICA，manifold learning都属于无监督的降维。</p>
+                <h2 id="贝叶斯"><a href="#贝叶斯" class="headerlink" title="贝叶斯"></a>贝叶斯</h2><p>$\theta$是变量$x$的参数<br>$\eta$是变量$\theta$的参数<br>$\eta$是变量$x$的超参数</p>
+<h3 id="贝叶斯-Bayes-or-Standard-Bayes-or-Fully-Bayes"><a href="#贝叶斯-Bayes-or-Standard-Bayes-or-Fully-Bayes" class="headerlink" title="贝叶斯 (Bayes or Standard Bayes or Fully Bayes)"></a>贝叶斯 (Bayes or Standard Bayes or Fully Bayes)</h3><p>在给定数据之前，先验分布$p(\theta)$就已经确定下来了，即参数$\theta$的分布$p(\theta)$已知，$p(\theta)$表达式中的参数$\eta$已知。<br>$$p(\theta|x)=\frac{p(x|\theta)p(\theta)}{p(x)}$$</p>
+<h3 id="经验贝叶斯-Empirical-Bayes"><a href="#经验贝叶斯-Empirical-Bayes" class="headerlink" title="经验贝叶斯 (Empirical Bayes)"></a>经验贝叶斯 (Empirical Bayes)</h3><p>在给定数据之前，先验分布$p(\theta)$未知，即参数$\eta$未知。给定数据之后，先验分布是根据数据估计的，即确定使$p(x|\eta)$最大的超参数$\eta$的值。<br>$$\eta^<em>=argmax_{\eta}p(x|\eta)$$
+</em>$p(x|\eta)$表示关于$\eta$，而不是$\theta$的最大似然。将$p(x|\theta)$中的参数$\theta$替换成$p(\theta)$的表达式，表达式中，只包含超参数$\eta$，所以可以这么写。<em><br>然后根据$\eta^</em>$得到先验分布的估计，代入贝叶斯公式，其余的部分和贝叶斯都一样。<br>$$p(\theta|x) \approx \frac{p(x|\theta)p(\theta|\eta^<em>)}{p(x|\eta^</em>)}$$</p>
+<p>经验贝叶斯可以看成是贝叶斯的的近似，经验贝叶斯与贝叶斯也仅仅只有先验给定与估计的区别。</p>
+<h3 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h3><p>Empirical Bayes is only one of the possible approximations to a full Bayes treatment. There are many other approximation algorithms available, such as Variational Bayes and Expectation Propagation.</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>PRML</li>
-<li>《机器学习》周志华</li>
-<li><a href="http://www.cnblogs.com/jerrylead/archive/2011/04/21/2024384.html" target="_blank" rel="external">http://www.cnblogs.com/jerrylead/archive/2011/04/21/2024384.html</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Linear_discriminant_analysis" target="_blank" rel="external">https://en.wikipedia.org/wiki/Linear_discriminant_analysis</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Empirical_Bayes_method" target="_blank" rel="external">https://en.wikipedia.org/wiki/Empirical_Bayes_method</a></li>
+<li><a href="http://stats.stackexchange.com/questions/115155/empirical-bayes-vs-non-informative-priors?rq=1" target="_blank" rel="external">http://stats.stackexchange.com/questions/115155/empirical-bayes-vs-non-informative-priors?rq=1</a></li>
 </ol>
 
 
@@ -283,9 +209,13 @@
 
                 <ul class="pager">
                     
+                        <li class="previous">
+                            <a href="/2016/08/22/线性判别分析/" data-toggle="tooltip" data-placement="top" title="线性判别分析">&larr; Previous Post</a>
+                        </li>
+                    
                     
                         <li class="next">
-                            <a href="/2016/08/22/经验贝叶斯/" data-toggle="tooltip" data-placement="top" title="经验贝叶斯">Next Post &rarr;</a>
+                            <a href="/2016/08/21/偏差方差分解/" data-toggle="tooltip" data-placement="top" title="偏差方差分解">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -329,8 +259,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "/2016/08/22/线性判别分析/";
-    var disqus_url = "/2016/08/22/线性判别分析/";
+    var disqus_identifier = "/2016/08/22/经验贝叶斯/";
+    var disqus_url = "/2016/08/22/经验贝叶斯/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
