@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -193,8 +193,7 @@
 
                 <h2 id="贝叶斯"><a href="#贝叶斯" class="headerlink" title="贝叶斯"></a>贝叶斯</h2><p>$\theta$是变量$x$的参数<br>$\eta$是变量$\theta$的参数<br>$\eta$是变量$x$的超参数</p>
 <h3 id="贝叶斯-Bayes-or-Standard-Bayes-or-Fully-Bayes"><a href="#贝叶斯-Bayes-or-Standard-Bayes-or-Fully-Bayes" class="headerlink" title="贝叶斯 (Bayes or Standard Bayes or Fully Bayes)"></a>贝叶斯 (Bayes or Standard Bayes or Fully Bayes)</h3><p>在给定数据之前，先验分布$p(\theta)$就已经确定下来了，即参数$\theta$的分布$p(\theta)$已知，$p(\theta)$表达式中的参数$\eta$已知。<br>$$p(\theta|x)=\frac{p(x|\theta)p(\theta)}{p(x)}$$</p>
-<h3 id="经验贝叶斯-Empirical-Bayes"><a href="#经验贝叶斯-Empirical-Bayes" class="headerlink" title="经验贝叶斯 (Empirical Bayes)"></a>经验贝叶斯 (Empirical Bayes)</h3><p>在给定数据之前，先验分布$p(\theta)$未知，即参数$\eta$未知。给定数据之后，先验分布是根据数据估计的，即确定使$p(x|\eta)$最大的超参数$\eta$的值。<br>$$\eta^<em>=argmax_{\eta}p(x|\eta)$$
-</em>$p(x|\eta)$表示关于$\eta$，而不是$\theta$的最大似然。将$p(x|\theta)$中的参数$\theta$替换成$p(\theta)$的表达式，表达式中，只包含超参数$\eta$，所以可以这么写。<em><br>然后根据$\eta^</em>$得到先验分布的估计，代入贝叶斯公式，其余的部分和贝叶斯都一样。<br>$$p(\theta|x) \approx \frac{p(x|\theta)p(\theta|\eta^<em>)}{p(x|\eta^</em>)}$$</p>
+<h3 id="经验贝叶斯-Empirical-Bayes"><a href="#经验贝叶斯-Empirical-Bayes" class="headerlink" title="经验贝叶斯 (Empirical Bayes)"></a>经验贝叶斯 (Empirical Bayes)</h3><p>在给定数据之前，先验分布$p(\theta)$未知，即参数$\eta$未知。给定数据之后，先验分布是根据数据估计的，即确定使$p(x|\eta)$最大的超参数$\eta$的值。<br>$$\eta^*=argmax_{\eta}p(x|\eta)$$<br><em>$p(x|\eta)$表示关于$\eta$，而不是$\theta$的最大似然。将$p(x|\theta)$中的参数$\theta$替换成$p(\theta)$的表达式，表达式中，只包含超参数$\eta$，所以可以这么写。</em><br>然后根据$\eta^*$得到先验分布的估计，代入贝叶斯公式，其余的部分和贝叶斯都一样。<br>$$p(\theta|x) \approx \frac{p(x|\theta)p(\theta|\eta^*)}{p(x|\eta^*)}$$</p>
 <p>经验贝叶斯可以看成是贝叶斯的的近似，经验贝叶斯与贝叶斯也仅仅只有先验给定与估计的区别。</p>
 <h3 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h3><p>Empirical Bayes is only one of the possible approximations to a full Bayes treatment. There are many other approximation algorithms available, such as Variational Bayes and Expectation Propagation.</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
