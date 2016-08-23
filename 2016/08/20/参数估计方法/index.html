@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -259,11 +259,15 @@
 <li>MAP估计的后验是一个不完整的后验，因此，不能说得到的后验与先验共轭。而Bayesian估计是后验的完整形式，所以先验和后验关于似然共轭，这也是共轭先验的由来。</li>
 <li>Bayesian估计可以求方差，表示确信度(confidence)，而且可以做推断(Inference)。</li>
 </ol>
+<p>任何一个基础模型都可以演变成贝叶斯模型。在一个基础模型之下，需要去estimate一些未知的参数（比如在linear regression, 需要去计算w这个向量），但在贝叶斯模型下我们需要去计算的是w的分布（而不是w的point estimation)，用其分布直接计算对y的预测值p(y|x,D)，所以我们需要去需要integrate w，也就是说我们把所有可能的w向量都会去考虑， 这也为什么贝叶斯模型通常intractable, 所以我们需要用MCMC或者variational方法，而不是直接用优化的方法。在贝叶斯模型之下，随着我们observe more and more data, 我们会对w向量的分布会有更清晰的推断，这其实就是posterior inference。</p>
+<p>在linear regression上加上prior其实相当于加了regularization. 如果我们假定p(w)服从高斯分布，那我们加的实际上是L2_norm, 如果我们假定p(w)是拉普拉斯分布，那我们加的是L1_norm(linear regression情况下就是相当于LASSO，会有sparse的特点）。<br>因此MAP估计是L1还是L2，与参数分布本身有关。</p>
+<h3 id="拉普拉斯分布"><a href="#拉普拉斯分布" class="headerlink" title="拉普拉斯分布"></a>拉普拉斯分布</h3><p>$$f(x|\mu,b)=\frac{1}{2b}exp(-\frac{|x-\mu|}{b})$$<br><img src="http://oavdwoegd.bkt.clouddn.com/laplaceD.jpg" alt=""></p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
 <li><a href="https://zh.wikipedia.org/wiki/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation" target="_blank" rel="external">https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation</a></li>
 <li><a href="https://engineering.purdue.edu/kak/Trinity.pdf" target="_blank" rel="external">https://engineering.purdue.edu/kak/Trinity.pdf</a></li>
 <li><a href="http://blog.csdn.net/yangliuy/article/details/8296481" target="_blank" rel="external">http://blog.csdn.net/yangliuy/article/details/8296481</a></li>
+<li><a href="https://www.zhihu.com/question/22007264/answer/20014371" target="_blank" rel="external">https://www.zhihu.com/question/22007264/answer/20014371</a></li>
 </ol>
 
 
