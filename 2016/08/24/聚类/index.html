@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="zhengyang_cs@outlook.com">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          聚类总结 - ZhengYang&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="/2016/08/24/聚类/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">ZhengYang&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/line1.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Cluster" title="Cluster">Cluster</a>
+                        
+                    </div>
+                    <h1>聚类总结</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by ZhengYang on
+                        2016-08-24
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<ul>
+<li>距离</li>
+<li>原型聚类</li>
+<li><ul>
+<li>k-means</li>
+</ul>
+</li>
+<li><ul>
+<li>LVQ</li>
+</ul>
+</li>
+<li>DBSCAN</li>
+<li>层次聚类</li>
+</ul>
+</blockquote>
+<h2 id="距离"><a href="#距离" class="headerlink" title="距离"></a>距离</h2><ul>
+<li>1-范数距离(曼哈顿距离)<br>$$||x_i-y_i||_1 = \sum_{i=1}^n|x_i-y_i|$$</li>
+<li>2-范数距离(欧式距离)<br>$$||x_i-y_i||_2 = (\sum_{i=1}^n|x_i-y_i|^2)^{1/2}$$</li>
+<li>p-范数距离(闵可夫斯基距离)<br>$$||x_i-y_i||_p = (\sum_{i=1}^n|x_i-y_i|^p)^{1/p}$$</li>
+<li>无限范数距离(切比雪夫距离)<br>$$||x_i-y_i||_\infty = (\sum_{i=1}^n|x_i-y_i|^\infty)^{1/\infty}$$</li>
+</ul>
+<h2 id="原型聚类"><a href="#原型聚类" class="headerlink" title="原型聚类"></a>原型聚类</h2><p>Prototype methods represent the training data <strong>by a set of points in feature space.</strong> These prototypes are typically not examples from the training sample, except int the case of 1-nearest-neighbor classification. Each prototype has an associated class label, the classification of a query point x is made to <strong>the class of the closest prototype.</strong></p>
+<p>原型：样本空间中具有代表性的点，不一定是训练集上的点，也可能不存在训练集上。</p>
+<h3 id="k-means"><a href="#k-means" class="headerlink" title="k-means"></a>k-means</h3><ol>
+<li>在样本中，随机选择K个点作为初始质心</li>
+<li>将样本中的每个点指派到最近的质心，形成K个簇</li>
+<li>重复计算每个簇的质心</li>
+<li>如果质心改变大于阈值，返回步骤2；<br>如果质心改变小于阈值，则停止，得到K个质心和簇</li>
+</ol>
+<h3 id="学习向量量化-LVQ-Learning-Vector-Quantization"><a href="#学习向量量化-LVQ-Learning-Vector-Quantization" class="headerlink" title="学习向量量化 LVQ(Learning Vector Quantization)"></a>学习向量量化 LVQ(Learning Vector Quantization)</h3><ol>
+<li>初始化R个原型，每个原型是一个带类别信息的向量<br>即$(p_j,t_j)$，其中，类别 $t_j\in \{1,2,…,K\}$，<br>R一定要大于等于K，且必须包含所有的类别<br><em>例如，轮流在每个类上抽取一个向量，共抽取R个向量做原型</em></li>
+<li>重复随机抽取训练样例$(x_i,y_i)$，计算$d_{ij}=||x_i-p_j||_2$，<br>找到与$x_i$最近距离的原型$p_{j^*}$，<br>$$j^*=argmax_{j=1,2,…,R}d_{ij}$$<br>该原型的类别为$t_{j^*}$<br>(a) 如果$y_i=t_{j^*}$，说明是同类，那么<br>$$p_{j^*}=p_{j^*}+\lambda(x_j-p_{j^*})$$<br>(a) 如果$y_i\neq t_{j^*}$，说明是不同类，那么<br>$$p_{j^*}=p_{j^*}-\lambda(x_j-p_{j^*})$$<br>$\lambda$是学习率</li>
+<li>重复步骤2，逐渐减低学习率，直到原型的变化小于阈值，停止</li>
+</ol>
+<h2 id="DBSCAN-Density-Based-Spatial-Clustering-of-Application-with-Noise"><a href="#DBSCAN-Density-Based-Spatial-Clustering-of-Application-with-Noise" class="headerlink" title="DBSCAN (Density-Based Spatial Clustering of Application with Noise)"></a>DBSCAN (Density-Based Spatial Clustering of Application with Noise)</h2><p>DBSCAN assumes clusters of similar density, and may have problems separating nearby clusters.<br>OPTICS is a DBSCAN variant that handles different densities much better.<br>OPTICS (Ordering points to identify the clustering structure)</p>
+<h4 id="三种类型的点"><a href="#三种类型的点" class="headerlink" title="三种类型的点"></a>三种类型的点</h4><ul>
+<li><strong>核心点 (core point)</strong>： 在$\epsilon$ 距离的范围内至少包含minPts个点(包括自己)，则该点为核心点，这个$\epsilon$的范围称为该核心点的邻域。核心点可能落在多个核心点的邻域内。</li>
+<li><strong>边界点 (border point 或 reachable point)</strong>： 边界点不是核心点，因为$\epsilon$ 距离范围内，点的个数少于minPts。但是它落在某个核心点的邻域内。同样，边界点也可能落在 [1,minPts) 个核心点的邻域内。</li>
+<li><strong>异常点 (outlier point 或 noise point)</strong>： 对于任何点都不可达，则为outlier。<h4 id="三种关系"><a href="#三种关系" class="headerlink" title="三种关系"></a>三种关系</h4></li>
+<li><strong>(密度)直达 (directly density-reachable)</strong>：核心点直达自己邻域内的所有点(minPts个)。</li>
+<li><strong>(密度)可达 (density-reachable)</strong>：对于点x和点y，若存在一条路径p1, p2, …, pn，其中p1=x，pn=y，且pi直达pi+1，则称x可达y。这条路径上的所有点(除了终点pn)，都是核心点，终点pn是核心点或可达点。不满足对称性</li>
+<li><strong>(密度)相连 (density-connectedness)</strong>：对于点x和点y，存在点o，且o可达x，同时可达y，则称x和y密度相连。满足对称性。</li>
+</ul>
+<h4 id="关系的说明"><a href="#关系的说明" class="headerlink" title="关系的说明"></a>关系的说明</h4><ol>
+<li>每个簇至少包含一个core point</li>
+<li>一个簇中的所有点是相连的。</li>
+<li>如果一个点被一个簇中任意一点可达，那么该点也属于这个簇。</li>
+<li>可达关系不是对称的，因为只有核心点才能作为始点，而边界点只能作终点(被可达)。</li>
+<li>直达一定是可达，但可达不一定是直达，同样，直达也不是对称的(对于边界点)。</li>
+</ol>
+<h4 id="DBSCAN的簇定义"><a href="#DBSCAN的簇定义" class="headerlink" title="DBSCAN的簇定义"></a>DBSCAN的簇定义</h4><p>由密度可达关系导出的最大的密度相连的样例集合。</p>
+<h4 id="算法伪码"><a href="#算法伪码" class="headerlink" title="算法伪码"></a>算法伪码</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">//// 返回聚类结果 C</div><div class="line">// D 数据集</div><div class="line">// eps 距离阈值</div><div class="line">// minPts 邻域阈值</div><div class="line">DBSCAN(D, eps, minPts) &#123;</div><div class="line">   C // 是一个动态的二维数组，(K, 样例集合)，第一维动态保存簇数，第二类保存簇中的样例点集合</div><div class="line">   for each point p in dataset D &#123;</div><div class="line">      if p is visited</div><div class="line">         continue</div><div class="line"></div><div class="line">      mark p as visited</div><div class="line">      neighborPts = regionQuery(p, eps)  // 一个集合，查询点p在eps范围内的样例</div><div class="line"></div><div class="line">      if sizeof(neighborPts) &lt; minPts</div><div class="line">         mark p as NOISE // !!!</div><div class="line">      else &#123;</div><div class="line">         expandCluster(p, neighborPts, C[k], eps, minPts)</div><div class="line">         k = k + 1;</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">   return C</div><div class="line">&#125;</div><div class="line"></div><div class="line">//// 计算p为核心的簇</div><div class="line">// p 核心点</div><div class="line">// neighborPts 核心点的邻域</div><div class="line">// Ck 最终形成的簇的集合</div><div class="line">// eps 距离阈值</div><div class="line">// minPts 邻域阈值</div><div class="line">expandCluster(p, neighborPts, Ck, eps, minPts) &#123;</div><div class="line">   add p to cluster Ck</div><div class="line">   for each point p1 in neighborPts &#123;   // neighborPts 用队列</div><div class="line">      if p1 is not visited &#123;</div><div class="line">         mark p1 as visited</div><div class="line"></div><div class="line">         neighborPts1 = regionQuery(p1, eps)</div><div class="line">         if sizeof(neighborPts1) &gt;= minPts</div><div class="line">            neighborPts = neighborPts joined with neighborPts1  // 队列加到尾部</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      // 本函数里的点全部都属于簇Ck，只要不重复添加就好</div><div class="line">      if p1 is not yet member of any cluster</div><div class="line">         add p1 to cluster Ck</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 返回点p为中心，在eps距离内的所有样例</div><div class="line">regionQuery(p, eps)&#123;</div><div class="line">  return all points within p's eps-neighborhood (including p)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/DBSCAN-Illustration.svg/400px-DBSCAN-Illustration.svg.png" alt=""></p>
+<ol>
+<li>In this diagram, minPts = 4.</li>
+<li>Point A and the other red points are <strong>core points</strong>, because the area surrounding these points in an ε radius contain at least 4 points (including the point itself). Because they are all <strong>reachable</strong> from one another, they form a single cluster.</li>
+<li>Points B and C are not core points, but are <strong>reachable</strong> from A (via other core points) and thus belong to the cluster as well.</li>
+<li>Point N is a noise point that is <strong>neither a core point nor density-reachable</strong>.</li>
+</ol>
+<h2 id="层次聚类"><a href="#层次聚类" class="headerlink" title="层次聚类"></a>层次聚类</h2><p>层次聚类可以自底向上，也可以自顶向下。</p>
+<h3 id="集合间的距离"><a href="#集合间的距离" class="headerlink" title="集合间的距离"></a>集合间的距离</h3><p>层次聚类需要计算集合之间的距离，计算的方式有如下几种：</p>
+<ol>
+<li>最小距离(Maxinum or single-linkage)：两集合的最小距离。<br>$$dist_{min}(X,Z)=min_{x\in Xz\in Z}dist(x,z)$$</li>
+<li>最大距离(Minimum or complete-linkage)：两集合的最大距离。<br>$$dist_{max}(X,Z)=max_{x\in Xz\in Z}dist(x,z)$$</li>
+<li>平均距离(Mean or average-linkage or UPGMA)：两集合所有距离的平均。<br>$$dist_{avg}(X,Z)=\frac{1}{|X||Z|}\sum_{x\in X}\sum_{z\in Z}dist(x,z)$$</li>
+<li>中心距离(Centroid linkage or UPGMC)：两集合中心点的距离。<br>$$dist_{cen}(X,Z)=dist(\frac{1}{|X|}\sum_{x\in X}x,\frac{1}{|Z|}\sum_{z\in Z}z)$$</li>
+<li>Hausdorff距离：两集合的最大最小距离。<br>$$dist_{hau}(X,Z)=max_{x\in X}min_{z\in Z}dist(x,z)$$</li>
+</ol>
+<h3 id="自底向上的层次聚类"><a href="#自底向上的层次聚类" class="headerlink" title="自底向上的层次聚类"></a>自底向上的层次聚类</h3><p>将每个样例看成一个簇，然后找到距离最近的两个簇进行合并，不断重复，知道合并到规定的簇个数。</p>
+<h4 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h4><p>输入：样本D={x1,x2,…,xN}，距离函数dist，聚类簇数K<br>输出：K个簇的聚类结果</p>
+<ol>
+<li>初始化每个样例为一个簇$C_i=\{x_i\}$</li>
+<li>计算簇之间的距离矩阵$M$，其中$M(i,j)=dist(C_i,C_j), i,j=1,2,…,N$</li>
+<li>设置当前聚类簇的个数$q=N$</li>
+<li>在距离矩阵中，找到最小距离对应的两个簇$C_{i^*},C_{j^*}$，合并$C_{i^*}=C_{i^*}\bigcup C_{j^*}$</li>
+<li>删除簇$C_{j^*}$</li>
+<li>修改距离矩阵M中与簇$C_{i^*}$有关的值，此时M的有效规模为N-1*N-1</li>
+<li>q = q-1</li>
+<li>如果q=K，停止，得到K个簇的聚类结果；<br>如果q&gt;K，返回步骤4</li>
+</ol>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://en.wikipedia.org/wiki/Cluster_analysis" target="_blank" rel="external">https://en.wikipedia.org/wiki/Cluster_analysis</a><br>The Elements of Statistical Learning<br><a href="https://en.wikipedia.org/wiki/DBSCAN" target="_blank" rel="external">https://en.wikipedia.org/wiki/DBSCAN</a></p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/08/23/线性模型/" data-toggle="tooltip" data-placement="top" title="线性模型总结">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "/2016/08/24/聚类/";
+    var disqus_url = "/2016/08/24/聚类/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; ZhengYang&#39;s Blog 2016 
+                    <br>
+		Driver - <a href="https://hexo.io/">Hexo</a> | 
+                    Theme - <a href="https://github.com/Kaijun/hexo-theme-huxblog">Hux</a> 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'zhengyangcs.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work --><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+
+</html>
