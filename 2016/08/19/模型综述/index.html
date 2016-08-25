@@ -217,7 +217,7 @@
 <li>选择估计期望泛化误差最小所对应的一个网格参数，作为最优参数</li>
 <li>用最优参数设置模型，在非测试集上训练，得到训练误差，在测试集上得到测试误差</li>
 </ol>
-<h2 id="P-R曲线-ROC曲线"><a href="#P-R曲线-ROC曲线" class="headerlink" title="P-R曲线 ROC曲线"></a>P-R曲线 ROC曲线</h2><p><em>先列，后行</em><br>|-|预测|-|<br>|–|–|–|<br>|<strong>真实</strong>|正例|反例|<br>|正例|TP|FN|<br>|反例|FP|TN|</p>
+<h2 id="P-R曲线-ROC曲线"><a href="#P-R曲线-ROC曲线" class="headerlink" title="P-R曲线 ROC曲线"></a>P-R曲线 ROC曲线</h2><p><em>先列，后行</em><br>|-|预测|-|<br>|—-|—-|—-|<br>|<strong>真实</strong>|正例|反例|<br>|正例|TP|FN|<br>|反例|FP|TN|</p>
 <h3 id="P-R"><a href="#P-R" class="headerlink" title="P-R"></a>P-R</h3><p>p 计算列1 显示列<br>r 计算行1 显示行<br>$P=\frac{TP}{TP+FP}$<br>$R=\frac{TP}{TP+FN}$</p>
 <h3 id="ROC"><a href="#ROC" class="headerlink" title="ROC"></a>ROC</h3><p>tpr 计算行1  显示列<br>fpr 计算行2  显示行<br>$TPR=\frac{TP}{TP+FN}$<br>$FPR=\frac{FP}{FP+TN}$</p>
 <p>$R=TPR$</p>
