@@ -13,11 +13,11 @@
 
     <title>
         
-          经验贝叶斯 - ZhengYang&#39;s Blog
+          ZhengYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="/2016/08/22/经验贝叶斯/">
+    <link rel="canonical" href="/i_dont_wanna_use_default_archives/page/4/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,166 +147,7 @@
 
 
     <!-- Main Content -->
-    
-<!-- Image to hack wechat -->
-<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
-
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        background-image: url('/img/line1.jpg')
-    }
-</style>
-<header class="intro-header" >
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                          <a class="tag" href="/tags/#Empirical Bayes" title="Empirical Bayes">Empirical Bayes</a>
-                        
-                    </div>
-                    <h1>经验贝叶斯</h1>
-                    <h2 class="subheading"></h2>
-                    <span class="meta">
-                        Posted by ZhengYang on
-                        2016-08-22
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <h2 id="贝叶斯"><a href="#贝叶斯" class="headerlink" title="贝叶斯"></a>贝叶斯</h2><p>$\theta$是变量$x$的参数<br>$\eta$是变量$\theta$的参数<br>$\eta$是变量$x$的超参数</p>
-<h3 id="贝叶斯-Bayes-or-Standard-Bayes-or-Fully-Bayes"><a href="#贝叶斯-Bayes-or-Standard-Bayes-or-Fully-Bayes" class="headerlink" title="贝叶斯 (Bayes or Standard Bayes or Fully Bayes)"></a>贝叶斯 (Bayes or Standard Bayes or Fully Bayes)</h3><p>在给定数据之前，先验分布$p(\theta)$就已经确定下来了，即参数$\theta$的分布$p(\theta)$已知，$p(\theta)$表达式中的参数$\eta$已知。<br>$$p(\theta|x)=\frac{p(x|\theta)p(\theta)}{p(x)}$$</p>
-<h3 id="经验贝叶斯-Empirical-Bayes"><a href="#经验贝叶斯-Empirical-Bayes" class="headerlink" title="经验贝叶斯 (Empirical Bayes)"></a>经验贝叶斯 (Empirical Bayes)</h3><p>在给定数据之前，先验分布$p(\theta)$未知，即参数$\eta$未知。给定数据之后，先验分布是根据数据估计的，即确定使$p(x|\eta)$最大的超参数$\eta$的值。<br>$$\eta^*=argmax_{\eta}p(x|\eta)$$<br><em>$p(x|\eta)$表示关于$\eta$，而不是$\theta$的最大似然。将$p(x|\theta)$中的参数$\theta$替换成$p(\theta)$的表达式，表达式中，只包含超参数$\eta$，所以可以这么写。</em><br>然后根据$\eta^*$得到先验分布的估计，代入贝叶斯公式，其余的部分和贝叶斯都一样。<br>$$p(\theta|x) \approx \frac{p(x|\theta)p(\theta|\eta^*)}{p(x|\eta^*)}$$</p>
-<p>经验贝叶斯可以看成是贝叶斯的的近似，经验贝叶斯与贝叶斯也仅仅只有先验给定与估计的区别。</p>
-<h3 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h3><p>Empirical Bayes is only one of the possible approximations to a full Bayes treatment. There are many other approximation algorithms available, such as Variational Bayes and Expectation Propagation.</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li><a href="https://en.wikipedia.org/wiki/Empirical_Bayes_method" target="_blank" rel="external">https://en.wikipedia.org/wiki/Empirical_Bayes_method</a></li>
-<li><a href="http://stats.stackexchange.com/questions/115155/empirical-bayes-vs-non-informative-priors?rq=1" target="_blank" rel="external">http://stats.stackexchange.com/questions/115155/empirical-bayes-vs-non-informative-priors?rq=1</a></li>
-</ol>
-
-
-                <hr>
-
-                
-
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2016/08/22/线性判别分析/" data-toggle="tooltip" data-placement="top" title="线性判别分析">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2016/08/21/偏差方差分解/" data-toggle="tooltip" data-placement="top" title="偏差方差分解">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                
-
-                
-                <!-- disqus 评论框 start -->
-                <div class="comment">
-                    <div id="disqus_thread" class="disqus-thread"></div>
-                </div>
-                <!-- disqus 评论框 end -->
-                
-
-            </div>
-    <!-- Side Catalog Container -->
-        
-
-    <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-
-        </div>
-    </div>
-</article>
-
-
-
-
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "/2016/08/22/经验贝叶斯/";
-    var disqus_url = "/2016/08/22/经验贝叶斯/";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus 公共JS代码 end -->
-
-
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
+    <!-- Default Archive layout, we use archives instead. -->
 
     <!-- Footer -->
     <!-- Footer -->

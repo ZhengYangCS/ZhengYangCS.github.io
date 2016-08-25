@@ -13,11 +13,11 @@
 
     <title>
         
-          线性判别分析 - ZhengYang&#39;s Blog
+          SOM网络 - ZhengYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="/2016/08/22/线性判别分析/">
+    <link rel="canonical" href="/2016/08/25/SOM/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#LDA" title="LDA">LDA</a>
+                          <a class="tag" href="/tags/#SOM网络" title="SOM网络">SOM网络</a>
                         
                     </div>
-                    <h1>线性判别分析</h1>
+                    <h1>SOM网络</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by ZhengYang on
-                        2016-08-22
+                        2016-08-25
                     </span>
                 </div>
             </div>
@@ -191,90 +191,38 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <blockquote>
-<p>区别于话题模型的LDA (Latent Dirichlet Allocation)</p>
-</blockquote>
-<h2 id="二类LDA-Linear-Discriminant-Analysis"><a href="#二类LDA-Linear-Discriminant-Analysis" class="headerlink" title="二类LDA(Linear Discriminant Analysis)"></a>二类LDA(Linear Discriminant Analysis)</h2><table>
-<thead>
-<tr>
-<th>二类</th>
-<th>原空间D维</th>
-<th>投影空间1维</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>点</td>
-<td>向量$\mathbf{x}$</td>
-<td>标量$y$</td>
-</tr>
-<tr>
-<td>类中心</td>
-<td>向量$\mathbf{m_k}$</td>
-<td>标量$\mu_k$</td>
-</tr>
-</tbody>
-</table>
-<p>如果原始特征数太多，想将D维特征降到只有1维，即这1维就能决定每个样例的类别。<br>记这个最佳的向量为$\mathbf w$ (D维)，那么样例$\mathbf x$ (D维)到$\mathbf w$上的投影表示为<br>$$y=\mathbf w^T\mathbf x$$<br>这里得到的$y$值不是0/1值，而是$\mathbf x$投影到$\mathbf w$上的点到原点的距离。<br><em>注意：这个式子并不是超平面，只是向量内积。</em></p>
-<h3 id="D维原空间"><a href="#D维原空间" class="headerlink" title="D维原空间"></a>D维原空间</h3><ol>
-<li>寻找每类样例的均值（中心点）<br>$\mathbf m_0=\frac{1}{N_0}\sum_{\mathbf x\in C_0}\mathbf x$<br>$\mathbf m_1=\frac{1}{N_1}\sum_{\mathbf x\in C_1}\mathbf x$</li>
-<li>得到投影后，两类的中心<br>$\mu_0=w^T\mathbf m_0$<br>$\mu_1=w^T\mathbf m_1$</li>
-<li>投影前的协方差<br>$S_0=\sum_{\mathbf x\in C_0}\mathbf{(x-m_0)(x-m_0)}^T$<br>$S_1=\sum_{\mathbf x\in C_1}\mathbf{(x-m_1)(x-m_1)}^T$</li>
-<li>投影后的方差<br>$s_0^2=\sum_{y\in C_0}(y-\mu_0)^2$<br>$s_1^2=\sum_{y\in C_1}(y-\mu_1)^2$</li>
+                <h2 id="SOM-Self-Organizing-Map-网络"><a href="#SOM-Self-Organizing-Map-网络" class="headerlink" title="SOM(Self-Organizing Map)网络"></a>SOM(Self-Organizing Map)网络</h2><p>SOM网络又称Kohonen网络，自组织特征映射(SOFM)网。<br>SOM网络是一种竞争的无监督神经网络，是两层结构，将高维输入数据映射到低维空间(通常为二维)，同时保持输入数据在高维空间的拓扑结构，即高维空间中相似的样例映射到网络输出层中的邻近神经元中。因此，<strong>SOM适用于聚类</strong>。SOM的训练目的就是为每个神经元找到合适的权向量，以达到保持拓扑结构的目的。</p>
+<p>SMO (Sequential Minimal Optimiztion) 序列最小优化，是SVM的一个学习算法。虽然缩写相似，但两者是完全不同的算法。</p>
+<h3 id="SOM网络的来源？"><a href="#SOM网络的来源？" class="headerlink" title="SOM网络的来源？"></a>SOM网络的来源？</h3><p>Kohonen根据生理学发现，认为神经网络在接受外界输入时，将会分成不同的区域，不同的区域对不同的模式具有不同的响应特征。竞争学习规则的生理学基础是神经细胞的侧抑制现象，当一个神经细胞兴奋后，会对其周围的神经细胞产生抑制作用。</p>
+<h3 id="四个主要部分"><a href="#四个主要部分" class="headerlink" title="四个主要部分"></a>四个主要部分</h3><ol>
+<li>初始化：所有连接的权值初始小的随机数</li>
+<li>竞争：对每一个输入向量，计算相似度最小的值所对应的神经元获胜</li>
+<li>邻域：对于获胜的神经元，找到其在输出层的邻域</li>
+<li>调整：调整获胜神经元和邻域神经元的权值</li>
 </ol>
-<h3 id="目标值优化"><a href="#目标值优化" class="headerlink" title="目标值优化"></a>目标值优化</h3><p>使类间距尽可能大，类内部的距离尽可能小<br>$$max_w J(\mathbf{w})=\frac{(\mu_0-\mu_1)^2}{s_0^2+s_1^2}$$</p>
-<ul>
-<li><p>分子化简<br>$(\mu_0-\mu_1)^2=\mathbf {(w^Tm_0-w^Tm_1)}^2$<br>$=\mathbf{w^T(m_0-m_1)(m_0-m_1)^Tw}$<br>$=\mathbf w^TS_B\mathbf w$<br>其中，$S_B$ 称为between-class covariance matrix<br>$S_B=\mathbf {(m_0-m_1)(m_0-m_1)}^T$</p>
-</li>
-<li><p>分母化简<br>$s_k^2=\sum_{y\in C_k}(y-\mu_k)^2$<br>$=\sum_{\mathbf x\in C_k}\mathbf {(w^Tx-w^Tm_k)}^2$<br>$=\sum_{\mathbf x\in C_k}\mathbf {w^T(x-m_k)(x-m_k)}^T\mathbf w$<br>$=\mathbf w^T\{\sum_{\mathbf x\in C_k}\mathbf {(x-m_k)(x-m_k)}^T\}\mathbf w$<br>$=\mathbf w^TS_k\mathbf w$<br>其中，$S_k=\sum_{\mathbf x\in C_k}\mathbf {(x-m_k)(x-m_k)}^T$<br>$S_W$ 称为within-class convariance matrix<br>$S_W=S_0+S_1$<br>$=\sum_{\mathbf x\in C_0}\mathbf {(x-m_0)(x-m_0)}^T+\sum_{\mathbf x\in C_1}\mathbf {(x-m_1)(x-m_1)}^T$</p>
-</li>
-</ul>
-<h3 id="改写后的目标值优化"><a href="#改写后的目标值优化" class="headerlink" title="改写后的目标值优化"></a>改写后的目标值优化</h3><p>$$J(\mathbf{w})=\frac{\mathbf w^TS_B\mathbf w}{\mathbf w^TS_W\mathbf w}$$</p>
-<h3 id="求解w"><a href="#求解w" class="headerlink" title="求解w"></a>求解w</h3><p>分子分母都是关于$\mathbf w$的二次形式，如果$\mathbf w$是解，那么$\alpha \mathbf w$也是解。因此固定分母为1，求分子的最大。<br>$$min_\mathbf w -\mathbf w^TS_B\mathbf w$$<br>$$s.t. \mathbf w^TS_W\mathbf w=1$$<br>解：<br>$L(\mathbf w)=-\mathbf w^TS_B\mathbf w+\lambda(\mathbf w^TS_W\mathbf w-1)=0$<br>$\frac{\partial L(\mathbf w)}{\partial \mathbf w}=2S_B\mathbf w-2\lambda S_W\mathbf w=0$<br>$S_B\mathbf w=\lambda S_W\mathbf w$<br>${S_W}^{-1}S_B\mathbf w=\lambda \mathbf w$</p>
-<p><em>因为 $S_B=\mathbf {(m_0-m_1)(m_0-m_1)}^T$，</em><br><em>两边同时乘$w$，得 $S_B\mathbf w=\mathbf {(m_0-m_1)(m_0-m_1)}^T\mathbf w$</em><br><em>令$\lambda = \mathbf {(m_0-m_1)}^T\mathbf w$，而且这里的$\lambda$等同于拉格朗日中的$\lambda$，则此时$\mathbf w$已定，</em><br><em>$S_B\mathbf w=\mathbf {(m_0-m_1)}\lambda$，代入上式，得，</em></p>
-<p>${S_W}^{-1}\mathbf {(m_0-m_1)}\lambda=\lambda \mathbf w$<br>${S_W}^{-1}\mathbf {(m_0-m_1)}=\mathbf w$</p>
-<p>因此，只需要求出原始样本的均值和方差就可以求出最佳的方向，<br>$$\mathbf w={S_W}^{-1}(\mathbf m_0-\mathbf m_1)$$<br>实际求解过程中，对$S_W$进行奇异值分解，即$S_W=U\Sigma V^T$，$\Sigma$是一个实对角线矩阵，其对角线上的元素是$S_W$的奇异值。然后在有$S_W^{-1}=V\Sigma^{-1} U^T$得到$S_W^{-1}$</p>
-<h2 id="多类LDA"><a href="#多类LDA" class="headerlink" title="多类LDA"></a>多类LDA</h2><table>
-<thead>
-<tr>
-<th>多类</th>
-<th>原空间D维</th>
-<th>投影空间d维</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>点</td>
-<td>向量$\mathbf{x}$</td>
-<td>向量$\mathbf y$</td>
-</tr>
-<tr>
-<td>类中心</td>
-<td>向量$\mathbf{m_k}$</td>
-<td>向量$\mathbf{\mu_k}$</td>
-</tr>
-<tr>
-<td>总中心</td>
-<td>向量$\mathbf{m}$</td>
-<td>向量$\mathbf{\mu}$</td>
-</tr>
-</tbody>
-</table>
-<p>之前讨论的是如何将D维降到1维，现在类别多了，1维可能已经不满足要求。假设有K个类别，需要投影到d维空间。<br>$y_i=\mathbf {w_i}^T\mathbf x$， 其中$i=1,2,…,d$，$\mathbf {w_i}$可以称作基向量。<br>$\mathbf y=\mathbf W^T\mathbf x$，其中$W$的第$i$列为$w_i$<br>$\mathbf W$的维数$D\times d$</p>
-<h3 id="D-维原空间"><a href="#D-维原空间" class="headerlink" title="$D$维原空间"></a>$D$维原空间</h3><h4 id="within-class-convariance-matirx"><a href="#within-class-convariance-matirx" class="headerlink" title="within-class convariance matirx"></a>within-class convariance matirx</h4><p>$S_W=\sum_{k=1}^{K}\sum_{\mathbf x\in C_k}\mathbf {(x-m_k)(x-m_k)}^T$<br>其中，$\mathbf {m_k}=\frac{1}{N_k}\sum_{\mathbf x\in C_k}\mathbf x$ ，$C_k$为$k$类数据子集<br>$S_W$的维数$D\times D$</p>
-<h4 id="total-covariance-matrix"><a href="#total-covariance-matrix" class="headerlink" title="total covariance matrix"></a>total covariance matrix</h4><p>$S_T=\sum_{\mathbf x\in C}\mathbf {(x-m)(x-m)}^T$<br>其中，$\mathbf m=\frac{1}{N}\sum_{\mathbf x\in C}\mathbf x$ ，$C$为数据全集<br>$S_T$的维数$D\times D$</p>
-<h4 id="between-class-convariance-matrix"><a href="#between-class-convariance-matrix" class="headerlink" title="between-class convariance matrix"></a>between-class convariance matrix</h4><p>$S_B$需一些改变，原来度量的是两个均值点的散列情况，现在度量的是每类均值点相对于样本中心的散列情况。<br>$S_B=\sum_{k=1}^KN_k\mathbf {(m_k-m)(m_k-m)}^T$<br>$S_B$的维数$D\times D$</p>
-<p>对于多类问题，$S_T=S_W+S_B$；但对于二类问题，$S_T\neq S_W+S_B$，因为$S_B$的定义不同</p>
-<h3 id="d-维投影空间"><a href="#d-维投影空间" class="headerlink" title="$d$维投影空间"></a>$d$维投影空间</h3><h4 id="within-class-convariance-matirx-1"><a href="#within-class-convariance-matirx-1" class="headerlink" title="within-class convariance matirx"></a>within-class convariance matirx</h4><p>$S_W=\sum_{k=1}^K\sum_{\mathbf y\in C_k}\mathbf {(y-\mu_k)(y-\mu_k)}^T$<br>其中，$\mathbf {\mu_k}=\frac{1}{N_k}\sum_{\mathbf y\in C_k}\mathbf y$ ，$C_k$为$k$类数据子集<br>$S_W$的维数$d\times d$</p>
-<h4 id="between-class-convariance-matrix-1"><a href="#between-class-convariance-matrix-1" class="headerlink" title="between-class convariance matrix"></a>between-class convariance matrix</h4><p>$S_B=\sum_{k=1}^KN_k\mathbf{(\mu_k-\mu)(\mu_k-\mu)}^T$<br>其中，$\mathbf {\mu}=\frac{1}{N}\sum_{\mathbf y\in C}\mathbf y$ ，$C$为数据全集<br>$S_B$的维数$d\times d$</p>
-<h3 id="目标值优化-1"><a href="#目标值优化-1" class="headerlink" title="目标值优化"></a>目标值优化</h3><p>$$max_W\frac{tr(\mathbf W^TS_B\mathbf W)}{tr(\mathbf W^TS_W\mathbf W)}$$<br>通过广义特征值来求解，<br>$$S_W^{-1}S_B\mathbf W=\lambda \mathbf W$$<br>$\mathbf W$的闭式解释是$S_W^{-1}S_B$的前$d$个最大的特征值对应的特征向量，所组成的$N\times d$维的$\mathbf W$。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>LDA可以分类，也可以用于有监督的降维。<br>而PCA，ICA，manifold learning都属于无监督的降维。</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>PRML</li>
-<li>《机器学习》周志华</li>
-<li><a href="http://www.cnblogs.com/jerrylead/archive/2011/04/21/2024384.html" target="_blank" rel="external">http://www.cnblogs.com/jerrylead/archive/2011/04/21/2024384.html</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Linear_discriminant_analysis" target="_blank" rel="external">https://en.wikipedia.org/wiki/Linear_discriminant_analysis</a></li>
+<h3 id="数据说明"><a href="#数据说明" class="headerlink" title="数据说明"></a>数据说明</h3><p>样本点是D维 $\mathbf x={x_i:i=1,…,D}$<br>输入单元D个，每个输入单元的索引为$i$<br>输出神经元N个，每个神经元的索引为$j$，(二维有矩阵排列，六边形排列)<br>连接权值$\mathbf w<em>j={w</em>{ji}:j=1,2,…,N; i=1,…,D}$，网络全连接<br><em>w第一维是输出神经元，第二维是输入单元</em></p>
+<h3 id="SMO算法"><a href="#SMO算法" class="headerlink" title="SMO算法"></a>SMO算法</h3><ol>
+<li>所有连接$w_{ji}$ (D*N) 的权值初始化一个小的随机数</li>
+<li>对每个输出神经元，计算与输入向量的相似度：<br>$$d<em>j(\mathbf x)=\sum</em>{i=1}^D(x<em>i-w</em>{ji})^2$$<br>找到最相似的输出神经元，表示为$I(\mathbf x)$<br><em>也就是说，哪个神经元与输入向量最接近，哪个神经元就胜出。连续的输入空间，就被映射到离散的输出空间上。</em></li>
+<li>找到激活的神经元$I(x)$后，找到它邻近的神经元。令$S<em>{jk}$表示输出神经元 j 和输出神经元 k 在平面上的(欧式)距离，分配给邻域内的神经元 j 一个更新权重，<br>$$T</em>{j,I(\mathbf x)}=exp(-S^2_{j,I(\mathbf x)}/2\sigma^2(t))$$<br>即每个输出神经元 j 对应一个权值，越靠近激活神经元$I(x)$，其权值越大<br>$\sigma(t)$控制着邻域的大小，且规定邻域随着时间增加，范围减小，也就是$\sigma(t)$在随时间衰减，常见的是指数衰减，$\sigma(t)=\sigma<em>0exp(-t/\tau</em>{\sigma})$，$\sigma<em>0, \tau</em>{\sigma}$是超参数</li>
+<li>获胜神经元和它的邻域都会调整权值，但调整幅度不同，<br>$$w<em>{ji}=w</em>{ji}+\eta(t)T_{j,I(\mathbf x)}(x<em>i-w</em>{ji})$$<br>调整量也随着时间减小，因此也可以用指数衰减表示学习率，$\eta(t)=\eta<em>0exp(-t/tau</em>{\tau})$，$\eta<em>0, \tau</em>{\eta}$是超参数</li>
+<li>返回步骤2，迭代多次，直到权值调整量小于阈值$\epsilon$，停止。</li>
 </ol>
+<h3 id="SOM说明"><a href="#SOM说明" class="headerlink" title="SOM说明"></a>SOM说明</h3><ol>
+<li>在输入空间中，激活的输出神经元及其邻域的权值向量 会不断向 输入向量靠近</li>
+<li>最终，展开后每个网格点就代表离它最近的输入空间的值，类似聚类中心，每个神经元代表一类，这一类所包含的数据，就是能够使它竞争获胜的那些数据。</li>
+<li>SOM需要确定输出层的神经元个数，排列方式，还有邻域和学习率的超参数</li>
+<li>二维SOM是原分布到二维空间的非线性投影，该投影试图保持原空间的拓扑特征</li>
+<li>SOM缺乏具体的目标函数，只是找到与原始分布最近似的质心的拓扑集合</li>
+</ol>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Somtraining.svg" alt=""><br>蓝色的为训练集的数据分布，网格为SOM的输出层。</p>
+<ol>
+<li>训练集随机选取一点，找到输出层中最近的神经元为激活神经元</li>
+<li>将激活神经元及其邻域的权值向量向输入向量靠近</li>
+<li>迭代多次，网格会充满训练集的分布</li>
+</ol>
+<p>网格中的每个点代表着与它最近的原空间的点，反过来说，原空间的点会被聚集到网格点上。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="http://www.cs.bham.ac.uk/~jxb/NN/l16.pdf" target="_blank" rel="external">http://www.cs.bham.ac.uk/~jxb/NN/l16.pdf</a><br><a href="https://en.wikipedia.org/wiki/Self-organizing_map" target="_blank" rel="external">https://en.wikipedia.org/wiki/Self-organizing_map</a></p>
 
 
                 <hr>
@@ -283,13 +231,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/08/23/线性模型/" data-toggle="tooltip" data-placement="top" title="线性模型总结">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/08/22/经验贝叶斯/" data-toggle="tooltip" data-placement="top" title="经验贝叶斯">Next Post &rarr;</a>
+                            <a href="/2016/08/24/聚类/" data-toggle="tooltip" data-placement="top" title="聚类总结">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -333,8 +277,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "/2016/08/22/线性判别分析/";
-    var disqus_url = "/2016/08/22/线性判别分析/";
+    var disqus_identifier = "/2016/08/25/SOM/";
+    var disqus_url = "/2016/08/25/SOM/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -97,14 +97,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -214,7 +214,7 @@
 <li>无限范数距离(切比雪夫距离)<br>$$||x_i-y_i||_\infty = (\sum_{i=1}^n|x_i-y_i|^\infty)^{1/\infty}$$</li>
 </ul>
 <h2 id="原型聚类"><a href="#原型聚类" class="headerlink" title="原型聚类"></a>原型聚类</h2><p>Prototype methods represent the training data <strong>by a set of points in feature space.</strong> These prototypes are typically not examples from the training sample, except int the case of 1-nearest-neighbor classification. Each prototype has an associated class label, the classification of a query point x is made to <strong>the class of the closest prototype.</strong></p>
-<p>原型：样本空间中具有代表性的点，不一定是训练集上的点，也可能不存在训练集上。</p>
+<p>原型：样本空间中具有代表性的点，不一定是训练集上的点，也可能不存在训练集上。<br>原型方法对于不同密度，不同形状的簇的聚类，效果不好。</p>
 <h3 id="k-means"><a href="#k-means" class="headerlink" title="k-means"></a>k-means</h3><ol>
 <li>在样本中，随机选择K个点作为初始质心</li>
 <li>将样本中的每个点指派到最近的质心，形成K个簇</li>
@@ -280,6 +280,10 @@
                 
 
                 <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/08/25/SOM/" data-toggle="tooltip" data-placement="top" title="SOM网络">&larr; Previous Post</a>
+                        </li>
                     
                     
                         <li class="next">
