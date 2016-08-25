@@ -200,12 +200,12 @@
 <li>邻域：对于获胜的神经元，找到其在输出层的邻域</li>
 <li>调整：调整获胜神经元和邻域神经元的权值</li>
 </ol>
-<h3 id="数据说明"><a href="#数据说明" class="headerlink" title="数据说明"></a>数据说明</h3><p>样本点是D维 $\mathbf x={x_i:i=1,…,D}$<br>输入单元D个，每个输入单元的索引为$i$<br>输出神经元N个，每个神经元的索引为$j$，(二维有矩阵排列，六边形排列)<br>连接权值$\mathbf w<em>j={w</em>{ji}:j=1,2,…,N; i=1,…,D}$，网络全连接<br><em>w第一维是输出神经元，第二维是输入单元</em></p>
+<h3 id="数据说明"><a href="#数据说明" class="headerlink" title="数据说明"></a>数据说明</h3><p>样本点是D维 $\mathbf x=\{x_i:i=1,…,D\}$<br>输入单元D个，每个输入单元的索引为$i$<br>输出神经元N个，每个神经元的索引为$j$，(二维有矩阵排列，六边形排列)<br>连接权值$\mathbf w_j={w_{ji}:j=1,2,…,N; i=1,…,D}$，网络全连接<br><em>w第一维是输出神经元，第二维是输入单元</em></p>
 <h3 id="SMO算法"><a href="#SMO算法" class="headerlink" title="SMO算法"></a>SMO算法</h3><ol>
 <li>所有连接$w_{ji}$ (D*N) 的权值初始化一个小的随机数</li>
-<li>对每个输出神经元，计算与输入向量的相似度：<br>$$d<em>j(\mathbf x)=\sum</em>{i=1}^D(x<em>i-w</em>{ji})^2$$<br>找到最相似的输出神经元，表示为$I(\mathbf x)$<br><em>也就是说，哪个神经元与输入向量最接近，哪个神经元就胜出。连续的输入空间，就被映射到离散的输出空间上。</em></li>
-<li>找到激活的神经元$I(x)$后，找到它邻近的神经元。令$S<em>{jk}$表示输出神经元 j 和输出神经元 k 在平面上的(欧式)距离，分配给邻域内的神经元 j 一个更新权重，<br>$$T</em>{j,I(\mathbf x)}=exp(-S^2_{j,I(\mathbf x)}/2\sigma^2(t))$$<br>即每个输出神经元 j 对应一个权值，越靠近激活神经元$I(x)$，其权值越大<br>$\sigma(t)$控制着邻域的大小，且规定邻域随着时间增加，范围减小，也就是$\sigma(t)$在随时间衰减，常见的是指数衰减，$\sigma(t)=\sigma<em>0exp(-t/\tau</em>{\sigma})$，$\sigma<em>0, \tau</em>{\sigma}$是超参数</li>
-<li>获胜神经元和它的邻域都会调整权值，但调整幅度不同，<br>$$w<em>{ji}=w</em>{ji}+\eta(t)T_{j,I(\mathbf x)}(x<em>i-w</em>{ji})$$<br>调整量也随着时间减小，因此也可以用指数衰减表示学习率，$\eta(t)=\eta<em>0exp(-t/tau</em>{\tau})$，$\eta<em>0, \tau</em>{\eta}$是超参数</li>
+<li>对每个输出神经元，计算与输入向量的相似度：<br>$$d_j(\mathbf x)=\sum_{i=1}^D(x_i-w_{ji})^2$$<br>找到最相似的输出神经元，表示为$I(\mathbf x)$<br><em>也就是说，哪个神经元与输入向量最接近，哪个神经元就胜出。连续的输入空间，就被映射到离散的输出空间上。</em></li>
+<li>找到激活的神经元$I(x)$后，找到它邻近的神经元。令$S_{jk}$表示输出神经元 j 和输出神经元 k 在平面上的(欧式)距离，分配给邻域内的神经元 j 一个更新权重，<br>$$T_{j,I(\mathbf x)}=exp(-S^2_{j,I(\mathbf x)}/2\sigma^2(t))$$<br>即每个输出神经元 j 对应一个权值，越靠近激活神经元$I(x)$，其权值越大<br>$\sigma(t)$控制着邻域的大小，且规定邻域随着时间增加，范围减小，也就是$\sigma(t)$在随时间衰减，常见的是指数衰减，$\sigma(t)=\sigma_0exp(-t/\tau_{\sigma})$，$\sigma_0, \tau_{\sigma}$是超参数</li>
+<li>获胜神经元和它的邻域都会调整权值，但调整幅度不同，<br>$$w_{ji}=w_{ji}+\eta(t)T_{j,I(\mathbf x)}(x_i-w_{ji})$$<br>调整量也随着时间减小，因此也可以用指数衰减表示学习率，$\eta(t)=\eta_0exp(-t/tau_{\tau})$，$\eta_0, \tau_{\eta}$是超参数</li>
 <li>返回步骤2，迭代多次，直到权值调整量小于阈值$\epsilon$，停止。</li>
 </ol>
 <h3 id="SOM说明"><a href="#SOM说明" class="headerlink" title="SOM说明"></a>SOM说明</h3><ol>
