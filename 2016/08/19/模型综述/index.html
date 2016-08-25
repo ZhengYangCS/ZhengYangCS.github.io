@@ -90,13 +90,6 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -105,6 +98,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -217,7 +217,28 @@
 <li>选择估计期望泛化误差最小所对应的一个网格参数，作为最优参数</li>
 <li>用最优参数设置模型，在非测试集上训练，得到训练误差，在测试集上得到测试误差</li>
 </ol>
-<h2 id="P-R曲线-ROC曲线"><a href="#P-R曲线-ROC曲线" class="headerlink" title="P-R曲线 ROC曲线"></a>P-R曲线 ROC曲线</h2><p><em>先列，后行</em><br>|真实 \ 预测|正例|反例|<br>|—-|—-|—-|<br>|<strong>正例</strong>|TP|FN|<br>|<strong>反例</strong>|FP|TN|</p>
+<h2 id="P-R曲线-ROC曲线"><a href="#P-R曲线-ROC曲线" class="headerlink" title="P-R曲线 ROC曲线"></a>P-R曲线 ROC曲线</h2><p><em>先列，后行</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">真实 \ 预测</th>
+<th style="text-align:center">正例</th>
+<th style="text-align:center">反例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>正例</strong></td>
+<td style="text-align:center">TP</td>
+<td style="text-align:center">FN</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>反例</strong></td>
+<td style="text-align:center">FP</td>
+<td style="text-align:center">TN</td>
+</tr>
+</tbody>
+</table>
 <h3 id="P-R"><a href="#P-R" class="headerlink" title="P-R"></a>P-R</h3><p>p 计算列1 显示列<br>r 计算行1 显示行<br>$P=\frac{TP}{TP+FP}$<br>$R=\frac{TP}{TP+FN}$</p>
 <h3 id="ROC"><a href="#ROC" class="headerlink" title="ROC"></a>ROC</h3><p>tpr 计算行1  显示列<br>fpr 计算行2  显示行<br>$TPR=\frac{TP}{TP+FN}$<br>$FPR=\frac{FP}{FP+TN}$</p>
 <p>$R=TPR$</p>
@@ -259,12 +280,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2016/08/19/朴素贝叶斯/" data-toggle="tooltip" data-placement="top" title="朴素贝叶斯">&larr; Previous Post</a>
+                            <a href="/2016/08/20/参数估计方法/" data-toggle="tooltip" data-placement="top" title="参数估计方法">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2016/08/18/boosting/" data-toggle="tooltip" data-placement="top" title="Boosting">Next Post &rarr;</a>
+                            <a href="/2016/08/19/朴素贝叶斯/" data-toggle="tooltip" data-placement="top" title="朴素贝叶斯">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
