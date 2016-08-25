@@ -386,6 +386,33 @@ P(x)与p(x)区......
 
 <div class="post-preview">
 
+    <a href="/2016/08/19/模型综述/">
+        <h2 class="post-title">
+            模型综述
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            模型评估方法网格搜索 调参在训练集上训练模型，根据验证集上的结果调参。调好参数后，在测试集上得到测试误差。
+
+将数据集分为训练集，验证集，测试集
+将参数网格化，每一个交叉点都是一组参数
+遍历每个网格参数，在训练集上训练模型，在验证集上得到与网格参数对应的验证误差
+挑选最小的验证误差所对应的那个网格参数，作为最优的参数
+用最优参数设置模型，在训练集$\bigcup$验证集上训练，得到测试误差，......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-08-19
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/08/19/朴素贝叶斯/">
         <h2 class="post-title">
             朴素贝叶斯
@@ -422,31 +449,6 @@ AdaBoostAdaBoost是Freund和Schapire于1995年提出的。每次迭代更改的�
     <p class="post-meta">
         Posted by ZhengYang on
         2016-08-18
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/08/17/mathjax/">
-        <h2 class="post-title">
-            mathjax总结
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-hexo写markdown中_与*一样，表示斜体或粗体，但mathjax中_表示下标，因此，mathjax中换行\\，在markdown中写成\\\\mathjax中下标_，在markdown改写成\_mathjax中下标\{，在markdown改写成\\{mathjax中下标\}，在markdown改写成\\}
-
-公式右键-Show Math As-Tex Commands可以查看编辑
-......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-08-17
     </p>
 
 </div>

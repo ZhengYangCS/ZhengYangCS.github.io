@@ -13,11 +13,11 @@
 
     <title>
         
-          参数估计方法 - ZhengYang&#39;s Blog
+          模型综述 - ZhengYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="/2016/08/20/参数估计方法/">
+    <link rel="canonical" href="/2016/08/19/模型综述/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#MLE &amp; MAP estimator &amp; Bayesian estimator" title="MLE &amp; MAP estimator &amp; Bayesian estimator">MLE &amp; MAP estimator &amp; Bayesian estimator</a>
+                          <a class="tag" href="/tags/#Models" title="Models">Models</a>
                         
                     </div>
-                    <h1>参数估计方法</h1>
+                    <h1>模型综述</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by ZhengYang on
-                        2016-08-20
+                        2016-08-19
                     </span>
                 </div>
             </div>
@@ -191,84 +191,65 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p><strong>几个参数估计的策略</strong></p>
+                <h2 id="模型评估方法"><a href="#模型评估方法" class="headerlink" title="模型评估方法"></a>模型评估方法</h2><h3 id="网格搜索-调参"><a href="#网格搜索-调参" class="headerlink" title="网格搜索 调参"></a>网格搜索 调参</h3><p>在训练集上训练模型，根据验证集上的结果调参。调好参数后，在测试集上得到测试误差。</p>
 <ol>
-<li>期望损失(expected loss) 风险函数(risk function)<br>是模型$f(X)$关于联合分布$P(X,Y)$的期望</li>
-<li>经验风险最小化 ERM(Empirical Risk Minimization)<br>是关于训练样本的平均损失</li>
-<li>结构风险最小化 SRM(Structural Risk Minimization)<br>是加了正则项的经验风险最小化</li>
+<li>将数据集分为训练集，验证集，测试集</li>
+<li>将参数网格化，每一个交叉点都是一组参数</li>
+<li>遍历每个网格参数，在训练集上训练模型，在验证集上得到与网格参数对应的验证误差</li>
+<li>挑选最小的验证误差所对应的那个网格参数，作为最优的参数</li>
+<li>用最优参数设置模型，在训练集$\bigcup$验证集上训练，得到测试误差，在测试集上得到测试误差。</li>
 </ol>
-<p><strong>P(x)与p(x)区别</strong></p>
+<h3 id="交叉验证-估计期望泛化误差"><a href="#交叉验证-估计期望泛化误差" class="headerlink" title="交叉验证 估计期望泛化误差"></a>交叉验证 估计期望泛化误差</h3><p>用交叉验证的目的是为了得到可靠稳定的模型。如果已经调好参了，且得到的估计的期望泛化误差比较大，那么说明模型不太适用，就可以考虑做一些特征变化或换模型了。<br>在非测试集上交叉验证，用MSE估计期望泛化误差，在测试集上得到测试误差</p>
 <ol>
-<li>大写$P(x)$表示概率质量函数 pmf (probability mass function)</li>
-<li>小写$p(x)$表示概率密度函数 pdf (probability density function)</li>
+<li>将数据集分为非测试集和测试集</li>
+<li>在将非测试集分为k份，其中k-1份作为训练集，另一份作为验证集</li>
+<li>在训练集上训练模型，得到一个训练误差，在验证集上测试，得到一个验证误差。</li>
+<li>共训练了k个模型，得到k个训练误差和k个验证误差。<strong>用k个验证误差的平均来估计期望泛化误差。</strong></li>
+<li>在非测试集上训练模型，得到训练误差，在测试集上测试模型，得到测试误差。</li>
 </ol>
-<p><strong>贝叶斯公式</strong><br>$$P(\theta|X)=\frac{P(X|\theta)\cdot P(\theta)}{P(X)}$$<br>$$posterior=\frac{likelihood\cdot prior}{evidence}$$</p>
-<h2 id="最大似然ML-Maximum-likelihood-估计"><a href="#最大似然ML-Maximum-likelihood-估计" class="headerlink" title="最大似然ML(Maximum likelihood)估计"></a>最大似然ML(Maximum likelihood)估计</h2><p>$$P(\theta|X)=P(X|\theta)$$<br>$$posterior=likelihood$$<br>wiki上面的词条将MLE翻译为最大似然估计，从图上来看，MLE的确也应该翻译为最大似然估计，而不是极大似然估计。但在实际求解时，常求的是极大值。<br><img src="http://oavdwoegd.bkt.clouddn.com/minimal_minimum.jpg" alt=""><br>$$\begin{align}<br>\hat \theta_{ML}&amp;=argmax_{\theta}logL \\<br>&amp;=argmax_{\theta}logP(X|\theta) \\<br>&amp;=argmax_{\theta}log\prod_xP(x|\theta) \\<br>&amp;=argmax_{\theta}\sum_xlogP(x|\theta) \\<br>\end{align}$$</p>
-<p>在实际应用中，模型分判别模型和生产模型，如果模型是判别模型，则似然估计为，<br>$$\hat \theta_{ML}=argmax_{\theta}\sum_{i=1}^NlogP(y_i|x_i,\theta) $$<br>如果模型是生成模型，则似然估计为，<br>$$\hat \theta_{ML}=argmax_{\theta}\sum_{i=1}^NlogP(y_i,x_i|\theta) $$</p>
-<h4 id="经验风险最小化-ERM-Empirical-Risk-Minimization"><a href="#经验风险最小化-ERM-Empirical-Risk-Minimization" class="headerlink" title="经验风险最小化 ERM(Empirical Risk Minimization)"></a>经验风险最小化 ERM(Empirical Risk Minimization)</h4><p>当模型是条件概率分布，损失函数是对数损失时，判别模型的最大似然估计等同于经验风险最小化。<br>$$\begin{align}<br>\hat \theta_{ERM}&amp;=argmin_{f}\frac{1}{N}\sum_{i=1}^NL(y_i,f(x_i)) \\<br>&amp;=argmin_{\theta}\frac{1}{N}\sum_{i=1}^NL(y_i,P(y_i|x_i,\theta)) \\<br>&amp;=argmin_{\theta}\frac{1}{N}\sum_{i=1}^N\{-logP(y_i|x_i,\theta)\} \\<br>&amp;=argmax_{\theta}\frac{1}{N}\sum_{i=1}^NlogP(y_i|x_i,\theta) \\<br>&amp;=argmax_{\theta}\sum_{i=1}^NlogP(y_i|x_i,\theta)<br>\end{align}$$</p>
-<h2 id="最大后验概率MAP-maximum-a-posteriori-估计"><a href="#最大后验概率MAP-maximum-a-posteriori-估计" class="headerlink" title="最大后验概率MAP(maximum a posteriori)估计"></a>最大后验概率MAP(maximum a posteriori)估计</h2><p>$$P(\theta|X)=P(X|\theta)\cdot P(\theta)$$<br>$$posterior=likelihood\cdot prior$$<br>相比于最大似然估计，最大后验估计加入一个先验，根据贝叶斯公式计算出的整个后验概率最大。但因为只需要求使$P(\theta|X)$最大的$\theta$，这里$P(X)$与参数$\theta$无关，因此等价于使分子最大。<br><em>最大后验概率估计是不完整的后验概率估计；后面的贝叶斯估计是完整的后验概率估计</em></p>
-<p>$$\begin{align}<br>\hat \theta_{MAP}&amp;=argmax_{\theta}logP(\theta|X) \\<br>&amp;=argmax_{\theta}log\frac{P(X|\theta)\cdot P(\theta)}{P(X)} \\<br>&amp;=argmax_{\theta}log(P(X|\theta)\cdot P(\theta)) \\<br>&amp;=argmax_{\theta}\{logP(X|\theta)+logP(\theta)\} \\<br>&amp;=argmax_{\theta}\{log\prod_xP(x|\theta)+logP(\theta)\} \\<br>&amp;=argmax_{\theta}\{\sum_xlogP(x|\theta)+logP(\theta)\}<br>\end{align}$$</p>
-<p>同样，在实际应用中，模型分判别模型和生产模型，如果模型是判别模型，则MAP估计为，<br>$$\hat \theta_{MAP}=argmax_{\theta}\left\{\sum_{i=1}^NlogP(y_i|x_i,\theta)+logP(\theta)\right\} $$<br>如果模型是生成模型，则MAP估计为，<br>$$\hat \theta_{MAP}=argmax_{\theta}\left\{\sum_{i=1}^NlogP(y_i,x_i|\theta)+logP(\theta)\right\} $$</p>
-<h4 id="结构风险最小化-SRM-Structural-Risk-Minimization"><a href="#结构风险最小化-SRM-Structural-Risk-Minimization" class="headerlink" title="结构风险最小化 SRM(Structural Risk Minimization)"></a>结构风险最小化 SRM(Structural Risk Minimization)</h4><p>当模型是条件概率分布，损失函数是对数损失，正则项为负log先验时，判别模型的MAP估计等同于结构风险最小化。<br>$$\begin{align}<br>\hat \theta_{SRM}&amp;=argmin_{f}\{\frac{1}{N}\sum_{i=1}^NL(y_i,f(x_i))+\lambda J(f)\} \\<br>&amp;=argmin_{\theta}\{\frac{1}{N}\sum_{i=1}^NL(y_i,P(y_i|x_i,\theta))-\frac1NlogP(\theta)\} \\<br>&amp;=argmin_{\theta}\{\frac{1}{N}\sum_{i=1}^N\{-logP(y_i|x_i,\theta)\}-\frac1NlogP(\theta)\} \\<br>&amp;=argmax_{\theta}\{\frac{1}{N}\sum_{i=1}^NlogP(y_i|x_i,\theta)+\frac1NlogP(\theta)\} \\<br>&amp;=argmax_{\theta}\{\sum_{i=1}^NlogP(y_i|x_i,\theta)+logP(\theta)\}<br>\end{align}$$</p>
-<h2 id="贝叶斯估计-Bayesian-estimator"><a href="#贝叶斯估计-Bayesian-estimator" class="headerlink" title="贝叶斯估计(Bayesian estimator)"></a>贝叶斯估计(Bayesian estimator)</h2><p>$$P(\theta|X)=\frac{P(X|\theta)\cdot P(\theta)}{P(X)}$$<br>$$posterior=\frac{likelihood\cdot prior}{evidence}$$<br>Bayesian估计是后验的完整形式。<br>在MAP估计中，只取了后验$P(\theta|X)$的最大值作为$\theta$的估计，忽略了$\theta$的其他可能性，可能丢失信息。而Bayesian估计则把$\theta$的所有可能取值(分母部分)考虑进来，即，<br>$$P(\theta|X)=\frac{P(X|\theta)\cdot P(\theta)}{P(X)}=\frac{P(X|\theta)\cdot P(\theta)}{\int_{\theta}P(X,\theta)d\theta}<br>=\frac{P(X|\theta)\cdot P(\theta)}{\int_{\theta}P(X|\theta)\cdot P(\theta)d\theta}$$<br>因此，Bayesian估计要比MAP估计更可靠些，但随着数据越多，Bayesian估计，MAP估计和ML估计越趋于一致。</p>
-<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ol>
-<li>Bayesian估计不仅可以得到后验的期望，还可以得到后验的方差，表示对这个期望值的确信程度。常用共轭先验作先验，可以根据分布的参数直接得到方差。</li>
-<li>Bayesian估计可以估计$\theta$后验分布上的某个具体的$\theta$值，而不是最大值，也就是Bayesian Inference。</li>
+<p>为了减小因样本划分不同而引起的差别，k折交叉验证通常要随机使用不同的划分重复p次，最终的评估结果是这p次k折交叉验证结果的平均。所以说，一共会训练p<em>k个模型，并得到p</em>k个验证误差。<br><strong><em>如果只是为了估计模型的期望泛化误差，可以去掉验证集，并以测试集代替。</em></strong></p>
+<h3 id="交叉验证-网格搜索"><a href="#交叉验证-网格搜索" class="headerlink" title="交叉验证+网格搜索"></a>交叉验证+网格搜索</h3><p>比网格搜索更稳定些，因为评价的标准不再是单个的验证误差，而是k个验证误差的平均。<br>在非测试集上网格搜索并交叉验证，用MSE估计期望泛化误差，调参。调好参数后，在测试集上得到测试误差。</p>
+<ol>
+<li>将数据集分为非测试集，测试集</li>
+<li>将非测试集分为k份，其中k-1份作为训练集，另一份作为验证集</li>
+<li>将参数网格化，每个交叉点都是一组参数</li>
+<li>遍历每个网格参数，进行k交叉验证，共得到k个模型，k个训练误差，k个验证误差。<strong>用k个验证误差的平均来估计期望泛化误差，作为参数选择的评判标准。</strong></li>
+<li>选择估计期望泛化误差最小所对应的一个网格参数，作为最优参数</li>
+<li>用最优参数设置模型，在非测试集上训练，得到训练误差，在测试集上得到测试误差</li>
 </ol>
-<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>Bayesian估计比较复杂，原因是分母$P(X)$不能在忽略，需要对$P(X|\theta)$在$P(\theta)$上求期望，<br>$$P(\theta|X)=\frac{P(X|\theta)\cdot P(\theta)}{\int_{\theta}P(X|\theta)\cdot P(\theta)d\theta}$$<br>通常计算比较困难，采用conjugate先验，可避免积分，直接得到后验分布。</p>
-<h3 id="共轭先验"><a href="#共轭先验" class="headerlink" title="共轭先验"></a>共轭先验</h3><p>Bayesian估计的分母$P(X)$，与后验无关，因此可以作为常数看待，所以，如果分子(似然*先验)计算后，与分母再结合后，得到的形式恰好为先验的形式，即先验后验同分布，只是改变了超参数，则称$P(\theta)$是似然函数$P(X|\theta)$的共轭先验。</p>
-<h4 id="共轭先验第一种定义-wiki"><a href="#共轭先验第一种定义-wiki" class="headerlink" title="共轭先验第一种定义 (wiki)"></a>共轭先验第一种定义 (wiki)</h4><p>In Bayesian probability theory, if the posterior distributions P(θ|x) are in the same family as the prior probability distribution P(θ), the prior and posterior are then called conjugate distributions, and the prior is called a conjugate prior for the likelihood function.</p>
-<h4 id="共轭先验第二种定义"><a href="#共轭先验第二种定义" class="headerlink" title="共轭先验第二种定义"></a>共轭先验第二种定义</h4><p>For a given likelihood function P(X|Θ), a prior P(Θ) is called a conjugate prior if the posterior P(Θ|X) has the same algebraic form as the prior.</p>
-<h4 id="常见的共轭先验"><a href="#常见的共轭先验" class="headerlink" title="常见的共轭先验"></a>常见的共轭先验</h4><table>
-<thead>
-<tr>
-<th>Distribution</th>
-<th>Conjugate Prior</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Bernoulli</td>
-<td>Beta</td>
-</tr>
-<tr>
-<td>Multinomial</td>
-<td>Dirichlet</td>
-</tr>
-<tr>
-<td>Gaussian(given mean, var unknown)</td>
-<td>Gaussian</td>
-</tr>
-<tr>
-<td>Gaussian(given var, mean unknown)</td>
-<td>Gaussian</td>
-</tr>
-<tr>
-<td>Gaussian(both mean and var unknown)</td>
-<td>Gaussian-Gamma</td>
-</tr>
-</tbody>
-</table>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
-<li>估计的复杂程度，ML&lt;MAP&lt;Bayesian</li>
-<li>ML估计最简单，$posteriori=likelihood$</li>
-<li>MAP估计，$posteriori=likelihood\cdot prior$</li>
-<li>Bayesian估计，$posteriori=\frac{likelihood\cdot prior}{evidence}$</li>
-<li>ML估计和MAP估计都是点估计，返回的是参数变量$\theta$的特定值</li>
-<li>MAP估计和Bayesian估计都需要先验。MAP估计只需要得到最大值，并不需要得到完整的后验，因此，可以不计算$P(X)$。而Bayesian估计是要得到完整的后验，所以需要计算$P(X)$。</li>
-<li>MAP估计的后验是一个不完整的后验，因此，不能说得到的后验与先验共轭。而Bayesian估计是后验的完整形式，所以先验和后验关于似然共轭，这也是共轭先验的由来。</li>
-<li>Bayesian估计可以求方差，表示确信度(confidence)，而且可以做推断(Inference)。</li>
+<h2 id="P-R曲线-ROC曲线"><a href="#P-R曲线-ROC曲线" class="headerlink" title="P-R曲线 ROC曲线"></a>P-R曲线 ROC曲线</h2><p><em>先列，后行</em><br>||预测||<br>|–|–|–|<br>|<strong>真实</strong>|正例|反例|<br>|正例|TP|FN|<br>|反例|FP|TN|</p>
+<h3 id="P-R"><a href="#P-R" class="headerlink" title="P-R"></a>P-R</h3><p>p 计算列1 显示列<br>r 计算行1 显示行<br>$P=\frac{TP}{TP+FP}$<br>$R=\frac{TP}{TP+FN}$</p>
+<h3 id="ROC"><a href="#ROC" class="headerlink" title="ROC"></a>ROC</h3><p>tpr 计算行1  显示列<br>fpr 计算行2  显示行<br>$TPR=\frac{TP}{TP+FN}$<br>$FPR=\frac{FP}{FP+TN}$</p>
+<p>$R=TPR$</p>
+<h2 id="正则"><a href="#正则" class="headerlink" title="正则"></a>正则</h2><p>正则就是在训练数据的模型上加一个惩罚项，shrink模型的参数。<br>lasso的解是稀疏的，如sparse coding， compressed sensing</p>
+<h2 id="构造目标函数"><a href="#构造目标函数" class="headerlink" title="构造目标函数"></a>构造目标函数</h2><p>用X来构造分布，用Y来确定分布的具体值。</p>
+<ol>
+<li>构造概率函数。给定x，初始超参数，构造出一个概率函数。但此概率函数的变量是y，不是x。</li>
+<li>构造似然函数。根据真实y，得到p(y|x)概率，连乘得到似然函数</li>
+<li>优化的参数，其实是构造分布时的超参数。</li>
 </ol>
-<p>任何一个基础模型都可以演变成贝叶斯模型。在一个基础模型之下，需要去estimate一些未知的参数（比如在linear regression, 需要去计算w这个向量），但在贝叶斯模型下我们需要去计算的是w的分布（而不是w的point estimation)，用其分布直接计算对y的预测值p(y|x,D)，所以我们需要去需要integrate w，也就是说我们把所有可能的w向量都会去考虑， 这也为什么贝叶斯模型通常intractable, 所以我们需要用MCMC或者variational方法，而不是直接用优化的方法。在贝叶斯模型之下，随着我们observe more and more data, 我们会对w向量的分布会有更清晰的推断，这其实就是posterior inference。</p>
-<p>在linear regression上加上prior其实相当于加了regularization. 如果我们假定p(w)服从高斯分布，那我们加的实际上是L2_norm, 如果我们假定p(w)是拉普拉斯分布，那我们加的是L1_norm(linear regression情况下就是相当于LASSO，会有sparse的特点）。<br>因此MAP估计是L1还是L2，与参数分布本身有关。</p>
-<h3 id="拉普拉斯分布"><a href="#拉普拉斯分布" class="headerlink" title="拉普拉斯分布"></a>拉普拉斯分布</h3><p>$$f(x|\mu,b)=\frac{1}{2b}exp(-\frac{|x-\mu|}{b})$$<br><img src="http://oavdwoegd.bkt.clouddn.com/laplaceD.jpg" alt=""></p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li><a href="https://zh.wikipedia.org/wiki/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation" target="_blank" rel="external">https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation</a></li>
-<li><a href="https://engineering.purdue.edu/kak/Trinity.pdf" target="_blank" rel="external">https://engineering.purdue.edu/kak/Trinity.pdf</a></li>
-<li><a href="http://blog.csdn.net/yangliuy/article/details/8296481" target="_blank" rel="external">http://blog.csdn.net/yangliuy/article/details/8296481</a></li>
-<li><a href="https://www.zhihu.com/question/22007264/answer/20014371" target="_blank" rel="external">https://www.zhihu.com/question/22007264/answer/20014371</a></li>
+<h2 id="不平衡类"><a href="#不平衡类" class="headerlink" title="不平衡类"></a>不平衡类</h2><ol>
+<li>对多的类进行欠采样</li>
+<li>对少的类进行过采样</li>
+<li>移动阈值$\frac{y}{1-y}&gt;\frac{m^+}{m^-}$即为正类</li>
+<li>少类的插值（kmeans聚类，然后在一个簇里面插值）</li>
 </ol>
+<h2 id="生成模型-判别模型"><a href="#生成模型-判别模型" class="headerlink" title="生成模型 判别模型"></a>生成模型 判别模型</h2><h3 id="生成模型"><a href="#生成模型" class="headerlink" title="生成模型"></a>生成模型</h3><p>学习的是联合分布p(y,x)</p>
+<ol>
+<li>可以由联合分布p(y,x)在y上积分得到p(x)，即类条件概率p(x|y)与p(y)在y上的积分，如果p(x)的概率比较小，说明可能是异常点(outlier)，该点的分类效果可能不好。对p(x,y)在y上的积分有时比较难求，需要用MCMC抽样方法得到p(x)或变分近似p(x)。</li>
+<li>根据贝叶斯公式，p(y,x) / p(x)得到条件分布p(y|x)，即得到预测的条件分布。</li>
+<li>当样本量较多时，生成模型能更快地收敛于真实模型。</li>
+<li>可以解决存在隐变量的模型，比如GMM，HMM。</li>
+<li>需要更大的样本，做判别的时候，有些信息用不到。</li>
+</ol>
+<h3 id="判别模型"><a href="#判别模型" class="headerlink" title="判别模型"></a>判别模型</h3><p>学习的是条件分布p(y|x)，或判别函数f(x)</p>
+<ol>
+<li>需要的样本量少于生成模型</li>
+<li>寻找的是不同类别的最优分类面</li>
+<li>准确率一般比生成模型高</li>
+<li>可以对原数据X进行特征的变化，例如降维，特征选择</li>
+</ol>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="http://blog.csdn.net/zouxy09/article/details/8195017" target="_blank" rel="external">http://blog.csdn.net/zouxy09/article/details/8195017</a></p>
 
 
                 <hr>
@@ -278,12 +259,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2016/08/21/偏差方差分解/" data-toggle="tooltip" data-placement="top" title="偏差方差分解">&larr; Previous Post</a>
+                            <a href="/2016/08/20/参数估计方法/" data-toggle="tooltip" data-placement="top" title="参数估计方法">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2016/08/19/模型综述/" data-toggle="tooltip" data-placement="top" title="模型综述">Next Post &rarr;</a>
+                            <a href="/2016/08/19/朴素贝叶斯/" data-toggle="tooltip" data-placement="top" title="朴素贝叶斯">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -327,8 +308,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "/2016/08/20/参数估计方法/";
-    var disqus_url = "/2016/08/20/参数估计方法/";
+    var disqus_identifier = "/2016/08/19/模型综述/";
+    var disqus_url = "/2016/08/19/模型综述/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
