@@ -200,12 +200,7 @@
 <p><strong>从hinge损失到SVM原问题</strong><br>令$[1-y_i(w^Tx_i+b)]_+=\xi_i$，$\xi_i\geqslant0$，满足约束1；<br>如果$1-y_i(w^Tx_i+b)&gt;0$，则$\xi_i=1-y_i(w^Tx_i+b)$，即$y_i(w^Tx_i+b)=1-\xi_i$；<br>如果$1-y_i(w^Tx_i+b)\leqslant0$，则$\xi_i=0\geqslant1-y_i(w^Tx_i+b)$，即$y_i(w^Tx_i+b)\geqslant1-\xi_i$；<br>所以$y_i(w^Tx_i+b)\geqslant1-\xi_i$，满足约束2。<br>因此，可以写成<br>$$min_{w,b} \{\sum_{i=1}^N\xi_i+\lambda||w||^2\}$$<br>令$\lambda=\frac{1}{2C}$，得<br>$$min_{w,b} \frac{1}{C}\{C\sum_{i=1}^N\xi_i+\frac{1}{2}||w||^2\}$$<br>常数C不影响优化，去掉后等价于SVM原问题，即<br>$$min_{w,b} \{C\sum_{i=1}^N\xi_i+\frac{1}{2}||w||^2\}$$</p>
 <p><strong>SVM-hinge总结</strong><br>不论是从SVM到hinge，还是从hinge到SVM，关键是令在$\xi_i=[1-y_i(w^Tx_i+b)]_+$。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>LR和SVM都可以看成是损失函数+L2正则，LR是logistic损失，而SVM是hinge损失<br>令$z=yf(x)$，损失值为$g(z)$，那么<br>$g(z)_{hinge loss} = [1-z]_+$ ,在z为小于1时，为1-z<br>$g(z)_{logistic loss}=log(1+exp(-z))$，当z为负无穷时，为-z<br>因此，hinge loss 在数轴的左部分，都会大于lostistic loss，另外，两个都大于0-1损失。</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li><a href="https://en.wikipedia.org/wiki/Weak_duality" target="_blank" rel="external">https://en.wikipedia.org/wiki/Weak_duality</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Strong_duality" target="_blank" rel="external">https://en.wikipedia.org/wiki/Strong_duality</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Slater%27s_condition" target="_blank" rel="external">https://en.wikipedia.org/wiki/Slater%27s_condition</a></li>
-<li>统计学习方法</li>
-</ol>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>统计学习方法</p>
 
 
                 <hr>
