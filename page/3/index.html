@@ -97,14 +97,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -181,6 +181,52 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/08/05/共轭方向共轭梯度/">
+        <h2 class="post-title">
+            共轭方向 共轭梯度
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            牛顿法只需要迭代一次便可得到正定二次的极小值，而梯度下降需要迭代很多次，因此可以认为牛顿法对于二次函数是有效，但牛顿法每步迭代的计算量大，所以有了共轭方向法。共轭方向法建立在二次模型的基础上，有效次迭代终止，介于梯度下降和牛顿法之间，既能克服梯度下降的收敛慢，又避免了牛顿法计算量大的缺点。共轭方向法是在共轭方向法和梯度下降法之间建立一种联系，得到一个既有效又有较好收敛性的算法
+共轭方向法
+共......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-08-05
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/08/04/常用优化方法/">
+        <h2 class="post-title">
+            常用优化方法
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            以下的优化方法，对于非凸问题，都不能保证求得的极小值为全局最小值。
+梯度下降梯度下降是求解无约束最优化问题，最常用的方法。常用于回归，神经网络等中，优化极小目标函数。目标函数的梯度，表示函数值增长最快的方向，因此，取负梯度的方向作为下一次取值的方向。优点：算法简单，实现容易。缺点：极小值附近梯度减小慢。
+牛顿法牛顿法也是求解无约束最优化问题，常用的方法。牛顿法是泰勒二阶展开，求偏导为0。相比......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-08-04
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -406,71 +452,6 @@ C++键盘输入单个输入
     <p class="post-meta">
         Posted by ZhengYang on
         2016-07-12
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/07/10/指针数组&数组指针/">
-        <h2 class="post-title">
-            指针数组&数组指针
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            指针数组：指针构成的数组，数组中的每个元素都是一个指针。int *p1[10]。
-数组指针：是一个指针，该指针指向一个数组，数组中的元素为int。int (*p2)[10]。
-[]的优先级高于*，p1先与[]结合，构成一个数组，数组名为p1；int*修饰数组的内容，即每个数组的元素。
-()优先级高于[]，p2先与*结合，构成一个指针，指针名为p2；int []修饰的是指针p2所指的内容。
-
-......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-07-10
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/07/07/贝叶斯网络/">
-        <h2 class="post-title">
-            贝叶斯网络
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            概率图模型可以分为有向图和无向图。
-有向图：贝叶斯网络，HMM。
-无向图：MRF，CRF。
-贝叶斯网络的表示贝叶斯网络的联合概率分布定义：有向图不用归一化。
-
-例子如下图，
-
-对应的概率分布：
-
-条件独立，在贝叶斯网络中主要体现了三种情况：
-
-tail-to-tail
-
-
-联合概率分布：
-
-如果a，b，c变量未知，那么不能用贝叶斯公式，只能对c求边际概率分布。
-
-不能得到a，b关于c条件独立......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-07-07
     </p>
 
 </div>
