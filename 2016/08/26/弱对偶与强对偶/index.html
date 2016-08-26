@@ -13,7 +13,7 @@
 
     <title>
         
-          SVM - ZhengYang&#39;s Blog
+          弱对偶 与 强对偶 - ZhengYang&#39;s Blog
         
     </title>
 
@@ -165,10 +165,10 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#SVM" title="SVM">SVM</a>
+                          <a class="tag" href="/tags/#弱对偶 与 强对偶" title="弱对偶 与 强对偶">弱对偶 与 强对偶</a>
                         
                     </div>
-                    <h1>SVM</h1>
+                    <h1>弱对偶 与 强对偶</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by ZhengYang on
@@ -197,7 +197,7 @@
 <li><strong>若原问题是线性归回问题</strong><br>则弱对偶直接等于强对偶</li>
 <li><strong>若原问题是凸优化问题</strong><br>则需要满足Slater’s condition</li>
 </ul>
-<h3 id="Slater’s-condition"><a href="#Slater’s-condition" class="headerlink" title="Slater’s condition"></a>Slater’s condition</h3><p>给定原问题：<br>$min_x f_0(x)$<br>$subject\_to:$<br>$f_i(x)\leqslant0, i=1,2,…,m$<br>$Ax=b$<br>其中，$f_0(x)$是凸函数，$f_i(x)$也是凸函数</p>
+<h3 id="Slater’s-condition"><a href="#Slater’s-condition" class="headerlink" title="Slater’s condition"></a>Slater’s condition</h3><p>给定原问题：<br>$min_x f_0(x)$<br>$subject\_to:$<br>$f_i(x’)\leqslant0, i=1,2,…,m$<br>$Ax’=b$<br>其中，$f_0(x)$是凸函数，$f_i(x)$也是凸函数</p>
 <p>Slater’s condition是说，如果存在<strong>任意一个</strong>$x’$，使得<br>$f_i(x)&lt;0, i=1,2,…,m$<br>$Ax=b$<br>那么强对偶成立。</p>
 <h2 id="弱对偶-与-强对偶-关系解释二"><a href="#弱对偶-与-强对偶-关系解释二" class="headerlink" title="弱对偶 与 强对偶 关系解释二"></a>弱对偶 与 强对偶 关系解释二</h2><h3 id="从必要条件上说"><a href="#从必要条件上说" class="headerlink" title="从必要条件上说"></a>从必要条件上说</h3><p>如果$d^*=p^*$，那么$d^*$对应的解(乘子)$\alpha^*, \beta^*$，和$d^*$对应的解$x^* $都是最优解。</p>
 <h3 id="从充分条件，判定相等上说"><a href="#从充分条件，判定相等上说" class="headerlink" title="从充分条件，判定相等上说"></a>从充分条件，判定相等上说</h3><p>假定$f(x),c_i(x)$是凸函数，$h_j(x)$是仿射函数。若<strong>存在任意一个</strong>$x$，对于<strong>所有$c_i(x)$</strong>，使得<strong>所有</strong>不等式约束$c_i(x)&lt;0$，则存在$x^*,\alpha^*,\beta^*$，使得$x^*$是最优原始问题$p^*$的解，$\alpha^*\beta^*$是最优对偶问题$d^*$的解,并且等式成立<br>$$d^*=L(x^*,\alpha^*,\beta^*)=p^*$$</p>
