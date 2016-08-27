@@ -90,7 +90,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -104,7 +104,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -199,8 +199,10 @@
 <p><strong>hinge损失，L2正则</strong><br>$$min_{w,b}\{\lambda||w||^2 +\sum_{i=1}^N[1-y_i(w^Tx_i+b)]_+\}$$<br><strong>证明：</strong><br><strong>从SVM原问题到hinge损失</strong><br>如果$x_i$在正确最大边界以外，那么$\xi_i=0$，$y_i(w^Tx_i+b)\geqslant1$，同时满足约束1不等式，满足2等式；<br>如果$x_i$在正确最大边界以内，那么$\xi_i=|y_i-f(x_i)|=1-y_if(x_i)=1-y_i(w^Tx_i+b)\geqslant0$，同时满足约束1等式，满足2不等式。<br>合并约束，得，<br>$$\xi_i=[1-y_i(w^Tx_i+b)]_+$$<br>带入SVM原始问题，得，<br>$$min_{w,b}  \{\frac{1}{2}||w||^2+C\sum_{i=1}^N[1-y_i(w^Tx_i+b)]_+\}$$<br>$$min_{w,b}  C\{\frac{1}{2C}||w||^2+\sum_{i=1}^N[1-y_i(w^Tx_i+b)]_+\}$$<br>去掉常量C，不影响优化结果，得<br>$$min_{w,b}  \{\frac{1}{2C}||w||^2+\sum_{i=1}^N[1-y_i(w^Tx_i+b)]_+\}$$<br>令$\lambda=\frac{1}{2C}$，得<br>$$min_{w,b} \{\lambda||w||^2+\sum_{i=1}^N[1-y_i(w^Tx_i+b)]_+\}$$<br>得到hinge损失，L2正则的损失函数</p>
 <p><strong>从hinge损失到SVM原问题</strong><br>令$[1-y_i(w^Tx_i+b)]_+=\xi_i$，$\xi_i\geqslant0$，满足约束1；<br>如果$1-y_i(w^Tx_i+b)&gt;0$，则$\xi_i=1-y_i(w^Tx_i+b)$，即$y_i(w^Tx_i+b)=1-\xi_i$；<br>如果$1-y_i(w^Tx_i+b)\leqslant0$，则$\xi_i=0\geqslant1-y_i(w^Tx_i+b)$，即$y_i(w^Tx_i+b)\geqslant1-\xi_i$；<br>所以$y_i(w^Tx_i+b)\geqslant1-\xi_i$，满足约束2。<br>因此，可以写成<br>$$min_{w,b} \{\sum_{i=1}^N\xi_i+\lambda||w||^2\}$$<br>令$\lambda=\frac{1}{2C}$，得<br>$$min_{w,b} \frac{1}{C}\{C\sum_{i=1}^N\xi_i+\frac{1}{2}||w||^2\}$$<br>常数C不影响优化，去掉后等价于SVM原问题，即<br>$$min_{w,b} \{C\sum_{i=1}^N\xi_i+\frac{1}{2}||w||^2\}$$</p>
 <p><strong>SVM-hinge总结</strong><br>不论是从SVM到hinge，还是从hinge到SVM，关键是令在$\xi_i=[1-y_i(w^Tx_i+b)]_+$。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>LR和SVM都可以看成是损失函数+L2正则，LR是logistic损失，而SVM是hinge损失<br>令$z=yf(x)$，损失值为$g(z)$，那么<br>$g(z)_{hinge loss} = [1-z]_+$ ,在z为小于1时，为1-z<br>$g(z)_{logistic loss}=log(1+exp(-z))$，当z为负无穷时，为-z<br>因此，hinge loss 在数轴的左部分，都会大于lostistic loss，另外，两个都大于0-1损失。</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>统计学习方法</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>LR和SVM都可以看成是损失函数+L2正则，LR是logistic损失，而SVM是hinge损失<br>令$z=yf(x)$，损失值为$g(z)$，那么<br>$g(z)_{hinge loss} = [1-z]_+$ ,在z为小于1时，为1-z<br>$g(z)_{logistic loss}=log(1+exp(-z))$，当z为负无穷时，为-z<br>因此，hinge loss 在数轴的左部分，都会大于lostistic loss，另外，两个都大于0-1损失。<br>最主要的区别，目标函数不同。<br>LR中所有点都会有损失，即使非常非常小，+L2<br>SVM的损失只有被分错的 和 稍微分对的才有损失，+L2<br>解法不同<br>LR没有闭式解，可以随机梯度<br>SVM有闭式解，全局最优</p>
+<p>不加正则LR，凸函数<br>加正则LR，严格凸<br>SVM严格凸</p>
+<p>可以看到，给定一个数据集，一旦完成Linear SVM的求解，所有数据点可以被归成两类<br>1）第一类是被完全正确分类的点，gap里被分对的点不算<br>2）第二类是被错误分类的点，和在gap里被分对的点<br>假设一个数据集已经被Linear SVM求解，那么往这个数据集里面增加或者删除更多的第一类点并不会改变重新求解的Linear SVM平面。这也是一个SVM的泛化误差略小于LR的区别</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>统计学习方法<br><a href="http://www.iliuye.com/index.php/Wap/Index/article/id/190886" target="_blank" rel="external">http://www.iliuye.com/index.php/Wap/Index/article/id/190886</a></p>
 
 
                 <hr>

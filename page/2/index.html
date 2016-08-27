@@ -90,7 +90,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -104,7 +104,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -184,20 +184,47 @@
 
 <div class="post-preview">
 
-    <a href="/2016/08/19/朴素贝叶斯/">
+    <a href="/2016/08/19/模型综述/">
         <h2 class="post-title">
-            朴素贝叶斯
+            模型综述
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            朴素贝叶斯朴素贝叶斯是基于贝叶斯定理和属性条件独立的分类器。其中，”朴素”指的是一个很naive的假设，即属性条件独立。$$\begin{align}y&amp;=argmax_kP(c_k|x)\\&amp;=argmax_k\frac{P(c_k)P(x|c_k)}{P(x)}\\&amp;=argmax_kP(c_k)P(x|c_k)\\&amp;=argmax_kP(c_k)\pro......
+            模型评估方法网格搜索 调参在训练集上训练模型，根据验证集上的结果调参。调好参数后，在测试集上得到测试误差。
+
+将数据集分为训练集，验证集，测试集
+将参数网格化，每一个交叉点都是一组参数
+遍历每个网格参数，在训练集上训练模型，在验证集上得到与网格参数对应的验证误差
+挑选最小的验证误差所对应的那个网格参数，作为最优的参数
+用最优参数设置模型，在训练集$\bigcup$验证集上训练，得到测试误差，......
         </div>
     </a>
     <p class="post-meta">
         Posted by ZhengYang on
         2016-08-19
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/08/18/关联规则/">
+        <h2 class="post-title">
+            Apriori
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            关联规则关联规则是形如$X \rightarrow Y$ 的蕴含表达式，其中$X$和$Y$是不相交的项集，即$X\bigcap Y=\varnothing$。关联规则的强度可以用它的支持度(support)和置信度(confidence)度量。支持度（联合概率）：确定规则可以用与给定的数据集的频繁程度。置信度（条件概率）：确定$Y$在包含$X$的事物中出现的频繁程度。$$support(X\......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-08-18
     </p>
 
 </div>
@@ -423,28 +450,6 @@ SVM是一种非常有效的二分类模型，是在特种空间上的间隔最�
     <p class="post-meta">
         Posted by ZhengYang on
         2016-08-09
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/08/07/DDL&DML&DCL/">
-        <h2 class="post-title">
-            DDL & DML & DCL
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            之前学习sql，并没有注意DDL，DML的区别。上网查了，发现很多版本相互矛盾的。最疑惑的是wiki和oracle里的竟然有不一致的。最后发现，oracle将GRANT和REVOKE也算到DDL里。所以，最终也算统一了，按wiki为准。
-DDLA data definition language or data description language (DDL) is a syntax s......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-08-07
     </p>
 
 </div>

@@ -13,11 +13,11 @@
 
     <title>
         
-          弱对偶 与 强对偶 - ZhengYang&#39;s Blog
+          ZhengYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="/2016/08/26/弱对偶与强对偶/">
+    <link rel="canonical" href="/tags/Apriori/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,170 +147,7 @@
 
 
     <!-- Main Content -->
-    
-<!-- Image to hack wechat -->
-<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
-
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        background-image: url('/img/line1.jpg')
-    }
-</style>
-<header class="intro-header" >
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                          <a class="tag" href="/tags/#弱对偶 与 强对偶" title="弱对偶 与 强对偶">弱对偶 与 强对偶</a>
-                        
-                    </div>
-                    <h1>弱对偶 与 强对偶</h1>
-                    <h2 class="subheading"></h2>
-                    <span class="meta">
-                        Posted by ZhengYang on
-                        2016-08-26
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <h2 id="弱对偶-与-强对偶-关系解释一"><a href="#弱对偶-与-强对偶-关系解释一" class="headerlink" title="弱对偶 与 强对偶 关系解释一"></a>弱对偶 与 强对偶 关系解释一</h2><h3 id="弱对偶"><a href="#弱对偶" class="headerlink" title="弱对偶"></a>弱对偶</h3><p>弱对偶：在最优化问题中，对偶间隙(duality gap)总是大于等于0。对于最小值优化来说，即$d\leqslant p$</p>
-<h3 id="强对偶"><a href="#强对偶" class="headerlink" title="强对偶"></a>强对偶</h3><p>强对偶：在最优化问题中，对偶间隙(duality gap)等于0，即原问题等于对偶问题，$d=p$。</p>
-<h3 id="弱对偶-变为-强对偶-（充分条件）"><a href="#弱对偶-变为-强对偶-（充分条件）" class="headerlink" title="弱对偶 变为 强对偶 （充分条件）"></a>弱对偶 变为 强对偶 （充分条件）</h3><ul>
-<li><strong>若原问题是线性归回问题</strong><br>则弱对偶直接等于强对偶</li>
-<li><strong>若原问题是凸优化问题</strong><br>则需要满足Slater’s condition</li>
-</ul>
-<h3 id="Slater’s-condition"><a href="#Slater’s-condition" class="headerlink" title="Slater’s condition"></a>Slater’s condition</h3><p>给定原问题：<br>$min_x f_0(x)$<br>$subject\_to:$<br>$f_i(x)\leqslant0, i=1,2,…,m$<br>$Ax=b$<br>其中，$f_0(x)$是凸函数，$f_i(x)$也是凸函数</p>
-<p>Slater’s condition是说，如果存在<strong>任意一个</strong>$x’$，使得<br>$f_i(x’)&lt;0, i=1,2,…,m$<br>$Ax’=b$<br>那么强对偶成立。</p>
-<h2 id="弱对偶-与-强对偶-关系解释二"><a href="#弱对偶-与-强对偶-关系解释二" class="headerlink" title="弱对偶 与 强对偶 关系解释二"></a>弱对偶 与 强对偶 关系解释二</h2><h3 id="从必要条件上说"><a href="#从必要条件上说" class="headerlink" title="从必要条件上说"></a>从必要条件上说</h3><p>如果$d^*=p^*$，那么$d^*$对应的解(乘子)$\alpha^*, \beta^*$，和$d^*$对应的解$x^* $都是最优解。</p>
-<h3 id="从充分条件，判定相等上说"><a href="#从充分条件，判定相等上说" class="headerlink" title="从充分条件，判定相等上说"></a>从充分条件，判定相等上说</h3><p>假定$f(x),c_i(x)$是凸函数，$h_j(x)$是仿射函数。若<strong>存在任意一个</strong>$x$，对于<strong>所有$c_i(x)$</strong>，使得<strong>所有</strong>不等式约束$c_i(x)&lt;0$，则存在$x^*,\alpha^*,\beta^*$，使得$x^*$是最优原始问题$p^*$的解，$\alpha^*\beta^*$是最优对偶问题$d^*$的解,并且等式成立<br>$$d^*=L(x^*,\alpha^*,\beta^*)=p^*$$</p>
-<h3 id="从充分条件，解最优上说"><a href="#从充分条件，解最优上说" class="headerlink" title="从充分条件，解最优上说"></a>从充分条件，解最优上说</h3><p>假定$f(x),c_i(x)$是凸函数，$h_j(x)$是仿射函数，若<strong>存在任意一个</strong>$x$，对于<strong>所有$c_i(x)$</strong>，使得<strong>所有</strong>不等式约束$c_i(x)&lt;0$，则$x^*$和$\alpha^*,\beta^*$分别是原始问题和对偶问题的解的<strong>充要条件</strong>是$x^*,\alpha^*,\beta^*$满足KKT条件：<br>$\nabla_xL(x^*,\alpha^*,\beta^*)=0$<br>$\nabla_{\alpha}L(x^*,\alpha^*,\beta^*)=0$<br>$\nabla_{\beta}L(x^*,\alpha^*,\beta^*)=0$<br>$\alpha_i^*c_i(x^*)=0, i=1,2,…,k$<br>$c_i(x^*)\leqslant0, i=1,2,…,k$<br>$\alpha_i\geqslant0, i=1,2,…,k$<br>$h_j(x^*)=0, j=1,2,…,l$<br>其中，$\alpha_i^*c_i(x^*)=0, i=1,2,…,k$称为kkt的对偶互补条件，若$c_i(x)&lt;0$，那么$\alpha_i=0$</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li><a href="https://en.wikipedia.org/wiki/Weak_duality" target="_blank" rel="external">https://en.wikipedia.org/wiki/Weak_duality</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Strong_duality" target="_blank" rel="external">https://en.wikipedia.org/wiki/Strong_duality</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Slater%27s_condition" target="_blank" rel="external">https://en.wikipedia.org/wiki/Slater%27s_condition</a></li>
-<li>统计学习方法</li>
-</ol>
-
-
-                <hr>
-
-                
-
-                <ul class="pager">
-                    
-                    
-                        <li class="next">
-                            <a href="/2016/08/26/LR & SVM/" data-toggle="tooltip" data-placement="top" title="LR & SVM">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                
-
-                
-                <!-- disqus 评论框 start -->
-                <div class="comment">
-                    <div id="disqus_thread" class="disqus-thread"></div>
-                </div>
-                <!-- disqus 评论框 end -->
-                
-
-            </div>
-    <!-- Side Catalog Container -->
-        
-
-    <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-
-        </div>
-    </div>
-</article>
-
-
-
-
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "/2016/08/26/弱对偶与强对偶/";
-    var disqus_url = "/2016/08/26/弱对偶与强对偶/";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus 公共JS代码 end -->
-
-
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
+    <!-- Default Archive layout, we use archives instead. -->
 
     <!-- Footer -->
     <!-- Footer -->
