@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -199,7 +199,7 @@
 <th>最好情况</th>
 <th>平均情况</th>
 <th>最坏情况</th>
-<th>空间复杂度</th>
+<th>空间</th>
 <th>稳定型</th>
 <th>方法</th>
 <th>备注</th>
@@ -224,7 +224,7 @@
 <td>$n^2$</td>
 <td>$n^2$</td>
 <td>$1$</td>
-<td>稳定</td>
+<td><strong>稳定</strong></td>
 <td>交换</td>
 <td>从头开始每次确定一个最大的，冒泡到尾，然后数组量减一，继续冒泡</td>
 </tr>
@@ -235,7 +235,7 @@
 <td>$n^2$</td>
 <td>$n^2$</td>
 <td>$1$</td>
-<td>稳定</td>
+<td><strong>稳定</strong></td>
 <td>插入</td>
 <td>像整理扑克牌</td>
 </tr>
@@ -246,7 +246,7 @@
 <td>$n^2$</td>
 <td>$n^2$</td>
 <td>$1$</td>
-<td>稳定</td>
+<td><strong>稳定</strong></td>
 <td>插入</td>
 <td>平均情况下比直接插入排序比较次数少，但元素移动次数不变；但在最好情况下，直接插入只比较一次，而折半比较logn次</td>
 </tr>
@@ -290,7 +290,7 @@
 <td>$nlogn</td>
 <td>$nlogn$</td>
 <td>$n$</td>
-<td>稳定</td>
+<td><strong>稳定</strong></td>
 <td>归并</td>
 <td>递归，自顶向下；慢慢合并，自底向上</td>
 </tr>
@@ -301,7 +301,7 @@
 <td>$d(n+k)$</td>
 <td>$d(n+k)$</td>
 <td>$n+k$</td>
-<td>稳定</td>
+<td><strong>稳定</strong></td>
 <td>-</td>
 <td>d表示位数，比如2，k表示进制，比如10。基数排序属于非比较算法，适用于整数，不适用于字符串</td>
 </tr>
@@ -344,7 +344,7 @@
 <td>$n^2$</td>
 <td>$n^2$</td>
 <td>$1$</td>
-<td>稳定</td>
+<td><strong>稳定</strong></td>
 <td>交换</td>
 </tr>
 <tr>
@@ -354,7 +354,7 @@
 <td>$n^2$</td>
 <td>$n^2$</td>
 <td>$1$</td>
-<td>稳定</td>
+<td><strong>稳定</strong></td>
 <td>插入</td>
 </tr>
 <tr>
@@ -417,7 +417,38 @@
 <li>缩小h值，分成h个组，在组内排序，得到h个有序子数组</li>
 <li>直到h&lt;1，停止，得到有序数组</li>
 </ol>
-<p>间隔的取法<br>|General term(k&gt;=1)|Concrete gaps|Worst-case time complexity|<br>|–|–|–|<br>|$\lfloor \frac{N}{2^k} \rfloor$|$\lfloor \frac{N}{2} \rfloor,\lfloor \frac{N}{4} \rfloor,…,1$| $O(N^2)$|<br>|$2^k-1$|1,3,7,15,31,63,…| $O(N^{3/2})$|<br>|$\frac{3^k-1}{2}$，且$\leqslant\lceil \frac{N}{3}\rceil$|1,,4,13,40,121,…| $O(N^{3/2})$|<br>|…|…|…|</p>
+<p>间隔的取法</p>
+<table>
+<thead>
+<tr>
+<th>General term(k&gt;=1)</th>
+<th>Concrete gaps</th>
+<th>Worst-case time complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\lfloor \frac{N}{2^k} \rfloor$</td>
+<td>$\lfloor \frac{N}{2} \rfloor,\lfloor \frac{N}{4} \rfloor,…,1$</td>
+<td>$O(N^2)$</td>
+</tr>
+<tr>
+<td>$2^k-1$</td>
+<td>1,3,7,15,31,63,…</td>
+<td>$O(N^{3/2})$</td>
+</tr>
+<tr>
+<td>$\frac{3^k-1}{2}$，且$\leqslant\lceil \frac{N}{3}\rceil$</td>
+<td>1,,4,13,40,121,…</td>
+<td>$O(N^{3/2})$</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">shellSort</span><span class="params">(Comparable&lt;?&gt;[] a)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> N = a.length;</div><div class="line">	<span class="keyword">int</span> h = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(h&lt;N/<span class="number">3</span>)&#123;</div><div class="line">		h = <span class="number">3</span>*h+<span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">while</span>(h&gt;=<span class="number">1</span>)&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=h; i&lt;N; ++i)&#123;</div><div class="line">			<span class="comment">// a[i] a[i-h] a[i-2h] ... 一组</span></div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=i; j&gt;=h &amp;&amp; less(a[j], a[j-h]); j=j-h)&#123;</div><div class="line">				exch(a, j, j-h);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		h=h/<span class="number">3</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="6-快速排序"><a href="#6-快速排序" class="headerlink" title="6.快速排序"></a>6.快速排序</h3><p>v为头元素<br>从左边向右，发现第一个大于等于v的元素，<br>从右边向左，发现第一个小于等于v的元素<br>交换这两个元素，然后重复<br>直到左指针向右，指到右指针，右指针再向左一格<br>现在右指针&lt;=左指针，右指针比v小，右指针与v交换<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 切分1</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition1</span><span class="params">(Comparable&lt;?&gt;[] a, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> i = low, j = high+<span class="number">1</span>;</div><div class="line">	Comparable&lt;?&gt; v = a[low];</div><div class="line">	<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">		<span class="keyword">while</span>(less(a[++i], v))&#123;</div><div class="line">			<span class="comment">// i指向第一个大于等于v的索引  </span></div><div class="line">			<span class="comment">// 或者如果后面全都比v小，则指向high</span></div><div class="line">			<span class="keyword">if</span>(i==high)</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">while</span>(less(v, a[--j]))&#123;</div><div class="line">			<span class="comment">// j指向第一个小于等于v的索引</span></div><div class="line">			<span class="comment">// 或者比后面的比v都大，指向low</span></div><div class="line">			<span class="keyword">if</span>(j==low)</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(i&gt;=j) <span class="comment">// 大于号必须存在</span></div><div class="line">			<span class="keyword">break</span>;</div><div class="line"></div><div class="line">		exch(a, i, j);</div><div class="line">	&#125;</div><div class="line">	exch(a, low, j);</div><div class="line">	<span class="keyword">return</span> j;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 快排1</span></div><div class="line"><span class="comment">// 递归</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort1</span><span class="params">(Comparable&lt;?&gt;[] a, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">	<span class="keyword">if</span>(high &lt;= low)</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	<span class="keyword">int</span> j = partition1(a, low, high);</div><div class="line">	quickSort1(a, low, j-<span class="number">1</span>);</div><div class="line">	quickSort1(a, j+<span class="number">1</span>, high);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 切分2</span></div><div class="line"><span class="comment">// 交换次数是切分1的两倍</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition2</span><span class="params">(Comparable&lt;?&gt;[] a, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> i=low, j=high;</div><div class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(i&lt;=j)&#123;</div><div class="line">		<span class="keyword">while</span>(less(a[i], a[j]))</div><div class="line">			j--;</div><div class="line">		exch(a, i, j);</div><div class="line">		i++;</div><div class="line">		<span class="keyword">if</span>(i&gt;=j)&#123;</div><div class="line">			res = j;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">while</span>(less(a[i], a[j]))</div><div class="line">			i++;</div><div class="line">		exch(a, i, j);</div><div class="line">		j--;</div><div class="line">		<span class="keyword">if</span>(i&gt;=j)&#123;</div><div class="line">			res = i;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;			</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 快排2</span></div><div class="line"><span class="comment">// 递归</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort2</span><span class="params">(Comparable&lt;?&gt;[] a, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">	<span class="keyword">if</span>(high&lt;=low)</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	<span class="keyword">int</span> j = partition2(a, low, high);</div><div class="line">	quickSort2(a, low, j-<span class="number">1</span>);</div><div class="line">	quickSort2(a, j+<span class="number">1</span>, high);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 快排3</span></div><div class="line"><span class="comment">// 三向切分 快排</span></div><div class="line"><span class="comment">// 递归</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort3</span><span class="params">(Comparable&lt;?&gt;[] a, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">	<span class="keyword">if</span>(high&lt;=low)</div><div class="line">		<span class="keyword">return</span>;</div><div class="line"></div><div class="line">	<span class="comment">// 接下来找分解点，其实是分阶段</span></div><div class="line">	<span class="keyword">int</span> lt=low; <span class="comment">// lt指向的是第一个与v相等元素</span></div><div class="line">	<span class="keyword">int</span> i=low+<span class="number">1</span>; <span class="comment">// i指向的是第一个与v不相等的元素</span></div><div class="line">	<span class="keyword">int</span> gt=high;</div><div class="line">	Comparable&lt;?&gt; v = a[low];</div><div class="line">	<span class="keyword">while</span>(i&lt;=gt)&#123;</div><div class="line">		<span class="keyword">if</span>(less(a[i],v)) <span class="comment">// 如果a[i]小于v，那么交换i，lt，同时两个都++</span></div><div class="line">			exch(a, lt++, i++);  </div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(more(a[i],v))  <span class="comment">// 如果a[i]比v大，那么交换i，gt，并且gt--，i不变</span></div><div class="line">			<span class="comment">//	从尾部重新换个元素，看看大于v否</span></div><div class="line">			exch(a, i, gt--);</div><div class="line">		<span class="keyword">else</span></div><div class="line">			i++;</div><div class="line">	&#125; <span class="comment">// 此时 [low,lt-1] &lt; [lt,gt]=v &lt; [gt+1,high]</span></div><div class="line"></div><div class="line">	quickSort3(a, low, lt-<span class="number">1</span>);</div><div class="line">	quickSort3(a, gt+<span class="number">1</span>, high);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="7-堆排序"><a href="#7-堆排序" class="headerlink" title="7.堆排序"></a>7.堆排序</h3><p>从小到大排序</p>
