@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="zhengyang_cs@outlook.com">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          排序 - ZhengYang&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="/2016/08/29/排序/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">ZhengYang&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/line1.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#排序" title="排序">排序</a>
+                        
+                    </div>
+                    <h1>排序</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by ZhengYang on
+                        2016-08-29
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><table>
+<thead>
+<tr>
+<th>id</th>
+<th>排序算法</th>
+<th>最好情况</th>
+<th>平均情况</th>
+<th>最坏情况</th>
+<th>空间复杂度</th>
+<th>稳定型</th>
+<th>方法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>选择排序</td>
+<td>$n^2$</td>
+<td>$n^2$</td>
+<td>$n^2$</td>
+<td>$1$</td>
+<td>不稳定</td>
+<td>选择</td>
+<td>每次选最小的与第i个元素交换，是数据移动次数最少的算法，注意，但不是比较次数最少的算法</td>
+</tr>
+<tr>
+<td>2</td>
+<td>冒泡排序</td>
+<td>$n$</td>
+<td>$n^2$</td>
+<td>$n^2$</td>
+<td>$1$</td>
+<td>稳定</td>
+<td>交换</td>
+<td>从头开始每次确定一个最大的，冒泡到尾，然后数组量减一，继续冒泡</td>
+</tr>
+<tr>
+<td>3</td>
+<td>直接插入排序</td>
+<td>$n$</td>
+<td>$n^2$</td>
+<td>$n^2$</td>
+<td>$1$</td>
+<td>稳定</td>
+<td>插入</td>
+<td>像整理扑克牌</td>
+</tr>
+<tr>
+<td>4</td>
+<td>折半插入排序</td>
+<td>$nlogn$</td>
+<td>$n^2$</td>
+<td>$n^2$</td>
+<td>$1$</td>
+<td>稳定</td>
+<td>插入</td>
+<td>平均情况下比直接插入排序比较次数少，但元素移动次数不变；但在最好情况下，直接插入只比较一次，而折半比较logn次</td>
+</tr>
+<tr>
+<td>5</td>
+<td>希尔排序</td>
+<td>$nlogn$</td>
+<td>$nlogn$ or $n^{5/4}$</td>
+<td>depands on gap, best known is $nlogn$</td>
+<td>1</td>
+<td>不稳定</td>
+<td>插入</td>
+<td>时间复杂度需要通过gap确定</td>
+</tr>
+<tr>
+<td>6</td>
+<td>快速排序</td>
+<td>$nlogn$</td>
+<td>$nlog$</td>
+<td>$n^2$</td>
+<td>$logn$</td>
+<td>不稳定</td>
+<td>切分</td>
+<td>递归空间$logn$;头只移动一次，交换前后两个指针；头常移动，和两个指针来回交换；三向切分，用于重复多的数组</td>
+</tr>
+<tr>
+<td>7</td>
+<td>堆排序</td>
+<td>$nlogn$</td>
+<td>$nlogn$</td>
+<td>$nlogn$</td>
+<td>$1$</td>
+<td>不稳定</td>
+<td>选择</td>
+<td>从小到大排序，用大根堆</td>
+</tr>
+<tr>
+<td>8</td>
+<td>归并排序</td>
+<td>$nlogn$</td>
+<td>$nlogn</td>
+<td>$nlogn$</td>
+<td>$n$</td>
+<td>稳定</td>
+<td>归并</td>
+<td>递归，自顶向下；慢慢合并，自底向上</td>
+</tr>
+<tr>
+<td>9</td>
+<td>基数排序</td>
+<td>$d(n+k)$</td>
+<td>$d(n+k)$</td>
+<td>$d(n+k)$</td>
+<td>$n+k$</td>
+<td>稳定</td>
+<td>-</td>
+<td>d表示位数，比如2，k表示进制，比如10。基数排序属于非比较算法，适用于整数，不适用于字符串</td>
+</tr>
+</tbody>
+</table>
+<h2 id="算法的选择"><a href="#算法的选择" class="headerlink" title="算法的选择"></a>算法的选择</h2><table>
+<thead>
+<tr>
+<th>id</th>
+<th>排序算法</th>
+<th>最好情况</th>
+<th>平均情况</th>
+<th>最坏情况</th>
+<th>空间复杂度</th>
+<th>稳定型</th>
+<th>方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>n较小，无稳定型要求</td>
+</tr>
+<tr>
+<td>1</td>
+<td>选择排序</td>
+<td>$n^2$</td>
+<td>$n^2$</td>
+<td>$n^2$</td>
+<td>$1$</td>
+<td>不稳定</td>
+<td>选择</td>
+</tr>
+<tr>
+<td>n较小，有稳定性要求；整体有序</td>
+</tr>
+<tr>
+<td>2</td>
+<td>冒泡排序</td>
+<td>$\mathbf n$</td>
+<td>$n^2$</td>
+<td>$n^2$</td>
+<td>$1$</td>
+<td>稳定</td>
+<td>交换</td>
+</tr>
+<tr>
+<td>3</td>
+<td>直接插入排序</td>
+<td>$\mathbf n$</td>
+<td>$n^2$</td>
+<td>$n^2$</td>
+<td>$1$</td>
+<td>稳定</td>
+<td>插入</td>
+</tr>
+<tr>
+<td>n较大，无稳定性要求，比较随机</td>
+</tr>
+<tr>
+<td>6</td>
+<td>快速排序</td>
+<td>$nlogn$</td>
+<td>$nlog$</td>
+<td>$n^2$</td>
+<td>$logn$</td>
+<td>不稳定</td>
+<td>切分</td>
+</tr>
+<tr>
+<td>n较大，无稳定性要求，比较有序</td>
+</tr>
+<tr>
+<td>7</td>
+<td>堆排序</td>
+<td>$nlogn$</td>
+<td>$nlogn$</td>
+<td>$nlogn$</td>
+<td>$1$</td>
+<td>不稳定</td>
+<td>选择</td>
+</tr>
+<tr>
+<td>n较大，有稳定性要求，比较有序，空间允许的情况下</td>
+</tr>
+<tr>
+<td>8</td>
+<td>归并排序</td>
+<td>$nlogn$</td>
+<td>$nlogn$</td>
+<td>$nlogn$</td>
+<td>$n$</td>
+<td><strong>稳定</strong></td>
+<td>归并</td>
+</tr>
+</tbody>
+</table>
+<p><strong>原地排序</strong>：在排序输入数组时，只有常数个元素被存放到数组以外的空间中去。</p>
+<h3 id="1-选择排序"><a href="#1-选择排序" class="headerlink" title="1.选择排序"></a>1.选择排序</h3><ol>
+<li>找到数组中最小的那个元素</li>
+<li>将它和数组中的第一个元素交换</li>
+<li>在剩下的元素中找到最小的元素，与第二个元素交换</li>
+<li>如此往复。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">selectSort</span><span class="params">(Comparable&lt;?&gt;[] a)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> N = a.length;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; ++i)&#123;</div><div class="line">		<span class="keyword">int</span> min=i; <span class="comment">// 最小元素的索引</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;N; ++j)&#123;</div><div class="line">			<span class="keyword">if</span>(less(a[j],a[min]))</div><div class="line">				min = j;</div><div class="line">		&#125;</div><div class="line">		exch(a, i, min);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行时间和输入无关，即不会因为初始有序而提高效率<br>如果已经是有序，那么是时间复杂度还是平方级的。<br>数据移动是最少的</p>
+<h3 id="2-冒泡排序"><a href="#2-冒泡排序" class="headerlink" title="2.冒泡排序"></a>2.冒泡排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 冒泡</span></div><div class="line"><span class="comment">// 一次冒泡，使得最大的元素跑到最后面</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(Comparable&lt;?&gt;[] a)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> N = a.length;</div><div class="line">	<span class="keyword">int</span> flag = <span class="number">1</span>; <span class="comment">// 标志，在排序中 0未排好</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;N; ++i)&#123; <span class="comment">// 排N-1次</span></div><div class="line">		flag = <span class="number">1</span>; <span class="comment">// 先默认已排好</span></div><div class="line"></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;N-i; ++j)&#123;<span class="comment">// 第一次比较N-1次，第二次比较N-2次，第N-1次比较1次</span></div><div class="line">			<span class="keyword">if</span>(more(a[j],a[j+<span class="number">1</span>]))&#123;</div><div class="line">				exch(a, j, j+<span class="number">1</span>);</div><div class="line">				flag = <span class="number">0</span>;  <span class="comment">// 如果交换了，则说明没排好</span></div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(flag == <span class="number">1</span>)</div><div class="line">			<span class="keyword">break</span> ;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3-直接插入排序"><a href="#3-直接插入排序" class="headerlink" title="3.直接插入排序"></a>3.直接插入排序</h3><p>下一个元素倒序与前面的元素一个个比较，插入到前面的合适位置<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 交换多次</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(Comparable&lt;?&gt;[] a)</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> N = a.length;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; ++i)&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=i; j&gt;<span class="number">0</span> &amp;&amp; less(a[j],a[j-<span class="number">1</span>]); --j)&#123;</div><div class="line">      exch(a, j, j-<span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 不交换元素，而是使较大元素向右移，设置一个index,最后插入到相对的合适位置</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertSort2</span><span class="params">(Comparable&lt;?&gt;[] a)</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> N = a.length;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; ++i)&#123;</div><div class="line">    Comparable&lt;?&gt; t = a[i];</div><div class="line">    <span class="keyword">int</span> j = i;</div><div class="line">    <span class="keyword">for</span>(; j&gt;<span class="number">0</span> &amp;&amp; less(t,a[j-<span class="number">1</span>]); --j)&#123;  <span class="comment">// t 错写成 a[i]，a[i]变了</span></div><div class="line">      a[j] = a[j-<span class="number">1</span>];				</div><div class="line">    &#125;</div><div class="line">    a[j]=t;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>取决于初始的状态，如果已经是有序，那么是时间复杂度线性的。<br>插入排序对于部分有序的数组十分高效。</p>
+<h3 id="4-折半插入"><a href="#4-折半插入" class="headerlink" title="4.折半插入"></a>4.折半插入</h3><p>下一个元素折半与前面的元素比较，插入到前面的合适位置<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">binsertSort</span><span class="params">(Comparable&lt;?&gt;[] a)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> N=a.length;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;N; ++i)&#123;</div><div class="line">		Comparable&lt;?&gt; t = a[i];			</div><div class="line">		<span class="comment">// 找出合适位置为m, 但最后的插值位置不是m，而是low或者high+1</span></div><div class="line">		<span class="keyword">int</span> low = <span class="number">0</span>;</div><div class="line">		<span class="keyword">int</span> high = i-<span class="number">1</span>;</div><div class="line">		<span class="keyword">int</span> m = <span class="number">0</span>;</div><div class="line">		<span class="keyword">while</span>(low&lt;=high)&#123;</div><div class="line">			m = (low+high)/<span class="number">2</span>;</div><div class="line">			<span class="keyword">if</span>(less(a[i],a[m]))&#123;</div><div class="line">				high = m-<span class="number">1</span>;</div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				low = m+<span class="number">1</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;			</div><div class="line">		<span class="comment">// low到i-1向后移</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=i; j&gt;low; --j)&#123;</div><div class="line">			a[j] = a[j-<span class="number">1</span>];</div><div class="line">		&#125;</div><div class="line">		a[low] = t;		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="5-希尔排序"><a href="#5-希尔排序" class="headerlink" title="5.希尔排序"></a>5.希尔排序</h3><p>缩小增量法排序</p>
+<ol>
+<li>设置间隔值h，分成h个组，在组内排序，得到h个有序子数组</li>
+<li>缩小h值，分成h个组，在组内排序，得到h个有序子数组</li>
+<li>直到h&lt;1，停止，得到有序数组</li>
+</ol>
+<p>间隔的取法<br>|General term(k&gt;=1)|Concrete gaps|Worst-case time complexity|<br>|–|–|–|<br>|$\lfloor \frac{N}{2^k} \rfloor$|$\lfloor \frac{N}{2} \rfloor,\lfloor \frac{N}{4} \rfloor,…,1$| $O(N^2)$|<br>|$2^k-1$|1,3,7,15,31,63,…| $O(N^{3/2})$|<br>|$\frac{3^k-1}{2}$，且$\leqslant\lceil \frac{N}{3}\rceil$|1,,4,13,40,121,…| $O(N^{3/2})$|<br>|…|…|…|</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">shellSort</span><span class="params">(Comparable&lt;?&gt;[] a)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> N = a.length;</div><div class="line">	<span class="keyword">int</span> h = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(h&lt;N/<span class="number">3</span>)&#123;</div><div class="line">		h = <span class="number">3</span>*h+<span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">while</span>(h&gt;=<span class="number">1</span>)&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=h; i&lt;N; ++i)&#123;</div><div class="line">			<span class="comment">// a[i] a[i-h] a[i-2h] ... 一组</span></div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=i; j&gt;=h &amp;&amp; less(a[j], a[j-h]); j=j-h)&#123;</div><div class="line">				exch(a, j, j-h);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		h=h/<span class="number">3</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="6-快速排序"><a href="#6-快速排序" class="headerlink" title="6.快速排序"></a>6.快速排序</h3><p>v为头元素<br>从左边向右，发现第一个大于等于v的元素，<br>从右边向左，发现第一个小于等于v的元素<br>交换这两个元素，然后重复<br>直到左指针向右，指到右指针，右指针再向左一格<br>现在右指针&lt;=左指针，右指针比v小，右指针与v交换<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 切分1</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition1</span><span class="params">(Comparable&lt;?&gt;[] a, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> i = low, j = high+<span class="number">1</span>;</div><div class="line">	Comparable&lt;?&gt; v = a[low];</div><div class="line">	<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">		<span class="keyword">while</span>(less(a[++i], v))&#123;</div><div class="line">			<span class="comment">// i指向第一个大于等于v的索引  </span></div><div class="line">			<span class="comment">// 或者如果后面全都比v小，则指向high</span></div><div class="line">			<span class="keyword">if</span>(i==high)</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">while</span>(less(v, a[--j]))&#123;</div><div class="line">			<span class="comment">// j指向第一个小于等于v的索引</span></div><div class="line">			<span class="comment">// 或者比后面的比v都大，指向low</span></div><div class="line">			<span class="keyword">if</span>(j==low)</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(i&gt;=j) <span class="comment">// 大于号必须存在</span></div><div class="line">			<span class="keyword">break</span>;</div><div class="line"></div><div class="line">		exch(a, i, j);</div><div class="line">	&#125;</div><div class="line">	exch(a, low, j);</div><div class="line">	<span class="keyword">return</span> j;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 快排1</span></div><div class="line"><span class="comment">// 递归</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort1</span><span class="params">(Comparable&lt;?&gt;[] a, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">	<span class="keyword">if</span>(high &lt;= low)</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	<span class="keyword">int</span> j = partition1(a, low, high);</div><div class="line">	quickSort1(a, low, j-<span class="number">1</span>);</div><div class="line">	quickSort1(a, j+<span class="number">1</span>, high);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 切分2</span></div><div class="line"><span class="comment">// 交换次数是切分1的两倍</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition2</span><span class="params">(Comparable&lt;?&gt;[] a, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> i=low, j=high;</div><div class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(i&lt;=j)&#123;</div><div class="line">		<span class="keyword">while</span>(less(a[i], a[j]))</div><div class="line">			j--;</div><div class="line">		exch(a, i, j);</div><div class="line">		i++;</div><div class="line">		<span class="keyword">if</span>(i&gt;=j)&#123;</div><div class="line">			res = j;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">while</span>(less(a[i], a[j]))</div><div class="line">			i++;</div><div class="line">		exch(a, i, j);</div><div class="line">		j--;</div><div class="line">		<span class="keyword">if</span>(i&gt;=j)&#123;</div><div class="line">			res = i;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;			</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> res;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 快排2</span></div><div class="line"><span class="comment">// 递归</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort2</span><span class="params">(Comparable&lt;?&gt;[] a, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">	<span class="keyword">if</span>(high&lt;=low)</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	<span class="keyword">int</span> j = partition2(a, low, high);</div><div class="line">	quickSort2(a, low, j-<span class="number">1</span>);</div><div class="line">	quickSort2(a, j+<span class="number">1</span>, high);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 快排3</span></div><div class="line"><span class="comment">// 三向切分 快排</span></div><div class="line"><span class="comment">// 递归</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort3</span><span class="params">(Comparable&lt;?&gt;[] a, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">	<span class="keyword">if</span>(high&lt;=low)</div><div class="line">		<span class="keyword">return</span>;</div><div class="line"></div><div class="line">	<span class="comment">// 接下来找分解点，其实是分阶段</span></div><div class="line">	<span class="keyword">int</span> lt=low; <span class="comment">// lt指向的是第一个与v相等元素</span></div><div class="line">	<span class="keyword">int</span> i=low+<span class="number">1</span>; <span class="comment">// i指向的是第一个与v不相等的元素</span></div><div class="line">	<span class="keyword">int</span> gt=high;</div><div class="line">	Comparable&lt;?&gt; v = a[low];</div><div class="line">	<span class="keyword">while</span>(i&lt;=gt)&#123;</div><div class="line">		<span class="keyword">if</span>(less(a[i],v)) <span class="comment">// 如果a[i]小于v，那么交换i，lt，同时两个都++</span></div><div class="line">			exch(a, lt++, i++);  </div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(more(a[i],v))  <span class="comment">// 如果a[i]比v大，那么交换i，gt，并且gt--，i不变</span></div><div class="line">			<span class="comment">//	从尾部重新换个元素，看看大于v否</span></div><div class="line">			exch(a, i, gt--);</div><div class="line">		<span class="keyword">else</span></div><div class="line">			i++;</div><div class="line">	&#125; <span class="comment">// 此时 [low,lt-1] &lt; [lt,gt]=v &lt; [gt+1,high]</span></div><div class="line"></div><div class="line">	quickSort3(a, low, lt-<span class="number">1</span>);</div><div class="line">	quickSort3(a, gt+<span class="number">1</span>, high);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="7-堆排序"><a href="#7-堆排序" class="headerlink" title="7.堆排序"></a>7.堆排序</h3><p>从小到大排序</p>
+<ol>
+<li>构建大根堆。从最后一个非叶节点(k=N/2)开始sink(1,k)，直到根节点(k=1)</li>
+<li>交换大根与最后一个节点，然后sink(1,–N)，直到 N=1<br>本来堆排序，从1开始比较方便索引的比较，但为了和别的排序一致，所以也改从0开始。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 堆排序 0开始</span></div><div class="line"><span class="comment">// sink 部分</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sink</span><span class="params">(Comparable&lt;?&gt;[] a, <span class="keyword">int</span> k, <span class="keyword">int</span> N)</span></span>&#123;</div><div class="line">	<span class="comment">// k的子节点大于N终止，或k大于子节点终止</span></div><div class="line">	<span class="comment">// k 表示要下沉的索引</span></div><div class="line">	<span class="comment">// N 表示树的最后一个节点</span></div><div class="line">	<span class="keyword">while</span>(<span class="number">2</span>*k+<span class="number">1</span>&lt;=N)&#123;   <span class="comment">// 如果根为0，那它的左子节点为2*k+1</span></div><div class="line">		<span class="keyword">int</span> j = <span class="number">2</span>*k+<span class="number">1</span>;</div><div class="line">		<span class="keyword">if</span>(j&lt;N &amp;&amp; less(a[j],a[j+<span class="number">1</span>]))</div><div class="line">			j++;</div><div class="line"></div><div class="line">		<span class="keyword">if</span>(!less(a[k],a[j])) <span class="comment">// 只要不满足条件，终止下沉</span></div><div class="line">			<span class="keyword">break</span>;</div><div class="line"></div><div class="line">		exch(a,k,j);</div><div class="line">		k=j;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 堆排序 0开始</span></div><div class="line"><span class="comment">// 从小到大排序，大根堆</span></div><div class="line"><span class="comment">// 1. 构建大根堆。从最后一个非叶节点(k=N/2)开始sink(1,k)，直到根节点(k=1)</span></div><div class="line"><span class="comment">// 2. 交换大根与最后一个节点，然后sink(1,--N)，直到 N=1</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heapSort</span><span class="params">(Comparable&lt;?&gt;[] a)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> N = a.length-<span class="number">1</span>;  <span class="comment">// 表示最后一个索引</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k=(N-<span class="number">1</span>)/<span class="number">2</span>; k&gt;=<span class="number">0</span>; --k)&#123;</div><div class="line">		sink(a,k,N);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">while</span>(N&gt;<span class="number">0</span>)&#123;</div><div class="line">		exch(a,<span class="number">0</span>,N--);</div><div class="line">		sink(a,<span class="number">0</span>,N);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="8-归并排序-插入"><a href="#8-归并排序-插入" class="headerlink" title="8.归并排序 插入"></a>8.归并排序 插入</h3><p>两个子数组的归并<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> 	Comparable&lt;?&gt;[] aux; <span class="comment">//辅助空间</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(Comparable&lt;?&gt;[] a, <span class="keyword">int</span> low, <span class="keyword">int</span> mid, <span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> i = low, j= mid+<span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k = low; k&lt;=high; ++k)&#123;</div><div class="line">		aux[k] = a[k];</div><div class="line">	&#125;		</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k=low; k&lt;=high; ++k)&#123;</div><div class="line">		<span class="keyword">if</span>(i&gt;mid)</div><div class="line">			a[k] = aux[j++];</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(j&gt;high)</div><div class="line">			a[k] = aux[i++];</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(less(aux[i],aux[j]))</div><div class="line">			a[k] = aux[i++];</div><div class="line">		<span class="keyword">else</span></div><div class="line">			a[k] = aux[j++];</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="8-1自顶向下归并排序"><a href="#8-1自顶向下归并排序" class="headerlink" title="8.1自顶向下归并排序"></a>8.1自顶向下归并排序</h4><p>递归归并<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 自顶向下归并</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">topDownMergeSort</span><span class="params">(Comparable&lt;?&gt;[] a)</span></span>&#123;</div><div class="line">	aux = <span class="keyword">new</span> Comparable[a.length];</div><div class="line">	tdsort(a, <span class="number">0</span>, a.length-<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">// 自顶向下归并递归</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">tdsort</span><span class="params">(Comparable&lt;?&gt;[] a, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">	<span class="keyword">if</span>(high&lt;=low)</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	<span class="keyword">int</span> mid = (low+high)/<span class="number">2</span>;</div><div class="line">	tdsort(a,low, mid);</div><div class="line">	tdsort(a,mid+<span class="number">1</span>, high);</div><div class="line">	merge(a,low, mid, high);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="8-2自底向上归并排序"><a href="#8-2自底向上归并排序" class="headerlink" title="8.2自底向上归并排序"></a>8.2自底向上归并排序</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 自底向上归并</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">downTopMergeSort</span><span class="params">(Comparable&lt;?&gt;[] a)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> N = a.length;</div><div class="line">	aux = <span class="keyword">new</span> Comparable[a.length];</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> sz = <span class="number">1</span>; sz &lt; N; sz=sz+sz)&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> low = <span class="number">0</span>; low&lt;N-sz; low=low+sz+sz)&#123;</div><div class="line">			<span class="comment">// 需要保证至少还有sz+1个</span></div><div class="line">			merge(a, low, low+sz-<span class="number">1</span>, Math.min(low+sz+sz-<span class="number">1</span>, N-<span class="number">1</span>));</div><div class="line">			<span class="comment">// 假如low为N-sz-1,那么low+sz-1=N-sz-1+sz-1=N-2,</span></div><div class="line">			<span class="comment">// 说明mid是倒数第二个元素，还有一个元素		</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="9-基数排序"><a href="#9-基数排序" class="headerlink" title="9. 基数排序"></a>9. 基数排序</h3><p>前面的算法都是利用比较和交换，而基数排序则是利用分配和收集。<br>这种排序一般仅适用于整数类型的排序，对于字符串不适合。<br><strong>LDS（least significant digit）低位优先</strong><br>比如，15,13(a),7,13(b)。按个位排，13(a),13(b),15,7，接下来按十位排7,13(a),13(b),15 正确<br><strong>MDS（most significant digit）高位优先</strong><br>不能完全按照LDS的方式进行，比如，15,13(a),7,13(b)。按十位排，7,15,13(a),13(b)，接下来按个位排13(a),13(b),15,7 错误<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 基数排序</span></div><div class="line"><span class="comment">// 获取x这个数的d位数上的数字</span></div><div class="line"><span class="comment">// 比如获取123的1位数，结果返回3</span></div><div class="line"><span class="comment">// d为第几位</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getDigit</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> d)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> tmp = <span class="number">1</span>;</div><div class="line">	<span class="keyword">while</span>(d&gt;<span class="number">0</span>)&#123;</div><div class="line">		tmp = tmp*<span class="number">10</span>;</div><div class="line">		d--;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> (x%tmp)/(tmp/<span class="number">10</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 基数排序 LSD  先排个位  再排十位</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">radixSortLSD</span><span class="params">(Comparable&lt;?&gt;[] a, <span class="keyword">int</span> d)</span></span>&#123;</div><div class="line">	<span class="comment">// d 表示位数，比如99，则k=2</span></div><div class="line">	<span class="comment">// k 表示进制，比如k=10 ，k个桶</span></div><div class="line">	<span class="keyword">int</span> N = a.length;</div><div class="line">	<span class="keyword">final</span> <span class="keyword">int</span> k = <span class="number">10</span>;</div><div class="line">	<span class="keyword">int</span>[] count = <span class="keyword">new</span> <span class="keyword">int</span>[k];</div><div class="line">	Comparable&lt;?&gt;[] bucket = <span class="keyword">new</span> Comparable&lt;?&gt;[N];</div><div class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> j = <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="comment">// LSD 从低位到高位</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> id=<span class="number">1</span>; id&lt;=d; ++id)&#123;</div><div class="line"></div><div class="line">		<span class="comment">// 置空每个桶</span></div><div class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;k; ++i)&#123;</div><div class="line">    		count[i] = <span class="number">0</span>;</div><div class="line">    	&#125;</div><div class="line">		<span class="comment">// 统计每个桶将要装入的数据个数</span></div><div class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;N; ++i)&#123;</div><div class="line">			j = getDigit((<span class="keyword">int</span>)a[i], id);</div><div class="line">			count[j]++;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">// 每个桶的左起始边界</span></div><div class="line">		count[k-<span class="number">1</span>] = N - count[k-<span class="number">1</span>];</div><div class="line">		<span class="keyword">for</span>(i = k-<span class="number">2</span>; i&gt;=<span class="number">0</span>; --i)&#123;</div><div class="line">			count[i] = count[i+<span class="number">1</span>] - count[i];</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">// 将数据一次装入桶中</span></div><div class="line">		<span class="keyword">for</span>(i = <span class="number">0</span>; i&lt;N; ++i)&#123;</div><div class="line">			j = getDigit((<span class="keyword">int</span>)a[i], id);</div><div class="line">			bucket[count[j]++] = a[i];</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">// 将bucket倒入a中</span></div><div class="line">		<span class="keyword">for</span>(i = <span class="number">0</span>; i&lt;N; ++i)&#123;</div><div class="line">			a[i] = bucket[i];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://en.wikipedia.org/wiki/Sorting_algorithm" target="_blank" rel="external">https://en.wikipedia.org/wiki/Sorting_algorithm</a><br><a href="https://www.douban.com/note/250011027/?type=like" target="_blank" rel="external">https://www.douban.com/note/250011027/?type=like</a><br><a href="http://blog.csdn.net/CJF_iceKing/article/details/7953637" target="_blank" rel="external">http://blog.csdn.net/CJF_iceKing/article/details/7953637</a><br><a href="http://www.cnblogs.com/jingmoxukong/p/4311237.html" target="_blank" rel="external">http://www.cnblogs.com/jingmoxukong/p/4311237.html</a></p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/08/26/弱对偶与强对偶/" data-toggle="tooltip" data-placement="top" title="弱对偶 与 强对偶">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "/2016/08/29/排序/";
+    var disqus_url = "/2016/08/29/排序/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; ZhengYang&#39;s Blog 2016 
+                    <br>
+		Driver - <a href="https://hexo.io/">Hexo</a> | 
+                    Theme - <a href="https://github.com/Kaijun/hexo-theme-huxblog">Hux</a> 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'zhengyangcs.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work --><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+
+</html>
