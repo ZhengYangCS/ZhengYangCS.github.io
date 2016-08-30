@@ -13,11 +13,11 @@
 
     <title>
         
-          贝叶斯网络 - ZhengYang&#39;s Blog
+          查找 - ZhengYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="/2016/07/07/贝叶斯网络/">
+    <link rel="canonical" href="/2016/08/30/查找/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#贝叶斯网络 概率图 有向图 推断" title="贝叶斯网络 概率图 有向图 推断">贝叶斯网络 概率图 有向图 推断</a>
+                          <a class="tag" href="/tags/#查找" title="查找">查找</a>
                         
                     </div>
-                    <h1>贝叶斯网络</h1>
+                    <h1>查找</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by ZhengYang on
-                        2016-07-07
+                        2016-08-30
                     </span>
                 </div>
             </div>
@@ -191,80 +191,39 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>概率图模型可以分为有向图和无向图。</p>
-<p>有向图：贝叶斯网络，HMM。</p>
-<p>无向图：MRF，CRF。</p>
-<h2 id="贝叶斯网络的表示"><a href="#贝叶斯网络的表示" class="headerlink" title="贝叶斯网络的表示"></a>贝叶斯网络的表示</h2><p>贝叶斯网络的联合概率分布定义：<em>有向图不用归一化。</em></p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF1.png" alt=""></p>
-<p>例子如下图，</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF02.png" alt=""></p>
-<p>对应的概率分布：</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF03.png" alt=""></p>
-<p>条件独立，在贝叶斯网络中主要体现了三种情况：</p>
+                <p>为什么要用equals()?为什么不一直用从compareTo()?<br>因为并不是所有的对象都实现了Comparable接口，但所有的对象都继承了Object类，所以都可以equals()</p>
+<h2 id="二叉查找树-BST-Binary-Search-Tree"><a href="#二叉查找树-BST-Binary-Search-Tree" class="headerlink" title="二叉查找树 BST (Binary Search Tree)"></a>二叉查找树 BST (Binary Search Tree)</h2><p>又称二叉排序树<br>是不平衡的二叉树</p>
+<h2 id="平衡查找树-ALV-balanced-binary-tree"><a href="#平衡查找树-ALV-balanced-binary-tree" class="headerlink" title="平衡查找树 ALV (balanced binary tree)"></a>平衡查找树 ALV (balanced binary tree)</h2><h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><p>红黑树是二叉查找树，不过存在红节点和黑节点。<br>红节点 表示该节点 与 该节点的父链接 是红色的。<br>黑节点 表示该节点 与 该节点的父链接 是黑色的。<br>红黑树有如下特点：</p>
 <ol>
-<li>tail-to-tail</li>
+<li>红链接全为左链接</li>
+<li>没有任何一个结点同时和两条红链接相连</li>
+<li>如果一个节点是红的，那它的两个子节点都是黑的</li>
+<li>红黑树是完美黑色平衡的，即任意叶节点到根结点的路径上的黑链接数量相同。</li>
+<li>对每个节点，从该节点到其子孙叶节点的所有路径上，包含相同数目的黑节点。</li>
+<li>红黑树不一定是平衡二叉树，如果红色不算链的话，它是完美平衡二叉树。</li>
+<li>根节点是黑的，但它的左节点可能是红的</li>
 </ol>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF2.png" alt=""></p>
-<p>联合概率分布：</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF3.png" alt=""></p>
-<p>如果a，b，c变量未知，那么不能用贝叶斯公式，只能对c求边际概率分布。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF4.png" alt=""></p>
-<p>不能得到a，b关于c条件独立。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF5.png" alt=""></p>
-<p>如果c已知，那么便不能对c求边际概率分布，只能用贝叶斯公式。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF6.png" alt=""></p>
-<p>可以得到，a，b关于c条件独立。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF7.png" alt=""></p>
-<p>2 . head-to-tail</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF8.png" alt=""></p>
-<p>联合概率分布：</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF9.png" alt=""></p>
-<p>如果a，b，c未知，不能用贝叶斯公式，只能对c求边际概率分布。</p>
-<p> <img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF10.png" alt=""></p>
-<p>不能得到，a，b关于c条件独立。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF11.png" alt=""></p>
-<p>如果c已知，不能对c求边际概率分布，只能用贝叶斯公式。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF12.png" alt=""></p>
-<p>可以看出，a，b关于c条件独立。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF13.png" alt=""></p>
-<p>3 . head-to-head</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF14.png" alt=""></p>
-<p>联合概率分布：</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF15.png" alt=""></p>
-<p>如果a，b，c未知，不能用贝叶斯公式，只能对c求边际概率分布。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF16.png" alt=""></p>
-<p>这次可以得到，a，b独立。  当然a，b也是关于c条件独立的。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF17.png" alt=""></p>
-<p>如果c已知，不能对c求边际概率分布，只能用贝叶斯公式。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF18.png" alt=""></p>
-<p>但是这次，并不能导出a，b关于c条件独立。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF19.png" alt=""></p>
-<h3 id="d-separation"><a href="#d-separation" class="headerlink" title="d-separation"></a>d-separation</h3><p>d-separation是有向图的一个属性，表示如下，<br>A，B，C三组节点，A中的任意节点到B的任意结点的所有路径，只要在任意一条路径上，存在以下结点，就说A和B被C阻断（blocked）：</p>
-<p>举例说明，例一，紫色表示该节点已知，白色表示未知，</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF20.png" alt=""></p>
-<p>A：结点a<br>B：结点b<br>结点f是tail-to-tail结构，且未知，则结点f并不能阻断a和b；<br>结点e是head-to-head结构，且未知，说明如果无后继结点，可以阻断a和b的；但是它存在一个后继结点c，而且c是已知的，因此，结点e不能阻断a和b。</p>
-<p>例二，紫色表示该节点已知，白色表示未知，</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF21.png" alt=""></p>
-<p>A：结点a<br>B：结点b<br>结点f是tail-to-tail结构，已知，因此结点f可以阻断a和b；<br>结点e是head-to-head结构，未知，说明如果无后继结点，可以阻断a和b；结点e存在后继结点c，而且c是未知的，也可以阻断a和b，因此，结点e可以阻断a和b。</p>
-<h2 id="贝叶斯网络推断-得到的后验概率分布"><a href="#贝叶斯网络推断-得到的后验概率分布" class="headerlink" title="贝叶斯网络推断 得到的后验概率分布"></a>贝叶斯网络推断 得到的后验概率分布</h2><p>根据贝叶斯网络的联合概率分布，通过对隐藏变量求积分或求和，得出观测变量的边缘概率分布，然后再用联合概率分布除以边际概率分布，得到隐藏变量的后验概率分布。</p>
-<h3 id="可见变量边缘概率分布易求"><a href="#可见变量边缘概率分布易求" class="headerlink" title="可见变量边缘概率分布易求"></a>可见变量边缘概率分布易求</h3><p>如果可见变量（visible variables）的边缘概率分布很容易求，即隐藏变量（hidden variables）很容易积分或求和，那么可以直接求出隐藏变量的后验概率分布。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF22.png" alt=""></p>
-<p>有时，隐藏变量可以更进一步分解为query variable和nuisance variable，那么可以继续对nuisance variable求积分或求和，得到query variable的条件概率分布。</p>
-<p><img src="http://oavdwoegd.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF23.png" alt=""></p>
-<h3 id="可见变量边缘概率分布难求"><a href="#可见变量边缘概率分布难求" class="headerlink" title="可见变量边缘概率分布难求"></a>可见变量边缘概率分布难求</h3><p>当观测隐藏变量为多个变量，且取值很多时，求可见变量的边缘概率分布就是个NP。<br>因此，需要进行近似推断，常采用Gibbs sampling来进行推断。</p>
-<p>具体算法如下：<br>查询向量等同于查询上式中的隐藏变量，证据向量等同于上式中的可见变量。<br>查询向量为Q={Q1,Q2…Qn}，取值为q；证据向量为E={E1,E2,E3…Em}，取值为e</p>
+<h2 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h2><p>B树，概括来说是一个一般化的二叉查找树（binary search tree），可以拥有多于2个子节点。<br>B树又叫平衡多路查找树，<strong>m阶B树又叫平衡m叉查找树</strong>。一棵<strong>m阶的B树</strong>的特点如下：（m阶\=\=度为m\=\=个m叉）</p>
 <ol>
-<li>遍历查询向量Q，取Qi</li>
-<li>新向量Z等于Q和E的交集，出去变量Qi</li>
-<li>计算条件概率分布p(Qi | Z)</li>
-<li>根据条件概率分布p(Qi | Z)，得到变量Qi的采样值qit</li>
-<li>用qit替换qi(t-1)，组成新的查询向量值qt</li>
-<li>如果qt为目标查询向量的值，则计数nq累加1</li>
-<li>循环T次，使马尔科夫链达到平稳</li>
-<li>计算p(Q=q|E=e)近似等于nq/T</li>
+<li>树中每个节点最多含有m个孩子（m&gt;=2）</li>
+<li>除根节点外，其他每个分支节点至少有$\lceil m/2 \rceil$个孩子，最多m个孩子</li>
+<li>根节点至少有两个孩子（除非B树只包含一个节点）</li>
+<li>所有点节点都出现在同一层上，叶节点不包含任何关键字信息</li>
+<li>有j个孩子的非叶节点恰好有j-1个关键字，关键字按递增顺序排列</li>
 </ol>
-<p>算法中最终的一步，是求得一元隐藏变量的后验概率分布。<br>根据联合概率分布，对变量Qi进行积分或求和，得到向量Z的边缘概率分布；然后将联合概率分布除以Z的边缘概率分布，得到变量qi的后验概率分布，即p(Qi | Z).</p>
-<p>首先在隐藏变量中，分别对一元变量的进行积分或求和，得到其余变量的边缘概率分布，然后用联合概率分布除以其余变量的边缘概率分布，得到该隐藏一元变量的后验概率分布，接下来根据该条件概率分布进行采样。</p>
+<p>n个总关键字的m阶B树的最大高度是多少<br>$n&gt;=1+2(m-1)\sum_{i=1}^hm^{i-1}$</p>
+<h2 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h2><p>每种数据类型的hashCode()方法都必须和equals()一致。</p>
+<ol>
+<li>如果a.equals(b)返回true，那么a.hashCode()==b.hashCode()</li>
+<li><strong>如果a.hashCode()==b.hashCode()，那么a.equals(b)不一定返回true，还需用a.equals(b)比较</strong></li>
+<li>如果a.equals(b)返回false，那么a.hashCode()!=b.hashCode()</li>
+<li>如果a.hashCode()!=b.hashCode()，那么a.equals(b)一定返回false</li>
+</ol>
+<h3 id="构造hashCode"><a href="#构造hashCode" class="headerlink" title="构造hashCode()"></a>构造hashCode()</h3><p>Integer的hashCode是int<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> Integer.hashCode(value);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> value;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Double的hashCode也是int<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> Double.hashCode(value);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">(<span class="keyword">double</span> value)</span> </span>&#123;</div><div class="line">  <span class="keyword">long</span> bits = doubleToLongBits(value);</div><div class="line">  <span class="keyword">return</span> (<span class="keyword">int</span>)(bits ^ (bits &gt;&gt;&gt; <span class="number">32</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>String的hashCode()是每个char的计算结果，也是int<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> hash; <span class="comment">// Default to 0</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> h = hash;</div><div class="line">  <span class="keyword">if</span> (h == <span class="number">0</span> &amp;&amp; value.length &gt; <span class="number">0</span>) &#123;</div><div class="line">    <span class="keyword">char</span> val[] = value;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; value.length; i++) &#123;</div><div class="line">      h = <span class="number">31</span> * h + val[i];</div><div class="line">    &#125;</div><div class="line">    hash = h;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> h;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果你要为自定义的数据类型定义散列函数，则需要同时重写hashCode()和equals()。默认散列函数会返回对象的内存地址。Java中很多数据类型都重写了hashCode()方法，包括String，Integer，Double，File和URL。</p>
+<p>重写：子类的方法覆盖父类的方法，要求方法名和参数都相同<br>重载：在同一个类中的两个或两个以上的方法，拥有相同的方法名，但是参数却不相同，方法体也不相同，最常见的重载的例子就是类的构造函数。</p>
 
 
                 <hr>
@@ -273,13 +232,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/07/10/指针数组&数组指针/" data-toggle="tooltip" data-placement="top" title="指针数组&数组指针">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/07/02/变分线性回归/" data-toggle="tooltip" data-placement="top" title="变分线性回归">Next Post &rarr;</a>
+                            <a href="/2016/08/29/排序/" data-toggle="tooltip" data-placement="top" title="排序">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -323,8 +278,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "/2016/07/07/贝叶斯网络/";
-    var disqus_url = "/2016/07/07/贝叶斯网络/";
+    var disqus_identifier = "/2016/08/30/查找/";
+    var disqus_url = "/2016/08/30/查找/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

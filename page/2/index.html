@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -184,26 +184,26 @@
 
 <div class="post-preview">
 
-    <a href="/2016/08/19/模型综述/">
+    <a href="/2016/08/20/参数估计方法/">
         <h2 class="post-title">
-            模型综述
+            参数估计方法
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            模型评估方法网格搜索 调参在训练集上训练模型，根据验证集上的结果调参。调好参数后，在测试集上得到测试误差。
+            几个参数估计的策略
 
-将数据集分为训练集，验证集，测试集
-将参数网格化，每一个交叉点都是一组参数
-遍历每个网格参数，在训练集上训练模型，在验证集上得到与网格参数对应的验证误差
-挑选最小的验证误差所对应的那个网格参数，作为最优的参数
-用最优参数设置模型，在训练集$\bigcup$验证集上训练，得到测试误差，......
+期望损失(expected loss) 风险函数(risk function)是模型$f(X)$关于联合分布$P(X,Y)$的期望
+经验风险最小化 ERM(Empirical Risk Minimization)是关于训练样本的平均损失
+结构风险最小化 SRM(Structural Risk Minimization)是加了正则项的经验风险最小化
+
+P(x)与p(x)区......
         </div>
     </a>
     <p class="post-meta">
         Posted by ZhengYang on
-        2016-08-19
+        2016-08-20
     </p>
 
 </div>
@@ -220,6 +220,33 @@
         </h3>
         <div class="post-content-preview">
             朴素贝叶斯朴素贝叶斯是基于贝叶斯定理和属性条件独立的分类器。其中，”朴素”指的是一个很naive的假设，即属性条件独立。$$\begin{align}y&amp;=argmax_kP(c_k|x)\\&amp;=argmax_k\frac{P(c_k)P(x|c_k)}{P(x)}\\&amp;=argmax_kP(c_k)P(x|c_k)\\&amp;=argmax_kP(c_k)\pro......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-08-19
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/08/19/模型综述/">
+        <h2 class="post-title">
+            模型综述
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            模型评估方法网格搜索 调参在训练集上训练模型，根据验证集上的结果调参。调好参数后，在测试集上得到测试误差。
+
+将数据集分为训练集，验证集，测试集
+将参数网格化，每一个交叉点都是一组参数
+遍历每个网格参数，在训练集上训练模型，在验证集上得到与网格参数对应的验证误差
+挑选最小的验证误差所对应的那个网格参数，作为最优的参数
+用最优参数设置模型，在训练集$\bigcup$验证集上训练，得到测试误差，......
         </div>
     </a>
     <p class="post-meta">
@@ -415,31 +442,6 @@ SVM是一种非常有效的二分类模型，是在特种空间上的间隔最�
     <p class="post-meta">
         Posted by ZhengYang on
         2016-08-13
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/08/12/拉格朗日对偶/">
-        <h2 class="post-title">
-            拉格朗日对偶
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            拉格朗日对偶在约束最优化时，常常利用拉格朗日对偶性，将原始问题转化为对偶问题。
-最常见的就是在SVM中的使用，其实线性规划中的对偶问题也可以用拉格朗日对偶来解释。
-
-
-...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-08-12
     </p>
 
 </div>
