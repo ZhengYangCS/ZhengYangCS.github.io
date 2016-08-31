@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -184,6 +184,29 @@
 
 <div class="post-preview">
 
+    <a href="/2016/08/31/图/">
+        <h2 class="post-title">
+            图
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            1.图的表示G=(V,E)表示图，其中|V|=n
+邻接矩阵G的邻接矩阵是一个N阶方阵$$A_{ij}= \begin{cases}1, (i,j)\in E \0, elsewise\end{cases}$$如果图没有自连接的话，主对角线全为0。对于无向图，邻接矩阵是对称的；对于有向图，邻接矩阵基本是不对称的。
+邻接表 adjacency listG的邻接表包含一个大小为N列表，每个元素为表......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-08-31
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/08/30/查找/">
         <h2 class="post-title">
             查找
@@ -193,8 +216,10 @@
         </h3>
         <div class="post-content-preview">
             为什么要用equals()?为什么不一直用从compareTo()?因为并不是所有的对象都实现了Comparable接口，但所有的对象都继承了Object类，所以都可以equals()
-二叉查找树 BST (Binary Search Tree)又称二叉排序树是不平衡的二叉树
-平衡查找树 ALV (balanced binary tree)红黑树红黑树是二叉查找树，不过存在红节点和黑节点。红......
+二叉查找树 BST (Binary Search Tree)又称二叉排序树二叉查找树 不是 平衡的二叉树
+平衡查找树 ALV (balanced binary tree)又称平衡二叉树。
+
+左子树和右子树的高......
         </div>
     </a>
     <p class="post-meta">
@@ -396,28 +421,6 @@ p-范数距离(闵可夫斯基距离)$$||x_i-y_i||_p = ......
 
 <div class="post-preview">
 
-    <a href="/2016/08/22/经验贝叶斯/">
-        <h2 class="post-title">
-            经验贝叶斯
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            贝叶斯$\theta$是变量$x$的参数$\eta$是变量$\theta$的参数$\eta$是变量$x$的超参数
-贝叶斯 (Bayes or Standard Bayes or Fully Bayes)在给定数据之前，先验分布$p(\theta)$就已经确定下来了，即参数$\theta$的分布$p(\theta)$已知，$p(\theta)$表达式中的参数$\eta$已知。$$p(\thet......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-08-22
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
     <a href="/2016/08/22/线性判别分析/">
         <h2 class="post-title">
             线性判别分析
@@ -463,24 +466,21 @@ p-范数距离(闵可夫斯基距离)$$||x_i-y_i||_p = ......
 
 <div class="post-preview">
 
-    <a href="/2016/08/21/偏差方差分解/">
+    <a href="/2016/08/22/经验贝叶斯/">
         <h2 class="post-title">
-            偏差方差分解
+            经验贝叶斯
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            
-这里说的都是对泛化而言
-
-Bias-Variance Decomposition偏差 表示模型的期望预测 和 真实值的偏离程度。方差 表示模型的预测 和 模型的预测的偏离程度。
-多个训练集，分别为$D_1,D_2,…$一个测试用例，($\mathbf x,y$)观测变量$y$会存在误差，$y=y_t+\epsilon$，$y_t$为$\mathbf x$真正的值，$\epsilon$为噪声......
+            贝叶斯$\theta$是变量$x$的参数$\eta$是变量$\theta$的参数$\eta$是变量$x$的超参数
+贝叶斯 (Bayes or Standard Bayes or Fully Bayes)在给定数据之前，先验分布$p(\theta)$就已经确定下来了，即参数$\theta$的分布$p(\theta)$已知，$p(\theta)$表达式中的参数$\eta$已知。$$p(\thet......
         </div>
     </a>
     <p class="post-meta">
         Posted by ZhengYang on
-        2016-08-21
+        2016-08-22
     </p>
 
 </div>

@@ -13,11 +13,11 @@
 
     <title>
         
-          线性判别分析 - ZhengYang&#39;s Blog
+          图 - ZhengYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="/2016/08/22/线性判别分析/">
+    <link rel="canonical" href="/2016/08/31/图/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#LDA" title="LDA">LDA</a>
+                          <a class="tag" href="/tags/#图" title="图">图</a>
                         
                     </div>
-                    <h1>线性判别分析</h1>
+                    <h1>图</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by ZhengYang on
-                        2016-08-22
+                        2016-08-31
                     </span>
                 </div>
             </div>
@@ -191,90 +191,41 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <blockquote>
-<p>区别于话题模型的LDA (Latent Dirichlet Allocation)</p>
-</blockquote>
-<h2 id="二类LDA-Linear-Discriminant-Analysis"><a href="#二类LDA-Linear-Discriminant-Analysis" class="headerlink" title="二类LDA(Linear Discriminant Analysis)"></a>二类LDA(Linear Discriminant Analysis)</h2><table>
+                <h2 id="1-图的表示"><a href="#1-图的表示" class="headerlink" title="1.图的表示"></a>1.图的表示</h2><p>G=(V,E)表示图，其中|V|=n<br><img src="http://oavdwoegd.bkt.clouddn.com/adjacency.png" alt="图 (算法导论)"></p>
+<h3 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h3><p>G的邻接矩阵是一个N阶方阵<br>$$A_{ij}= \begin{cases}<br>1, (i,j)\in E \<br>0, elsewise<br>\end{cases}$$<br>如果图没有自连接的话，主对角线全为0。<br>对于无向图，邻接矩阵是对称的；<br>对于有向图，邻接矩阵基本是不对称的。</p>
+<h3 id="邻接表-adjacency-list"><a href="#邻接表-adjacency-list" class="headerlink" title="邻接表 adjacency list"></a>邻接表 adjacency list</h3><p>G的邻接表包含一个大小为N列表，每个元素为<strong>表头节点</strong>。对于每个表头节点 $u$，后面连接了一个链表，每个元素满足$(u,v)\in E$。<br>对于有向图，每个表头节点 后面的表节点，只记录从该表头出发的边。<br>对于无向图，每个表头节点 后面的表节点，记录了与该表头相连接的边。<br>所以说，将无向图的边节点总数必定是偶数，而有向图的边界点总数可能是奇数。</p>
+<h2 id="2-图的遍历"><a href="#2-图的遍历" class="headerlink" title="2.图的遍历"></a>2.图的遍历</h2><h3 id="广度优先-BFS-Breadth-First-Search"><a href="#广度优先-BFS-Breadth-First-Search" class="headerlink" title="广度优先 BFS (Breadth-First-Search)"></a>广度优先 BFS (Breadth-First-Search)</h3><p>类似 <strong>树的层次遍历</strong></p>
+<h3 id="深度优先-DFS-Depth-First-Traversal"><a href="#深度优先-DFS-Depth-First-Traversal" class="headerlink" title="深度优先 DFS (Depth-First Traversal)"></a>深度优先 DFS (Depth-First Traversal)</h3><p>类似 <strong>树的先序遍历</strong></p>
+<h2 id="3-最小生成树"><a href="#3-最小生成树" class="headerlink" title="3.最小生成树"></a>3.最小生成树</h2><p>生成树：一个连通图的生成树是一个<strong>极小连通子图</strong>。一般是对于无向图而言的。</p>
+<h3 id="连通性"><a href="#连通性" class="headerlink" title="连通性"></a>连通性</h3><h4 id="无向图"><a href="#无向图" class="headerlink" title="无向图"></a>无向图</h4><p>连通图：在无向图中，如果任意两个顶点都存路径，则称G是连通图。<br>连通分量：指无向图中的<strong>极大连通子图</strong>。</p>
+<h4 id="有向图"><a href="#有向图" class="headerlink" title="有向图"></a>有向图</h4><p>强连通图：在有向图中，如果任意两个顶点都存在路径，则称G是强连通图。<strong><em>注意这里(u,v)和(v,u)必须同时满足。</em></strong><br>强连通分量：在有向图中，<strong>极大连通子图</strong> 称为 有向图的强连通分量。</p>
+<table>
 <thead>
 <tr>
-<th>二类</th>
-<th>原空间D维</th>
-<th>投影空间1维</th>
+<th>极小连通子图（最小生成树）</th>
+<th>极大连通子图（连通分量）</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>点</td>
-<td>向量$\mathbf{x}$</td>
-<td>标量$y$</td>
-</tr>
-<tr>
-<td>类中心</td>
-<td>向量$\mathbf{m_k}$</td>
-<td>标量$\mu_k$</td>
+<td>使图全连通的的最小生成树</td>
+<td>图中最大的连通子图</td>
 </tr>
 </tbody>
 </table>
-<p>如果原始特征数太多，想将D维特征降到只有1维，即这1维就能决定每个样例的类别。<br>记这个最佳的向量为$\mathbf w$ (D维)，那么样例$\mathbf x$ (D维)到$\mathbf w$上的投影表示为<br>$$y=\mathbf w^T\mathbf x$$<br>这里得到的$y$值不是0/1值，而是$\mathbf x$投影到$\mathbf w$上的点到原点的距离。<br><em>注意：这个式子并不是超平面，只是向量内积。</em></p>
-<h3 id="D维原空间"><a href="#D维原空间" class="headerlink" title="D维原空间"></a>D维原空间</h3><ol>
-<li>寻找每类样例的均值（中心点）<br>$\mathbf m_0=\frac{1}{N_0}\sum_{\mathbf x\in C_0}\mathbf x$<br>$\mathbf m_1=\frac{1}{N_1}\sum_{\mathbf x\in C_1}\mathbf x$</li>
-<li>得到投影后，两类的中心<br>$\mu_0=w^T\mathbf m_0$<br>$\mu_1=w^T\mathbf m_1$</li>
-<li>投影前的协方差<br>$S_0=\sum_{\mathbf x\in C_0}\mathbf{(x-m_0)(x-m_0)}^T$<br>$S_1=\sum_{\mathbf x\in C_1}\mathbf{(x-m_1)(x-m_1)}^T$</li>
-<li>投影后的方差<br>$s_0^2=\sum_{y\in C_0}(y-\mu_0)^2$<br>$s_1^2=\sum_{y\in C_1}(y-\mu_1)^2$</li>
+<p>G=(V,E)是一个带权的无向连通图，其中V是顶点的集合，E是所有带权的边。</p>
+<h3 id="Prim"><a href="#Prim" class="headerlink" title="Prim"></a>Prim</h3><p>类似广度优先搜索DFS 生成的最小生成树。<br><strong>Prim的思想是：先选一个权最小的边，依次在前一步的基础上，选择权最小且不构成环的边，直到所有的顶点都被选择。</strong><br>Prim在任何时刻，都是一个连通图，只是到最后才为一个完整的连通图。</p>
+<h3 id="Kruskal"><a href="#Kruskal" class="headerlink" title="Kruskal"></a>Kruskal</h3><p><strong>Kruskal的思想是：把边从小到大排序，从权最小的边开始，依次选权最小且不构成环的边，直到所有的顶点都被选择。</strong><br>Kruskal在大部分时刻，是多个连通图，直到最后才合并一个完整的连通图。</p>
+<h2 id="4-单源最短路径"><a href="#4-单源最短路径" class="headerlink" title="4.单源最短路径"></a>4.单源最短路径</h2><h3 id="Dijkstra-属于贪心算法"><a href="#Dijkstra-属于贪心算法" class="headerlink" title="Dijkstra 属于贪心算法"></a>Dijkstra 属于贪心算法</h3><p>无向图，有向图都可以用Dijkstra<br>Dijkstra的思想：</p>
+<ol>
+<li>把图中的所有顶点集V分为两组，S和T。<br><em>S表示已经求出最短路径的顶点集合<br>T表示还未求出最短路径的顶点集合</em></li>
+<li>初始时，集合S 只包含源 顶点v，集合T 包含其他顶点</li>
+<li>然后不断从 集合T 中，选取到 顶点v 路径最短的 顶点u 到集合S中</li>
+<li>在 集合S 中每次添加 顶点u 后，都需要 <strong>修改集合T</strong> 中所有点到 v 的路径长度<br><em>具体修改为，min(v到该点的原来最短路径长度，v到u的距离 + u到该点的距离)</em></li>
+<li>重复，直到 集合T 中顶点全部加入到 集合S 中。</li>
 </ol>
-<h3 id="目标值优化"><a href="#目标值优化" class="headerlink" title="目标值优化"></a>目标值优化</h3><p>使类间距尽可能大，类内部的距离尽可能小<br>$$max_w J(\mathbf{w})=\frac{(\mu_0-\mu_1)^2}{s_0^2+s_1^2}$$</p>
-<ul>
-<li><p>分子化简<br>$(\mu_0-\mu_1)^2=\mathbf {(w^Tm_0-w^Tm_1)}^2$<br>$=\mathbf{w^T(m_0-m_1)(m_0-m_1)^Tw}$<br>$=\mathbf w^TS_B\mathbf w$<br>其中，$S_B$ 称为between-class covariance matrix<br>$S_B=\mathbf {(m_0-m_1)(m_0-m_1)}^T$</p>
-</li>
-<li><p>分母化简<br>$s_k^2=\sum_{y\in C_k}(y-\mu_k)^2$<br>$=\sum_{\mathbf x\in C_k}\mathbf {(w^Tx-w^Tm_k)}^2$<br>$=\sum_{\mathbf x\in C_k}\mathbf {w^T(x-m_k)(x-m_k)}^T\mathbf w$<br>$=\mathbf w^T\{\sum_{\mathbf x\in C_k}\mathbf {(x-m_k)(x-m_k)}^T\}\mathbf w$<br>$=\mathbf w^TS_k\mathbf w$<br>其中，$S_k=\sum_{\mathbf x\in C_k}\mathbf {(x-m_k)(x-m_k)}^T$<br>$S_W$ 称为within-class convariance matrix<br>$S_W=S_0+S_1$<br>$=\sum_{\mathbf x\in C_0}\mathbf {(x-m_0)(x-m_0)}^T+\sum_{\mathbf x\in C_1}\mathbf {(x-m_1)(x-m_1)}^T$</p>
-</li>
-</ul>
-<h3 id="改写后的目标值优化"><a href="#改写后的目标值优化" class="headerlink" title="改写后的目标值优化"></a>改写后的目标值优化</h3><p>$$J(\mathbf{w})=\frac{\mathbf w^TS_B\mathbf w}{\mathbf w^TS_W\mathbf w}$$</p>
-<h3 id="求解w"><a href="#求解w" class="headerlink" title="求解w"></a>求解w</h3><p>分子分母都是关于$\mathbf w$的二次形式，如果$\mathbf w$是解，那么$\alpha \mathbf w$也是解。因此固定分母为1，求分子的最大。<br>$$min_\mathbf w -\mathbf w^TS_B\mathbf w$$<br>$$s.t. \mathbf w^TS_W\mathbf w=1$$<br>解：<br>$L(\mathbf w)=-\mathbf w^TS_B\mathbf w+\lambda(\mathbf w^TS_W\mathbf w-1)=0$<br>$\frac{\partial L(\mathbf w)}{\partial \mathbf w}=2S_B\mathbf w-2\lambda S_W\mathbf w=0$<br>$S_B\mathbf w=\lambda S_W\mathbf w$<br>${S_W}^{-1}S_B\mathbf w=\lambda \mathbf w$</p>
-<p><em>因为 $S_B=\mathbf {(m_0-m_1)(m_0-m_1)}^T$，</em><br><em>两边同时乘$w$，得 $S_B\mathbf w=\mathbf {(m_0-m_1)(m_0-m_1)}^T\mathbf w$</em><br><em>令$\lambda = \mathbf {(m_0-m_1)}^T\mathbf w$，而且这里的$\lambda$等同于拉格朗日中的$\lambda$，则此时$\mathbf w$已定，</em><br><em>$S_B\mathbf w=\mathbf {(m_0-m_1)}\lambda$，代入上式，得，</em></p>
-<p>${S_W}^{-1}\mathbf {(m_0-m_1)}\lambda=\lambda \mathbf w$<br>${S_W}^{-1}\mathbf {(m_0-m_1)}=\mathbf w$</p>
-<p>因此，只需要求出原始样本的均值和方差就可以求出最佳的方向，<br>$$\mathbf w={S_W}^{-1}(\mathbf m_0-\mathbf m_1)$$<br>实际求解过程中，对$S_W$进行奇异值分解，即$S_W=U\Sigma V^T$，$\Sigma$是一个实对角线矩阵，其对角线上的元素是$S_W$的奇异值。然后在有$S_W^{-1}=V\Sigma^{-1} U^T$得到$S_W^{-1}$</p>
-<h2 id="多类LDA"><a href="#多类LDA" class="headerlink" title="多类LDA"></a>多类LDA</h2><table>
-<thead>
-<tr>
-<th>多类</th>
-<th>原空间D维</th>
-<th>投影空间d维</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>点</td>
-<td>向量$\mathbf{x}$</td>
-<td>向量$\mathbf y$</td>
-</tr>
-<tr>
-<td>类中心</td>
-<td>向量$\mathbf{m_k}$</td>
-<td>向量$\mathbf{\mu_k}$</td>
-</tr>
-<tr>
-<td>总中心</td>
-<td>向量$\mathbf{m}$</td>
-<td>向量$\mathbf{\mu}$</td>
-</tr>
-</tbody>
-</table>
-<p>之前讨论的是如何将D维降到1维，现在类别多了，1维可能已经不满足要求。假设有K个类别，需要投影到d维空间。<br>$y_i=\mathbf {w_i}^T\mathbf x$， 其中$i=1,2,…,d$，$\mathbf {w_i}$可以称作基向量。<br>$\mathbf y=\mathbf W^T\mathbf x$，其中$W$的第$i$列为$w_i$<br>$\mathbf W$的维数$D\times d$</p>
-<h3 id="D-维原空间"><a href="#D-维原空间" class="headerlink" title="$D$维原空间"></a>$D$维原空间</h3><h4 id="within-class-convariance-matirx"><a href="#within-class-convariance-matirx" class="headerlink" title="within-class convariance matirx"></a>within-class convariance matirx</h4><p>$S_W=\sum_{k=1}^{K}\sum_{\mathbf x\in C_k}\mathbf {(x-m_k)(x-m_k)}^T$<br>其中，$\mathbf {m_k}=\frac{1}{N_k}\sum_{\mathbf x\in C_k}\mathbf x$ ，$C_k$为$k$类数据子集<br>$S_W$的维数$D\times D$</p>
-<h4 id="total-covariance-matrix"><a href="#total-covariance-matrix" class="headerlink" title="total covariance matrix"></a>total covariance matrix</h4><p>$S_T=\sum_{\mathbf x\in C}\mathbf {(x-m)(x-m)}^T$<br>其中，$\mathbf m=\frac{1}{N}\sum_{\mathbf x\in C}\mathbf x$ ，$C$为数据全集<br>$S_T$的维数$D\times D$</p>
-<h4 id="between-class-convariance-matrix"><a href="#between-class-convariance-matrix" class="headerlink" title="between-class convariance matrix"></a>between-class convariance matrix</h4><p>$S_B$需一些改变，原来度量的是两个均值点的散列情况，现在度量的是每类均值点相对于样本中心的散列情况。<br>$S_B=\sum_{k=1}^KN_k\mathbf {(m_k-m)(m_k-m)}^T$<br>$S_B$的维数$D\times D$</p>
-<p>对于多类问题，$S_T=S_W+S_B$；但对于二类问题，$S_T\neq S_W+S_B$，因为$S_B$的定义不同</p>
-<h3 id="d-维投影空间"><a href="#d-维投影空间" class="headerlink" title="$d$维投影空间"></a>$d$维投影空间</h3><h4 id="within-class-convariance-matirx-1"><a href="#within-class-convariance-matirx-1" class="headerlink" title="within-class convariance matirx"></a>within-class convariance matirx</h4><p>$S_W=\sum_{k=1}^K\sum_{\mathbf y\in C_k}\mathbf {(y-\mu_k)(y-\mu_k)}^T$<br>其中，$\mathbf {\mu_k}=\frac{1}{N_k}\sum_{\mathbf y\in C_k}\mathbf y$ ，$C_k$为$k$类数据子集<br>$S_W$的维数$d\times d$</p>
-<h4 id="between-class-convariance-matrix-1"><a href="#between-class-convariance-matrix-1" class="headerlink" title="between-class convariance matrix"></a>between-class convariance matrix</h4><p>$S_B=\sum_{k=1}^KN_k\mathbf{(\mu_k-\mu)(\mu_k-\mu)}^T$<br>其中，$\mathbf {\mu}=\frac{1}{N}\sum_{\mathbf y\in C}\mathbf y$ ，$C$为数据全集<br>$S_B$的维数$d\times d$</p>
-<h3 id="目标值优化-1"><a href="#目标值优化-1" class="headerlink" title="目标值优化"></a>目标值优化</h3><p>$$max_W\frac{tr(\mathbf W^TS_B\mathbf W)}{tr(\mathbf W^TS_W\mathbf W)}$$<br>通过广义特征值来求解，<br>$$S_W^{-1}S_B\mathbf W=\lambda \mathbf W$$<br>$\mathbf W$的闭式解释是$S_W^{-1}S_B$的前$d$个最大的特征值对应的特征向量，所组成的$N\times d$维的$\mathbf W$。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>LDA可以分类，也可以用于有监督的降维。<br>而PCA，ICA，manifold learning都属于无监督的降维。</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>PRML</li>
-<li>《机器学习》周志华</li>
-<li><a href="http://www.cnblogs.com/jerrylead/archive/2011/04/21/2024384.html" target="_blank" rel="external">http://www.cnblogs.com/jerrylead/archive/2011/04/21/2024384.html</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Linear_discriminant_analysis" target="_blank" rel="external">https://en.wikipedia.org/wiki/Linear_discriminant_analysis</a></li>
-</ol>
+<p>邻接矩阵不会被修改，只是修改 还未找到最短路径的顶点 的距离。</p>
+<h2 id="5-每对顶点的最短路径"><a href="#5-每对顶点的最短路径" class="headerlink" title="5.每对顶点的最短路径"></a>5.每对顶点的最短路径</h2><h3 id="Floyd-Warshall-属于动态规划"><a href="#Floyd-Warshall-属于动态规划" class="headerlink" title="Floyd-Warshall 属于动态规划"></a>Floyd-Warshall 属于动态规划</h3><p>根据邻接矩阵 迭代n次 生成最终的最短路径矩阵<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//伪码</span></div><div class="line">D = W  <span class="comment">// 邻接矩阵</span></div><div class="line"><span class="keyword">for</span>(k=<span class="number">0</span>; k&lt;n; ++k)&#123;  <span class="comment">// 这里的k必须在外层</span></div><div class="line">  <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; ++i)&#123;</div><div class="line">    <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;n; ++j)&#123;</div><div class="line">      D[i][j] = Math.min(D[i][j], D[i][k]+D[k][j]);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
 
                 <hr>
@@ -283,13 +234,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/08/23/线性模型/" data-toggle="tooltip" data-placement="top" title="线性模型总结">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/08/22/经验贝叶斯/" data-toggle="tooltip" data-placement="top" title="经验贝叶斯">Next Post &rarr;</a>
+                            <a href="/2016/08/30/查找/" data-toggle="tooltip" data-placement="top" title="查找">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -333,8 +280,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "/2016/08/22/线性判别分析/";
-    var disqus_url = "/2016/08/22/线性判别分析/";
+    var disqus_identifier = "/2016/08/31/图/";
+    var disqus_url = "/2016/08/31/图/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

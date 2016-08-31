@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -192,26 +192,35 @@
                 post-container">
 
                 <p>为什么要用equals()?为什么不一直用从compareTo()?<br>因为并不是所有的对象都实现了Comparable接口，但所有的对象都继承了Object类，所以都可以equals()</p>
-<h2 id="二叉查找树-BST-Binary-Search-Tree"><a href="#二叉查找树-BST-Binary-Search-Tree" class="headerlink" title="二叉查找树 BST (Binary Search Tree)"></a>二叉查找树 BST (Binary Search Tree)</h2><p>又称二叉排序树<br>是不平衡的二叉树</p>
-<h2 id="平衡查找树-ALV-balanced-binary-tree"><a href="#平衡查找树-ALV-balanced-binary-tree" class="headerlink" title="平衡查找树 ALV (balanced binary tree)"></a>平衡查找树 ALV (balanced binary tree)</h2><h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><p>红黑树是二叉查找树，不过存在红节点和黑节点。<br>红节点 表示该节点 与 该节点的父链接 是红色的。<br>黑节点 表示该节点 与 该节点的父链接 是黑色的。<br>红黑树有如下特点：</p>
+<h2 id="二叉查找树-BST-Binary-Search-Tree"><a href="#二叉查找树-BST-Binary-Search-Tree" class="headerlink" title="二叉查找树 BST (Binary Search Tree)"></a>二叉查找树 BST (Binary Search Tree)</h2><p>又称二叉排序树<br>二叉查找树 不是 平衡的二叉树</p>
+<h2 id="平衡查找树-ALV-balanced-binary-tree"><a href="#平衡查找树-ALV-balanced-binary-tree" class="headerlink" title="平衡查找树 ALV (balanced binary tree)"></a>平衡查找树 ALV (balanced binary tree)</h2><p>又称平衡二叉树。</p>
 <ol>
-<li>红链接全为左链接</li>
-<li>没有任何一个结点同时和两条红链接相连</li>
-<li>如果一个节点是红的，那它的两个子节点都是黑的</li>
-<li>红黑树是完美黑色平衡的，即任意叶节点到根结点的路径上的黑链接数量相同。</li>
+<li>左子树和右子树的高度之差的绝对值不超过1</li>
+<li>左子树和右子树也是平衡的</li>
+</ol>
+<h2 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h2><p>红黑树是<strong>二叉查找树，是黑色平衡的</strong>，不是平衡的。存在红节点和黑节点。<br>红节点 表示该节点 与 该节点的父链接 是红色的。<br>黑节点 表示该节点 与 该节点的父链接 是黑色的。<br>红黑树有如下特点：</p>
+<ol>
+<li>红链接全为左链接。</li>
+<li>没有任何一个结点同时和两条红链接相连。<strong>两个红链不相连。</strong></li>
+<li>如果一个节点是红的，那它的两个子节点都是黑的。</li>
+<li>红黑树是<strong>完美黑色平衡的</strong>，即任意叶节点到根结点的路径上的黑链接数量相同。</li>
 <li>对每个节点，从该节点到其子孙叶节点的所有路径上，包含相同数目的黑节点。</li>
 <li>红黑树不一定是平衡二叉树，如果红色不算链的话，它是完美平衡二叉树。</li>
-<li>根节点是黑的，但它的左节点可能是红的</li>
+<li>叶节点不可能出现一黑的情况，但可能出现一红的情况。</li>
+<li>黑叶节点必须存在黑节点兄弟，不能存在红节点兄弟，否则不满足黑色完美平衡。</li>
+<li>红叶节点不会存在兄弟，如果存在红兄弟，那么不满足两个红链不相连；如果存在黑兄弟，那么不满足黑色完美平衡。</li>
+<li>根节点是黑的，但它的左节点可能是红的。</li>
 </ol>
-<h2 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h2><p>B树，概括来说是一个一般化的二叉查找树（binary search tree），可以拥有多于2个子节点。<br>B树又叫平衡多路查找树，<strong>m阶B树又叫平衡m叉查找树</strong>。一棵<strong>m阶的B树</strong>的特点如下：（m阶\=\=度为m\=\=个m叉）</p>
+<h2 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h2><p>B树，是平衡多路查找树，<strong>m阶B树又叫平衡m叉查找树</strong>。一棵<strong>m阶的B树</strong>的特点如下：（m阶= =度为m= =个m叉）</p>
 <ol>
-<li>树中每个节点最多含有m个孩子（m&gt;=2）</li>
-<li>除根节点外，其他每个分支节点至少有$\lceil m/2 \rceil$个孩子，最多m个孩子</li>
-<li>根节点至少有两个孩子（除非B树只包含一个节点）</li>
-<li>所有点节点都出现在同一层上，叶节点不包含任何关键字信息</li>
+<li>根节点有 [2, m] 个孩子（除非B树只包含一个节点）</li>
+<li>除根节点，其他每个分支节点有$[\lceil m/2 \rceil, m]$个孩子</li>
+<li>根节点有 [1, m-1] 个关键字（除非B树只包含一个节点）</li>
+<li>除根节点，其他每个分支节点有$[\lceil m/2 \rceil-1, m-1]$个关键字</li>
+<li>所有点节点都出现在同一层上，<strong>叶节点不包含任何关键字信息</strong></li>
 <li>有j个孩子的非叶节点恰好有j-1个关键字，关键字按递增顺序排列</li>
 </ol>
-<p>n个总关键字的m阶B树的最大高度是多少<br>$n&gt;=1+2(m-1)\sum_{i=1}^hm^{i-1}$</p>
+<h3 id="Best-case-最低高度-and-worst-case-最高高度-heights"><a href="#Best-case-最低高度-and-worst-case-最高高度-heights" class="headerlink" title="Best case (最低高度) and worst case (最高高度) heights"></a>Best case (最低高度) and worst case (最高高度) heights</h3><p>Let h be the height of the classic B-tree. Let n &gt; 0 be the number of entries in the tree. Let m be the maximum number of children a node can have. Each node can have at most m−1 keys.<br>It can be shown that a B-tree of height h with all its nodes completely filled has $n=m^{h+1}-1$ entries. Hence, <strong>the best case height of a B-tree (where the root node is considered to have height 0)</strong> is:<br>$$\lceil log_m(n+1)\rceil$$<br>Let d be the minimum number of children an internal (non-root) node can have. For an ordinary B-tree, d=⌈m/2⌉. Comer (1979, p. 127) and Cormen et al. (2001, pp. 383–384) give <strong>the worst case height of a B-tree (where the root node is considered to have height 0)</strong> as:<br>$$h\leqslant \lfloor log_d(\frac{n+1}{2})\rfloor$$ 根节点二叉，非根节点d叉，d=⌈m/2⌉<br>$n\geqslant 1+2(d^h-1)$<br>$n\geqslant 2d^h-1$<br>$\frac{n+1}{2}\geqslant d^h$<br>$log_d\frac{n+1}{2}\geqslant h$</p>
 <h2 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h2><p>每种数据类型的hashCode()方法都必须和equals()一致。</p>
 <ol>
 <li>如果a.equals(b)返回true，那么a.hashCode()==b.hashCode()</li>
@@ -224,6 +233,7 @@
 <p>String的hashCode()是每个char的计算结果，也是int<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> hash; <span class="comment">// Default to 0</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> h = hash;</div><div class="line">  <span class="keyword">if</span> (h == <span class="number">0</span> &amp;&amp; value.length &gt; <span class="number">0</span>) &#123;</div><div class="line">    <span class="keyword">char</span> val[] = value;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; value.length; i++) &#123;</div><div class="line">      h = <span class="number">31</span> * h + val[i];</div><div class="line">    &#125;</div><div class="line">    hash = h;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> h;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>如果你要为自定义的数据类型定义散列函数，则需要同时重写hashCode()和equals()。默认散列函数会返回对象的内存地址。Java中很多数据类型都重写了hashCode()方法，包括String，Integer，Double，File和URL。</p>
 <p>重写：子类的方法覆盖父类的方法，要求方法名和参数都相同<br>重载：在同一个类中的两个或两个以上的方法，拥有相同的方法名，但是参数却不相同，方法体也不相同，最常见的重载的例子就是类的构造函数。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://en.wikipedia.org/wiki/B-tree" target="_blank" rel="external">https://en.wikipedia.org/wiki/B-tree</a></p>
 
 
                 <hr>
@@ -231,6 +241,10 @@
                 
 
                 <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/08/31/图/" data-toggle="tooltip" data-placement="top" title="图">&larr; Previous Post</a>
+                        </li>
                     
                     
                         <li class="next">
