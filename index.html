@@ -184,6 +184,48 @@
 
 <div class="post-preview">
 
+    <a href="/2016/09/02/奇异值分解/">
+        <h2 class="post-title">
+            奇异值分解
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            SVD的通俗解释SVD从最简单的二维上来说，原始正交基 $v_1,v_2$，通过乘以一个矩阵M，在原空间线性变换，得到一组新的正交积$u_1,u_2$,$\sigma_1,\sigma_2$是表示变化后长度的标量$\sigma_1u_1=Mv_1$$\sigma_2u_2=Mv_2$原空间的向量$x$可以表示为，$x=v_1^Txv_1+v_2^Txv_2$两边同时左乘M，得，$Mx=Mv_......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-09-02
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/09/01/矩估计_假设检验/">
+        <h2 class="post-title">
+            矩估计 假设检验
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            假设检验某类型电池的寿命必须超过$\mu_0=100$小时才算合格，现随机抽检了$n=50$个样品，发现平均使用寿命为$\overline x=98$小时，样本标准差为$s=5$小时，如果取显著性水平为$\alpha=0.025$，那么该厂的电池能否采购？$$H_0:\mu\geqslant\mu_0, H_1:\mu&lt;\mu_0$$$$t=\frac{\overline x-\mu_......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-09-01
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/08/31/图/">
         <h2 class="post-title">
             图
@@ -291,24 +333,27 @@ $1$
 
 <div class="post-preview">
 
-    <a href="/2016/08/26/弱对偶与强对偶/">
+    <a href="/2016/08/28/推荐/">
         <h2 class="post-title">
-            弱对偶 与 强对偶
+            推荐
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            弱对偶 与 强对偶 关系解释一弱对偶弱对偶：在最优化问题中，对偶间隙(duality gap)总是大于等于0。对于最小值优化来说，即$d\leqslant p$
-强对偶强对偶：在最优化问题中，对偶间隙(duality gap)等于0，即原问题等于对偶问题，$d=p$。
-弱对偶 变为 强对偶 （充分条件）
-若原问题是线性归回问题则弱对偶直接等于强对偶
-若原问题是凸优化问题则需要满足Slater......
+            推荐实验方法离线实验
+通过日志系统获得用户行为数据，并按照一定格式生成一个标准的数据集
+将数据集分为训练集和测试集
+在训练集上训练模型，在测试集上测试
+通过事先定义的评测指标判断测试效果
+
+用户调查离线实验的指标和实际的指标会存在差异，比如预测准确率和用户满意度之间就存在差异，高预测准确率不等于高用户满意度。最好的方法就是直接上线测试，但直接上线会存在风险，因此会在上线前做用户调查。
+在线实......
         </div>
     </a>
     <p class="post-meta">
         Posted by ZhengYang on
-        2016-08-26
+        2016-08-28
     </p>
 
 </div>
@@ -326,6 +371,31 @@ $1$
         <div class="post-content-preview">
             LR 与 SVMLR可以看作是一个线性分类器，一个w向量构成的超平面，与w内积大于0的表示正类，小于0的表示负类。LR与SVM线性核都是用一个超平面做分类，区别在于损失函数不同。LR是logistic损失，SVM是hinge损失。
 LRLR原本的损失是NLL，可以看成cross entropy，对数损失。如果把 $y=\{1,0\}$，换成 $y=\{1,-1\}$，那么可以看成logist......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-08-26
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/08/26/弱对偶与强对偶/">
+        <h2 class="post-title">
+            弱对偶 与 强对偶
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            弱对偶 与 强对偶 关系解释一弱对偶弱对偶：在最优化问题中，对偶间隙(duality gap)总是大于等于0。对于最小值优化来说，即$d\leqslant p$
+强对偶强对偶：在最优化问题中，对偶间隙(duality gap)等于0，即原问题等于对偶问题，$d=p$。
+弱对偶 变为 强对偶 （充分条件）
+若原问题是线性归回问题则弱对偶直接等于强对偶
+若原问题是凸优化问题则需要满足Slater......
         </div>
     </a>
     <p class="post-meta">
@@ -392,95 +462,6 @@ p-范数距离(闵可夫斯基距离)$$||x_i-y_i||_p = ......
     <p class="post-meta">
         Posted by ZhengYang on
         2016-08-24
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/08/23/线性模型/">
-        <h2 class="post-title">
-            线性模型总结
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            线性模型线性模型的基本形式，$$f(\mathbf x)=\mathbf w^T\mathbf x+b$$$\mathbf x$，D维输入$\mathbf w$，D维参数$b$，1维偏置将$\mathbf{w, x}$变成D+1维，且$\mathbf x$的D+1维恒为1，线性模型变为，$$f(\mathbf x)=\mathbf w^T\mathbf x$$
-更一般的写法为，$$f(\ma......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-08-23
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/08/22/线性判别分析/">
-        <h2 class="post-title">
-            线性判别分析
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-区别于话题模型的LDA (Latent Dirichlet Allocation)
-
-二类LDA(Linear Discriminant Analysis)
-
-
-二类
-原空间D维
-投影空间1维
-
-
-
-
-点
-向量$\mathbf{x}$
-标量$y$
-
-
-类中心
-向量$\mathbf{m_k}$
-标量$\mu_k$
-
-
-
-如果原始特征数太多，想将D维特征降到只有1维，即这1维就能决定每个样例的......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-08-22
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/08/22/经验贝叶斯/">
-        <h2 class="post-title">
-            经验贝叶斯
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            贝叶斯$\theta$是变量$x$的参数$\eta$是变量$\theta$的参数$\eta$是变量$x$的超参数
-贝叶斯 (Bayes or Standard Bayes or Fully Bayes)在给定数据之前，先验分布$p(\theta)$就已经确定下来了，即参数$\theta$的分布$p(\theta)$已知，$p(\theta)$表达式中的参数$\eta$已知。$$p(\thet......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-08-22
     </p>
 
 </div>

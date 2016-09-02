@@ -272,6 +272,10 @@
 <li>q = q-1</li>
 <li>如果q=K，停止，得到K个簇的聚类结果；<br>如果q&gt;K，返回步骤4</li>
 </ol>
+<h2 id="异常点检测"><a href="#异常点检测" class="headerlink" title="异常点检测"></a>异常点检测</h2><p>In data mining, anomaly detection (also outlier detection) is the identification of items, events or observations which do not conform to an expected pattern or other items in a dataset.</p>
+<h3 id="从统计上来说"><a href="#从统计上来说" class="headerlink" title="从统计上来说"></a>从统计上来说</h3><p>分位点划分，0.05到0.95之外的为异常值<br>高cook距离（D统计量）、高杠杆值</p>
+<h3 id="从模型上来说"><a href="#从模型上来说" class="headerlink" title="从模型上来说"></a>从模型上来说</h3><p>异常点可以理解为那些模型预测效果不佳的观测点</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>其实，异常点或异常趋势都会有导致的原因，只是很多相关的事件未知。所以，如果能找到导致异常的原因最好，找不到只能当做噪声，在预处理时去除。</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://en.wikipedia.org/wiki/Cluster_analysis" target="_blank" rel="external">https://en.wikipedia.org/wiki/Cluster_analysis</a><br>The Elements of Statistical Learning<br><a href="https://en.wikipedia.org/wiki/DBSCAN" target="_blank" rel="external">https://en.wikipedia.org/wiki/DBSCAN</a></p>
 
 

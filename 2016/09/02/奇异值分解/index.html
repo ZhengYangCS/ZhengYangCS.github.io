@@ -13,11 +13,11 @@
 
     <title>
         
-          弱对偶 与 强对偶 - ZhengYang&#39;s Blog
+          奇异值分解 - ZhengYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="/2016/08/26/弱对偶与强对偶/">
+    <link rel="canonical" href="/2016/09/02/奇异值分解/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#弱对偶 与 强对偶" title="弱对偶 与 强对偶">弱对偶 与 强对偶</a>
+                          <a class="tag" href="/tags/#SVD" title="SVD">SVD</a>
                         
                     </div>
-                    <h1>弱对偶 与 强对偶</h1>
+                    <h1>奇异值分解</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by ZhengYang on
-                        2016-08-26
+                        2016-09-02
                     </span>
                 </div>
             </div>
@@ -191,23 +191,30 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="弱对偶-与-强对偶-关系解释一"><a href="#弱对偶-与-强对偶-关系解释一" class="headerlink" title="弱对偶 与 强对偶 关系解释一"></a>弱对偶 与 强对偶 关系解释一</h2><h3 id="弱对偶"><a href="#弱对偶" class="headerlink" title="弱对偶"></a>弱对偶</h3><p>弱对偶：在最优化问题中，对偶间隙(duality gap)总是大于等于0。对于最小值优化来说，即$d\leqslant p$</p>
-<h3 id="强对偶"><a href="#强对偶" class="headerlink" title="强对偶"></a>强对偶</h3><p>强对偶：在最优化问题中，对偶间隙(duality gap)等于0，即原问题等于对偶问题，$d=p$。</p>
-<h3 id="弱对偶-变为-强对偶-（充分条件）"><a href="#弱对偶-变为-强对偶-（充分条件）" class="headerlink" title="弱对偶 变为 强对偶 （充分条件）"></a>弱对偶 变为 强对偶 （充分条件）</h3><ul>
-<li><strong>若原问题是线性归回问题</strong><br>则弱对偶直接等于强对偶</li>
-<li><strong>若原问题是凸优化问题</strong><br>则需要满足Slater’s condition</li>
-</ul>
-<h3 id="Slater’s-condition"><a href="#Slater’s-condition" class="headerlink" title="Slater’s condition"></a>Slater’s condition</h3><p>给定原问题：<br>$min_x f_0(x)$<br>$subject\_to:$<br>$f_i(x)\leqslant0, i=1,2,…,m$<br>$Ax=b$<br>其中，$f_0(x)$是凸函数，$f_i(x)$也是凸函数</p>
-<p>Slater’s condition是说，如果存在<strong>任意一个</strong>$x’$，使得<br>$f_i(x’)&lt;0, i=1,2,…,m$<br>$Ax’=b$<br>那么强对偶成立。</p>
-<h2 id="弱对偶-与-强对偶-关系解释二"><a href="#弱对偶-与-强对偶-关系解释二" class="headerlink" title="弱对偶 与 强对偶 关系解释二"></a>弱对偶 与 强对偶 关系解释二</h2><h3 id="从必要条件上说"><a href="#从必要条件上说" class="headerlink" title="从必要条件上说"></a>从必要条件上说</h3><p>如果$d^*=p^*$，那么$d^*$对应的解(乘子)$\alpha^*, \beta^*$，和$d^*$对应的解$x^* $都是最优解。</p>
-<h3 id="从充分条件，判定相等上说"><a href="#从充分条件，判定相等上说" class="headerlink" title="从充分条件，判定相等上说"></a>从充分条件，判定相等上说</h3><p>假定$f(x),c_i(x)$是凸函数，$h_j(x)$是仿射函数。若<strong>存在任意一个</strong>$x$，对于<strong>所有$c_i(x)$</strong>，使得<strong>所有</strong>不等式约束$c_i(x)&lt;0$，则存在$x^*,\alpha^*,\beta^*$，使得$x^*$是最优原始问题$p^*$的解，$\alpha^*\beta^*$是最优对偶问题$d^*$的解,并且等式成立<br>$$d^*=L(x^*,\alpha^*,\beta^*)=p^*$$</p>
-<h3 id="从充分条件，解最优上说"><a href="#从充分条件，解最优上说" class="headerlink" title="从充分条件，解最优上说"></a>从充分条件，解最优上说</h3><p>假定$f(x),c_i(x)$是凸函数，$h_j(x)$是仿射函数，若<strong>存在任意一个</strong>$x$，对于<strong>所有$c_i(x)$</strong>，使得<strong>所有</strong>不等式约束$c_i(x)&lt;0$，则$x^*$和$\alpha^*,\beta^*$分别是原始问题和对偶问题的解的<strong>充要条件</strong>是$x^*,\alpha^*,\beta^*$满足KKT条件：<br>$\nabla_xL(x^*,\alpha^*,\beta^*)=0$<br>$\nabla_{\alpha}L(x^*,\alpha^*,\beta^*)=0$<br>$\nabla_{\beta}L(x^*,\alpha^*,\beta^*)=0$<br>$\alpha_i^*c_i(x^*)=0, i=1,2,…,k$<br>$c_i(x^*)\leqslant0, i=1,2,…,k$<br>$\alpha_i\geqslant0, i=1,2,…,k$<br>$h_j(x^*)=0, j=1,2,…,l$<br>其中，$\alpha_i^*c_i(x^*)=0, i=1,2,…,k$称为kkt的对偶互补条件，若$c_i(x)&lt;0$，那么$\alpha_i=0$</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li><a href="https://en.wikipedia.org/wiki/Weak_duality" target="_blank" rel="external">https://en.wikipedia.org/wiki/Weak_duality</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Strong_duality" target="_blank" rel="external">https://en.wikipedia.org/wiki/Strong_duality</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Slater%27s_condition" target="_blank" rel="external">https://en.wikipedia.org/wiki/Slater%27s_condition</a></li>
-<li>统计学习方法</li>
+                <h2 id="SVD的通俗解释"><a href="#SVD的通俗解释" class="headerlink" title="SVD的通俗解释"></a>SVD的通俗解释</h2><h3 id="SVD"><a href="#SVD" class="headerlink" title="SVD"></a>SVD</h3><p>从最简单的二维上来说，<br>原始正交基 $v_1,v_2$，通过乘以一个矩阵M，在原空间线性变换，得到一组新的正交积$u_1,u_2$,$\sigma_1,\sigma_2$是表示变化后长度的标量<br>$\sigma_1u_1=Mv_1$<br>$\sigma_2u_2=Mv_2$<br>原空间的向量$x$可以表示为，$x=v_1^Txv_1+v_2^Txv_2$<br>两边同时左乘M，得，<br>$Mx=Mv_1^Txv_1+Mv_2^Txv_2$<br>$Mx=Mv_1(v_1^Tx)+Mv_2(v_2^Tx)$<br>$Mx=\sigma_1u_1(v_1^Tx)+\sigma_2u_2(v_2^Tx)$<br>$M=\sigma_1u_1v_1^T+\sigma_2u_2v_2^T$<br>$M=U\Sigma V^T$</p>
+<h3 id="为什么-u-1-u-2-正交？"><a href="#为什么-u-1-u-2-正交？" class="headerlink" title="为什么$u_1,u_2$正交？"></a>为什么$u_1,u_2$正交？</h3><p>$(\sigma_1u_1)^T\sigma_2u_2=(Mv_1)^TMv_2=v_1^TM^TMv_2$<br>如果M满秩，那么 $v_1^TM^TMv_2=\lambda v_1^Tv_2=0$<br>所以$(\sigma_1u_1)^T\sigma_2u_2=\sigma_1\sigma_2u_1^Tu_2=0$<br>故，变换后的基也是正交的。</p>
+<h3 id="SVD在推荐中的应用"><a href="#SVD在推荐中的应用" class="headerlink" title="SVD在推荐中的应用"></a>SVD在推荐中的应用</h3><p>矩阵乘法的含义是变换，伸缩，切变，旋转<br>svd可以把user-item评分矩阵分解为user-factor，factor-factor，factor-item矩阵<br>$$M=U\Sigma V^T$$<br>$M$为user-item原始评分矩阵<br>$U$为user-factor左奇异向量的集合<br>$\Sigma$为factor-factor，主对角线上为从大到小排列的特征值，其余为0。<br>$V$为factor-item右奇异向量的集合，注意这里在式中需要转置</p>
+<p>分解的目的是去掉$\Sigma$的小特征值，和$U$与$V$中对应的factor列。</p>
+<h3 id="特征值分解-的特征向量为什么正交？"><a href="#特征值分解-的特征向量为什么正交？" class="headerlink" title="特征值分解 的特征向量为什么正交？"></a>特征值分解 的特征向量为什么正交？</h3><p>PCA中的协方差矩阵是<strong>实对称矩阵</strong>，考虑两个特征值与特征向量，如下，<br>$Au_1=\lambda_1u_1$<br>$Au_2=\lambda_2u_2$</p>
+<p>分别左乘$u_1, u_2$，得，<br>$u_2^TAu_1=\lambda_1u_2^Tu_1$<br>$u_1^TAu_2=\lambda_2u_1^Tu_2$</p>
+<p>两式相减，注意$A^T=A$，得，<br>$0=\lambda_1u_2^Tu_1-\lambda_2u_1^Tu_2$<br>$0=\lambda_1u_1^Tu_2-\lambda_2u_1^Tu_2$<br>$0=(\lambda_1-\lambda_2)u_1^Tu_2$</p>
+<p>因为$\lambda_1-\lambda_2\neq 0$，所以$u_1,u_2$正交</p>
+<h3 id="PCA-与-SVD"><a href="#PCA-与-SVD" class="headerlink" title="PCA 与 SVD"></a>PCA 与 SVD</h3><p>相同</p>
+<ol>
+<li>都是要求得到最大特征值，与对应的向量</li>
 </ol>
+<p>不同</p>
+<ol>
+<li>PCA只是对方阵，且对阵的协方差矩阵分解</li>
+<li>SVD可以对任意的矩阵进行分解</li>
+<li>PCA得到的特征值，特征向量</li>
+<li>SVD会得到奇异值，左奇异向量，右奇异向量</li>
+</ol>
+<h2 id="SVD的定义解释"><a href="#SVD的定义解释" class="headerlink" title="SVD的定义解释"></a>SVD的定义解释</h2><h3 id="奇异值分解-Singular-Value-Decomposition"><a href="#奇异值分解-Singular-Value-Decomposition" class="headerlink" title="奇异值分解 (Singular Value Decomposition)"></a>奇异值分解 (Singular Value Decomposition)</h3><p>假设M是一个$m\times n$阶矩阵，其中的元素全部属于实数域或复数域。则存在一个分解使得<br>$$M=U\Sigma V^*$$<br>其中$U$是$m\times m$阶酉矩阵；是$m\times n$阶非负实数对角矩阵；而$V^*$是$V$的共轭转置，是$n\times n$阶酉矩阵。这样的分解就称作$M$的奇异值分解。$\Sigma$对角线上的元素$\Sigma_i$为$M$的奇异值。常见的做法是将奇异值由大而小排列，如此$\Sigma$便能由M唯一确定了。（虽然$U$和$V$仍然不能确定。）</p>
+<h3 id="酉矩阵-Unitary-Matrix"><a href="#酉矩阵-Unitary-Matrix" class="headerlink" title="酉矩阵(Unitary Matrix)"></a>酉矩阵(Unitary Matrix)</h3><p>如果一个复数方阵$U$的共轭转置$U^*$ 等于 $U$的逆矩阵$U^{-1}$，则称$U$是酉矩阵。<br>$U^{*}U=UU^{*}=I$<br>In physics, especially in quantum mechanics, the Hermitian conjugate of a matrix is denoted by a dagger (†) and the equation above becomes<br>$U^{\dagger }U=UU^{\dagger }=I$<br>在实数域中，酉矩阵等同于正交矩阵<br>$U^{T}U=UU^{T}=I$<br>因此，酉矩阵是正交矩阵在复数域上的推广。</p>
+<h3 id="共轭转秩-Conjugate-Transpose"><a href="#共轭转秩-Conjugate-Transpose" class="headerlink" title="共轭转秩 (Conjugate Transpose)"></a>共轭转秩 (Conjugate Transpose)</h3><p>矩阵A的共轭转置$A^*$ (又称埃尔米特共轭、埃尔米特转置或伴随矩阵)定义为：<br>$$(A^*)_{i,j}=\overline{A_{j,i}}$$<br>其中$(\cdot)_{i,j}$表示矩阵 i行 j列上的元素，${\overline {(\cdot )}}$表示标量的复共轭。<br>其实就是转置后，每个元素取复共轭。</p>
+<h3 id="共轭复数-Complex-Conjugate"><a href="#共轭复数-Complex-Conjugate" class="headerlink" title="共轭复数 (Complex Conjugate)"></a>共轭复数 (Complex Conjugate)</h3><p>在数学中，复数 ($z$)的复共轭 ($\overline z$)是对虚部变号的运算。<br>$z=a+bi$的复共轭为$\overline z=a-bi$<br>$z=2+3i$的复共轭为$\overline z=2-3i$<br>$z=7$的复共轭为$\overline z=7$<br>将复数理解为复平面，则复共轭是对实轴的反射。复数$z$的复共轭有时也表为$z^{*}$。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="http://blog.sciencenet.cn/blog-696950-699432.html" target="_blank" rel="external">http://blog.sciencenet.cn/blog-696950-699432.html</a><br><a href="http://www.ams.org/samplings/feature-column/fcarc-svd" target="_blank" rel="external">http://www.ams.org/samplings/feature-column/fcarc-svd</a><br><a href="http://zhidao.baidu.com/question/1732051979137036227.html?qbl=relate_question_0&amp;word=%CC%D8%D5%F7%D6%B5%BA%CD%CC%D8%D5%F7%CF%F2%C1%BF%20%D5%FD%BD%BB" target="_blank" rel="external">http://zhidao.baidu.com/question/1732051979137036227.html?qbl=relate_question_0&amp;word=%CC%D8%D5%F7%D6%B5%BA%CD%CC%D8%D5%F7%CF%F2%C1%BF%20%D5%FD%BD%BB</a><br><a href="https://en.wikipedia.org/wiki/Singular_value_decomposition" target="_blank" rel="external">https://en.wikipedia.org/wiki/Singular_value_decomposition</a><br><a href="https://en.wikipedia.org/wiki/Unitary_matrix" target="_blank" rel="external">https://en.wikipedia.org/wiki/Unitary_matrix</a><br><a href="https://en.wikipedia.org/wiki/Conjugate_transpose" target="_blank" rel="external">https://en.wikipedia.org/wiki/Conjugate_transpose</a><br><a href="https://en.wikipedia.org/wiki/Complex_conjugate" target="_blank" rel="external">https://en.wikipedia.org/wiki/Complex_conjugate</a></p>
 
 
                 <hr>
@@ -216,13 +223,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/08/26/LR & SVM/" data-toggle="tooltip" data-placement="top" title="LR & SVM">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/08/25/SOM/" data-toggle="tooltip" data-placement="top" title="SOM网络">Next Post &rarr;</a>
+                            <a href="/2016/09/01/矩估计_假设检验/" data-toggle="tooltip" data-placement="top" title="矩估计 假设检验">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -266,8 +269,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "/2016/08/26/弱对偶与强对偶/";
-    var disqus_url = "/2016/08/26/弱对偶与强对偶/";
+    var disqus_identifier = "/2016/09/02/奇异值分解/";
+    var disqus_url = "/2016/09/02/奇异值分解/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
