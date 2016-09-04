@@ -13,11 +13,11 @@
 
     <title>
         
-          朴素贝叶斯 - ZhengYang&#39;s Blog
+          ZhengYang&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="/2016/08/19/朴素贝叶斯/">
+    <link rel="canonical" href="/tags/统计/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,162 +147,7 @@
 
 
     <!-- Main Content -->
-    
-<!-- Image to hack wechat -->
-<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
-
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        background-image: url('/img/line1.jpg')
-    }
-</style>
-<header class="intro-header" >
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                          <a class="tag" href="/tags/#朴素贝叶斯 naive bayes" title="朴素贝叶斯 naive bayes">朴素贝叶斯 naive bayes</a>
-                        
-                    </div>
-                    <h1>朴素贝叶斯</h1>
-                    <h2 class="subheading"></h2>
-                    <span class="meta">
-                        Posted by ZhengYang on
-                        2016-08-19
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <h2 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h2><p>朴素贝叶斯是基于贝叶斯定理和属性条件独立的分类器。其中，”朴素”指的是一个很naive的假设，即属性条件独立。<br>$$\begin{align}<br>y&amp;=argmax_kP(c_k|x)\\<br>&amp;=argmax_k\frac{P(c_k)P(x|c_k)}{P(x)}\\<br>&amp;=argmax_kP(c_k)P(x|c_k)\\<br>&amp;=argmax_kP(c_k)\prod_{j=1}^DP(x^{(j)}|c_k)\\<br>&amp;=argmax_kP(c_k)\prod_{j=1}^D\frac{P(x^{(j)},c_k)}{P(c_k)}\\<br>&amp;=argmax_k \frac{\sum_{i=1}^NI(y_i=c_k)}N \prod_{j=1}^D\frac{\sum_{i=1}^NI(x_i^{(j)}=x^{(j)},y_i=c_k)}{\sum_{i=1}^NI(y_i=c_k)}\\<br>&amp;=argmax_k\frac{N_k}{N}\prod_{j=1}^{D}\frac{N_k^{x^{(j)}}}{N_k}<br>\end{align}$$<br>上式第3步，因为分母于参数k无关，故舍去<br>上式第4步，因为naive，故属性条件独立</p>
-<p><em>$x$表示需要预测的属性值向量，是values</em><br><em>$y$表示预测的类别值，是values</em><br><em>$D$表示属性个数</em><br><em>$D^{(j)}$表示第j个属性的取值数</em><br><em>$K$表示类别个数</em><br><em>$N$表示样本量</em><br><em>$N_k$表示属于k类的样本量</em><br><em>$N_k^{x^{(j)}}$表示属于k类，且第j个属性值为$x^{(j)}$的样本量</em><br><em>$x_i^{(j)}$表示第i个样例的第j个属性，是key</em><br><em>$x^{(j)}$表示x的第j个属性值，是value</em></p>
-<h3 id="平滑"><a href="#平滑" class="headerlink" title="平滑"></a>平滑</h3><p>当数据量较小时，很容易出现$N_k^{x^{(j)}}$为0的情况，因此需要做平滑。<br>具体来说，<br>$$\begin{align}<br>y&amp;=argmax_k \frac{\sum_{i=1}^NI(y_i=c_k)}N \prod_{j=1}^D\frac{\sum_{i=1}^NI(x_i^{(j)}=x^{(j)},y_i=c_k)}{\sum_{i=1}^NI(y_i=c_k)}\\<br>&amp;=argmax_k \frac{\sum_{i=1}^NI(y_i=c_k)+\lambda}{N+\lambda K} \prod_{j=1}^D\frac{\sum_{i=1}^NI(x_i^{(j)}=x^{(j)},y_i=c_k)+\lambda}{\sum_{i=1}^NI(y_i=c_k)+\lambda D^{(j)}}\\<br>&amp;=argmax_k\frac{N_k+\lambda}{N+\lambda K}\prod_{j=1}^{D}\frac{N_k^{x^{(j)}}+\lambda}{N_k+\lambda D^{(j)}}<br>\end{align}$$<br>当$\lambda=0$，上式退化为普通的朴素贝叶斯。<br>当$\lambda=1$，上式称为拉普拉斯平滑。</p>
-<h3 id="预测时，最大后验概率的意义"><a href="#预测时，最大后验概率的意义" class="headerlink" title="预测时，最大后验概率的意义"></a>预测时，最大后验概率的意义</h3><p>再次强调，模型已经通过ML或者MAP估计好了，这里是预测时，朴素贝叶斯将实例分到后验概率最大的类中，等价于期望风险最小化。<br>$X$是输入随机向量，$Y$是输出随机变量<br>损失函数为0-1损失：<br>$$L(Y,f(X))=\begin{cases}<br>1,\ Y\neq f(X)\\<br>0,\ Y\neq f(X)<br>\end{cases}$$</p>
-<p>则期望损失为：<br>$$R_{exp}(f)=E_{X\times Y}[L(Y,f(X))]$$<br>将期望损失分解成$P(Y|X)$条件期望的内部，和$P(X)$的外部形式:<br>$$\begin{align}<br>R_{exp}(f)&amp;=E_{X\times Y}[L(Y,f(X))] \\<br>&amp;=\iint_{X\times Y}L(Y,f(X))P(Y,X) \\<br>&amp;=\iint_{X\times Y}L(Y,f(X))P(Y|X)P(X) \\<br>&amp;=\int_X\left\{\int_YL(Y,f(X))P(Y|X)\right\}P(X) \\<br>&amp;=\int_X\left\{\sum_{k=1}^KL(c_k,f(X))P(Y=c_k|X)\right\}P(X) \\<br>\end{align}$$<br>当数据给定后，$P(X)$为定值，且不影响期望损失($f$的泛函)中对$f$的选择。<br>因此，为了使期望损失最小，只需要使得条件期望部分最小即可，具体来说，就是对$X=x$逐个极小化。<br>$$\begin{align}<br>\hat f(x)&amp;=argmin_{f(x)}\sum_{k=1}^KL(c_k,f(x))P(Y=c_k|X=x) \\<br>&amp;=argmin_y\sum_{k=1}^KL(c_k,y)P(Y=c_k|X=x) \\<br>&amp;=argmin_y\sum_{k=1}^KL(c_k,y)P(c_k|X=x) \\<br>&amp;=argmin_y\sum_{k=1}^KP(y\neq c_k|X=x) \\<br>&amp;=argmin_y\left\{1-\sum_{k=1}^KP(y=c_k|X=x)\right\} \\<br>&amp;=argmin_y\left\{1-P(y=c_k|X=x)\right\} \\<br>&amp;=argmax_yP(y=c_k|X=x) \\<br>&amp;=argmax_{c_k}P(Y=c_k|X=x) \\<br>\end{align}$$<br>因此，期望风险最小等同于后验概率最大化。</p>
-
-
-                <hr>
-
-                
-
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2016/08/19/模型综述/" data-toggle="tooltip" data-placement="top" title="模型综述">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2016/08/18/boosting/" data-toggle="tooltip" data-placement="top" title="Boosting">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                
-
-                
-                <!-- disqus 评论框 start -->
-                <div class="comment">
-                    <div id="disqus_thread" class="disqus-thread"></div>
-                </div>
-                <!-- disqus 评论框 end -->
-                
-
-            </div>
-    <!-- Side Catalog Container -->
-        
-
-    <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-
-        </div>
-    </div>
-</article>
-
-
-
-
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "/2016/08/19/朴素贝叶斯/";
-    var disqus_url = "/2016/08/19/朴素贝叶斯/";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus 公共JS代码 end -->
-
-
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
+    <!-- Default Archive layout, we use archives instead. -->
 
     <!-- Footer -->
     <!-- Footer -->
