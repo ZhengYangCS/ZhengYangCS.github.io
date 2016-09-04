@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -181,6 +181,28 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/09/04/大数据与空间限制/">
+        <h2 class="post-title">
+            大数据与空间限制
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            1. 查找1.1 二分查找 40亿个不重复的unsigned int的整数，未排序，然后再给一个数，如何快速判断这个数是否在40亿个数当中： 0-1二分该数如果是0开头，就去掉40亿中的1的部分；再比较第二高位，如果是0开头，继续去掉第二高位为1的部分，…，直到文件为空，或者剩下该元素。时间复杂度为O(logn)。
+1.2 bloom filter查找 URL 是否存在：bloom filt......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-09-04
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -383,28 +405,6 @@ $1$
 
 <div class="post-preview">
 
-    <a href="/2016/08/26/LR & SVM/">
-        <h2 class="post-title">
-            LR & SVM
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            LR 与 SVMLR可以看作是一个线性分类器，一个w向量构成的超平面，与w内积大于0的表示正类，小于0的表示负类。LR与SVM线性核都是用一个超平面做分类，区别在于损失函数不同。LR是logistic损失，SVM是hinge损失。
-LRLR原本的损失是NLL，可以看成cross entropy，对数损失。如果把 $y=\{1,0\}$，换成 $y=\{1,-1\}$，那么可以看成logist......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-08-26
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
     <a href="/2016/08/26/弱对偶与强对偶/">
         <h2 class="post-title">
             弱对偶 与 强对偶
@@ -430,20 +430,21 @@ LRLR原本的损失是NLL，可以看成cross entropy，对数损失。如果把
 
 <div class="post-preview">
 
-    <a href="/2016/08/25/SOM/">
+    <a href="/2016/08/26/LR & SVM/">
         <h2 class="post-title">
-            SOM网络
+            LR & SVM
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            SOM(Self-Organizing Map)网络SOM网络又称Kohonen网络，自组织特征映射(SOFM)网。SOM网络是一种竞争的无监督神经网络，是两层结构，将高维输入数据映射到低维空间(通常为二维)，同时保持输入数据在高维空间的拓扑结构，即高维空间中相似的样例映射到网络输出层中的邻近神经元中。因此，SOM适用于聚类。SOM的训练目的就是为每个神经元找到合适的权向量，以达到保持拓扑结......
+            LR 与 SVMLR可以看作是一个线性分类器，一个w向量构成的超平面，与w内积大于0的表示正类，小于0的表示负类。LR与SVM线性核都是用一个超平面做分类，区别在于损失函数不同。LR是logistic损失，SVM是hinge损失。
+LRLR原本的损失是NLL，可以看成cross entropy，对数损失。如果把 $y=\{1,0\}$，换成 $y=\{1,-1\}$，那么可以看成logist......
         </div>
     </a>
     <p class="post-meta">
         Posted by ZhengYang on
-        2016-08-25
+        2016-08-26
     </p>
 
 </div>
