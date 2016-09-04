@@ -201,7 +201,7 @@
 <p><strong><em>统计 2.5亿个整数中找出不重复的整数的个数： bitmap</em></strong><br>2.5亿需要240M字节的内存。然后统计二进制1的个数。</p>
 <h4 id="2-2-hash映射-hashmap"><a href="#2-2-hash映射-hashmap" class="headerlink" title="2.2 hash映射 hashmap"></a>2.2 hash映射 hashmap</h4><p><strong><em>统计 出现次数最多的元素：hash映射 hashmap</em></strong><br>类似词频统计，hash映射成多个小文件，hashmap统计每部分出现次数最多的数，比较每部分的次数</p>
 <p><strong><em>统计 重复的URL： hash映射 hashmap</em></strong><br>hash映射成多个小文件，hashmap统计</p>
-<p><strong><em>统计 URL次数的topK ： hash映射 hashmap 小根堆</em></strong><br>hash映射成多个小文件，hashmap统计，每个小文件构建一个小根堆，合并所有的小根堆得到topK</p>
+<p><strong><em>统计 URL次数的topK ： hash映射 hashmap 小根堆</em></strong><br>hash映射成多个小文件，hashmap统计，每个小文件构建一个小根堆，合并所有的小根堆，得到全局的小根堆，最终得到topK。</p>
 <p><strong><em>统计 海量日志数据，提取出某日访问百度次数最多的那个IP</em></strong><br>先把访问百度的ip全部筛选出来，<br>再将ip地址hash到多个小文件<br>再hashmap统计各个ip的次数<br>最后比较各个小文件的最大次数</p>
 <h4 id="2-3-划区域"><a href="#2-3-划区域" class="headerlink" title="2.3 划区域"></a>2.3 划区域</h4><p><strong><em>找到中位数：40亿个非负整数，10MB内存</em></strong></p>
 <ol>
