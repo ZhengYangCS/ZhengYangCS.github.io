@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -192,7 +192,7 @@
                 post-container">
 
                 <h2 id="1-图的表示"><a href="#1-图的表示" class="headerlink" title="1.图的表示"></a>1.图的表示</h2><p>G=(V,E)表示图，其中|V|=n<br><img src="http://oavdwoegd.bkt.clouddn.com/adjacency.png" alt="图 (算法导论)"></p>
-<h3 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h3><p>G的邻接矩阵是一个N阶方阵<br>$$A_{ij}= \begin{cases}<br>1, (i,j)\in E \<br>0, elsewise<br>\end{cases}$$<br>如果图没有自连接的话，主对角线全为0。<br>对于无向图，邻接矩阵是对称的；<br>对于有向图，邻接矩阵基本是不对称的。</p>
+<h3 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h3><p>G的邻接矩阵是一个N阶方阵<br>$$A_{ij}= \begin{cases}<br>1, (i,j)\in E \\<br>0, elsewise<br>\end{cases}$$<br>如果图没有自连接的话，主对角线全为0。<br>对于无向图，邻接矩阵是对称的；<br>对于有向图，邻接矩阵基本是不对称的。</p>
 <h3 id="邻接表-adjacency-list"><a href="#邻接表-adjacency-list" class="headerlink" title="邻接表 adjacency list"></a>邻接表 adjacency list</h3><p>G的邻接表包含一个大小为N列表，每个元素为<strong>表头节点</strong>。对于每个表头节点 $u$，后面连接了一个链表，每个元素满足$(u,v)\in E$。<br>对于有向图，每个表头节点 后面的表节点，只记录从该表头出发的边。<br>对于无向图，每个表头节点 后面的表节点，记录了与该表头相连接的边。<br>所以说，将无向图的边节点总数必定是偶数，而有向图的边界点总数可能是奇数。</p>
 <h2 id="2-图的遍历"><a href="#2-图的遍历" class="headerlink" title="2.图的遍历"></a>2.图的遍历</h2><h3 id="广度优先-BFS-Breadth-First-Search"><a href="#广度优先-BFS-Breadth-First-Search" class="headerlink" title="广度优先 BFS (Breadth-First-Search)"></a>广度优先 BFS (Breadth-First-Search)</h3><p>类似 <strong>树的层次遍历</strong></p>
 <h3 id="深度优先-DFS-Depth-First-Traversal"><a href="#深度优先-DFS-Depth-First-Traversal" class="headerlink" title="深度优先 DFS (Depth-First Traversal)"></a>深度优先 DFS (Depth-First Traversal)</h3><p>类似 <strong>树的先序遍历</strong></p>

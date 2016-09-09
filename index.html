@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -300,8 +300,8 @@
         </h3>
         <div class="post-content-preview">
             1.图的表示G=(V,E)表示图，其中|V|=n
-邻接矩阵G的邻接矩阵是一个N阶方阵$$A_{ij}= \begin{cases}1, (i,j)\in E \0, elsewise\end{cases}$$如果图没有自连接的话，主对角线全为0。对于无向图，邻接矩阵是对称的；对于有向图，邻接矩阵基本是不对称的。
-邻接表 adjacency listG的邻接表包含一个大小为N列表，每个元素为表......
+邻接矩阵G的邻接矩阵是一个N阶方阵$$A_{ij}= \begin{cases}1, (i,j)\in E \\0, elsewise\end{cases}$$如果图没有自连接的话，主对角线全为0。对于无向图，邻接矩阵是对称的；对于有向图，邻接矩阵基本是不对称的。
+邻接表 adjacency listG的邻接表包含一个大小为N列表，每个元素为......
         </div>
     </a>
     <p class="post-meta">
@@ -426,16 +426,19 @@ $1$
 
 <div class="post-preview">
 
-    <a href="/2016/08/26/LR & SVM/">
+    <a href="/2016/08/26/弱对偶与强对偶/">
         <h2 class="post-title">
-            LR & SVM
+            弱对偶 与 强对偶
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            LR 与 SVMLR可以看作是一个线性分类器，一个w向量构成的超平面，与w内积大于0的表示正类，小于0的表示负类。LR与SVM线性核都是用一个超平面做分类，区别在于损失函数不同。LR是logistic损失，SVM是hinge损失。
-LRLR原本的损失是NLL，可以看成cross entropy，对数损失。如果把 $y=\{1,0\}$，换成 $y=\{1,-1\}$，那么可以看成logist......
+            弱对偶 与 强对偶 关系解释一弱对偶弱对偶：在最优化问题中，对偶间隙(duality gap)总是大于等于0。对于最小值优化来说，即$d\leqslant p$
+强对偶强对偶：在最优化问题中，对偶间隙(duality gap)等于0，即原问题等于对偶问题，$d=p$。
+弱对偶 变为 强对偶 （充分条件）
+若原问题是线性归回问题则弱对偶直接等于强对偶
+若原问题是凸优化问题则需要满足Slater......
         </div>
     </a>
     <p class="post-meta">
