@@ -184,20 +184,56 @@
 
 <div class="post-preview">
 
-    <a href="/2016/09/15/java/">
+    <a href="/2016/09/17/静态块/">
         <h2 class="post-title">
-            java
+            java 代码块
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            java静态代码块内部类在类中直接定义的内部类，仅限这个类的内部使用。内部类对象保存了一个外部类对象的引用，当内部类访问的变量或方法不存在时，会通过这个引用去访问外部类的变量或方法。一个内部类可以访问它的外部类的成员，但反过来就不行。即内部类的成员只有在内部类的范围内使用，不能被外部类使用。1234567891011121314151617181920212223class Outer&#1......
+            代码块 构造块 静态(代码)块1 代码块
+在方法或语句中出现的{},代码块和一般的语句,顺序执行
+
+1234567891011121314151617public class CodeBlock1 &#123;	public static void main(String[] args)&#123;		&#123;			System.out.println("代码块1"); // 1		&#......
         </div>
     </a>
     <p class="post-meta">
         Posted by ZhengYang on
-        2016-09-15
+        2016-09-17
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/09/14/IO/">
+        <h2 class="post-title">
+            java IO
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            文件读写常用的类
+java.io.File
+java.io.InputStream  抽象类
+java.io.FileInputStream 参数为文件名
+java.io.FilterInputStream
+java.io.BufferedInputStream
+java.io.DataInputStream
+
+
+
+
+java.io.OutputStream  抽象类
+java.io.Fil......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-09-14
     </p>
 
 </div>
@@ -412,34 +448,6 @@ $1$
     <p class="post-meta">
         Posted by ZhengYang on
         2016-08-29
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/08/28/推荐/">
-        <h2 class="post-title">
-            推荐
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            推荐实验方法离线实验
-通过日志系统获得用户行为数据，并按照一定格式生成一个标准的数据集
-将数据集分为训练集和测试集
-在训练集上训练模型，在测试集上测试
-通过事先定义的评测指标判断测试效果
-
-用户调查离线实验的指标和实际的指标会存在差异，比如预测准确率和用户满意度之间就存在差异，高预测准确率不等于高用户满意度。最好的方法就是直接上线测试，但直接上线会存在风险，因此会在上线前做用户调查。
-在线实......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-08-28
     </p>
 
 </div>
