@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -181,6 +181,28 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/08/23/线性模型/">
+        <h2 class="post-title">
+            线性模型总结
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            线性模型线性模型的基本形式，$$f(\mathbf x)=\mathbf w^T\mathbf x+b$$$\mathbf x$，D维输入$\mathbf w$，D维参数$b$，1维偏置将$\mathbf{w, x}$变成D+1维，且$\mathbf x$的D+1维恒为1，线性模型变为，$$f(\mathbf x)=\mathbf w^T\mathbf x$$
+更一般的写法为，$$f(\ma......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by ZhengYang on
+        2016-08-23
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -351,16 +373,15 @@ P(x)与p(x)区......
 
 <div class="post-preview">
 
-    <a href="/2016/08/18/boosting/">
+    <a href="/2016/08/18/关联规则/">
         <h2 class="post-title">
-            Boosting
+            Apriori
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            Boosting是一类提升算法的总称，包括AdaBoost，提升树，梯度提升等。不同Boosting算法的提升方式不太相同，但主要学习步骤是先从初始训练集中训练出一个基学习器，然后下一个基学习器更多地关注分类错误的样本点，迭代多次，直到误差达到要求以内，最后将每次训练的基学习器组合起来。
-AdaBoostAdaBoost是Freund和Schapire于1995年提出的。每次迭代更改的是样例......
+            关联规则关联规则是形如$X \rightarrow Y$ 的蕴含表达式，其中$X$和$Y$是不相交的项集，即$X\bigcap Y=\varnothing$。关联规则的强度可以用它的支持度(support)和置信度(confidence)度量。支持度（联合概率）：确定规则可以用与给定的数据集的频繁程度。置信度（条件概率）：确定$Y$在包含$X$的事物中出现的频繁程度。$$support(X\......
         </div>
     </a>
     <p class="post-meta">
@@ -373,15 +394,16 @@ AdaBoostAdaBoost是Freund和Schapire于1995年提出的。每次迭代更改的�
 
 <div class="post-preview">
 
-    <a href="/2016/08/18/关联规则/">
+    <a href="/2016/08/18/boosting/">
         <h2 class="post-title">
-            Apriori
+            Boosting
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            关联规则关联规则是形如$X \rightarrow Y$ 的蕴含表达式，其中$X$和$Y$是不相交的项集，即$X\bigcap Y=\varnothing$。关联规则的强度可以用它的支持度(support)和置信度(confidence)度量。支持度（联合概率）：确定规则可以用与给定的数据集的频繁程度。置信度（条件概率）：确定$Y$在包含$X$的事物中出现的频繁程度。$$support(X\......
+            Boosting是一类提升算法的总称，包括AdaBoost，提升树，梯度提升等。不同Boosting算法的提升方式不太相同，但主要学习步骤是先从初始训练集中训练出一个基学习器，然后下一个基学习器更多地关注分类错误的样本点，迭代多次，直到误差达到要求以内，最后将每次训练的基学习器组合起来。
+AdaBoostAdaBoost是Freund和Schapire于1995年提出的。每次迭代更改的是样例......
         </div>
     </a>
     <p class="post-meta">
@@ -405,36 +427,13 @@ AdaBoostAdaBoost是Freund和Schapire于1995年提出的。每次迭代更改的�
             
 hexo写markdown中_与*一样，表示斜体或粗体，但mathjax中_表示下标，因此，mathjax中换行\\，在markdown中写成\\\\mathjax中下标_，在markdown改写成\_mathjax中下标\{，在markdown改写成\\{mathjax中下标\}，在markdown改写成\\}
 
-在markdown的表格中插入|，可以输入 \&#124; 代替
-公式右键......
+在markdown的表格中插入|，可以输入 \&amp;#124; 代替
+......
         </div>
     </a>
     <p class="post-meta">
         Posted by ZhengYang on
         2016-08-17
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/08/16/GMM/">
-        <h2 class="post-title">
-            EM算法解高斯混合模型
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            EM算法的一个重要应用是GMM的参数估计。因为GMM中包含一个隐变量，即可观测变量是来自哪个高斯的，因此，EM算法非常适合解决GMM的参数估计。
-
-...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by ZhengYang on
-        2016-08-16
     </p>
 
 </div>

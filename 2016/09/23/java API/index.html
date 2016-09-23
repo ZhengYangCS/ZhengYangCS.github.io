@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="zhengyang_cs@outlook.com">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          java API - ZhengYang&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="/2016/09/23/java API/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">ZhengYang&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/line1.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#java" title="java">java</a>
+                        
+                    </div>
+                    <h1>java API</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by ZhengYang on
+                        2016-09-23
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p><strong>Interface</strong></p>
+<ul>
+<li>java.lang.Iterable<t><ul>
+<li>java.util.Collection<e><ul>
+<li>java.util.List<e> 对象间有顺序，允许重复</e></li>
+<li>java.util.Set<e> 对象间无顺序，不允许重复</e></li>
+</ul>
+</e></li>
+</ul>
+</t></li>
+<li>java.util.Map<k, v=""><ul>
+<li>java.util.SortedMap<k, v=""></k,></li>
+</ul>
+</k,></li>
+</ul>
+<p><strong>Class</strong></p>
+<ul>
+<li>java.util.AbstractCollection<e><ul>
+<li>java.util.AbstractList<e><ul>
+<li>java.util.AbstractSequentialList<e><ul>
+<li><strong>java.util.LinkedList<e></e></strong></li>
+</ul>
+</e></li>
+<li><strong>java.util.ArrayList<e></e></strong></li>
+<li>java.util.Vector<e><ul>
+<li>java.Stack<e></e></li>
+</ul>
+</e></li>
+</ul>
+</e></li>
+<li>java.util.AbstractSet<e><ul>
+<li><strong>java.util.HashSet<e></e></strong><ul>
+<li>java.LinkedHashSet<e></e></li>
+</ul>
+</li>
+<li>java.util.TreeSet<e></e></li>
+</ul>
+</e></li>
+</ul>
+</e></li>
+<li>java.util.AbstractMap<k, v=""><ul>
+<li><strong>java.util.HashMap<k, v=""></k,></strong><ul>
+<li>java.util.LinkedHashMap<k, v=""></k,></li>
+</ul>
+</li>
+<li>java.util.TreeMap<k, v=""></k,></li>
+</ul>
+</k,></li>
+<li>java.util.Dictionary<k, v=""><ul>
+<li><strong>java.util.HashTable<k, v=""></k,></strong></li>
+</ul>
+</k,></li>
+</ul>
+<h3 id="1-正则表达式-字符串"><a href="#1-正则表达式-字符串" class="headerlink" title="1 正则表达式 字符串"></a>1 正则表达式 字符串</h3><h4 id="1-1-字符串常量-字符串变量"><a href="#1-1-字符串常量-字符串变量" class="headerlink" title="1.1 字符串常量 字符串变量"></a>1.1 字符串常量 字符串变量</h4><p>String 字符串常量 不可变，所以线程安全<br>StringBuffer 字符串变量 线程安全<br>StringBuilder 字符串变量 线程不安全</p>
+<h4 id="1-2-正则表达式"><a href="#1-2-正则表达式" class="headerlink" title="1.2 正则表达式"></a>1.2 正则表达式</h4><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>()</td>
+<td>组</td>
+</tr>
+<tr>
+<td>*</td>
+<td>任意次</td>
+</tr>
+<tr>
+<td>+</td>
+<td>一次或多次</td>
+</tr>
+<tr>
+<td>?</td>
+<td>零次或一次</td>
+</tr>
+<tr>
+<td>\d{n}</td>
+<td>数字匹配n次</td>
+</tr>
+<tr>
+<td>\d{n,}</td>
+<td>数字至少匹配n次</td>
+</tr>
+<tr>
+<td>\d{n,m}</td>
+<td>数字匹配n-m次</td>
+</tr>
+<tr>
+<td>.</td>
+<td>除\r\n之外的任意字符</td>
+</tr>
+<tr>
+<td>[\s\S]</td>
+<td>任意字符，包括\r\n</td>
+</tr>
+<tr>
+<td>x&#124;y</td>
+<td>匹配x或y</td>
+</tr>
+<tr>
+<td>[xy]</td>
+<td>匹配x或y</td>
+</tr>
+<tr>
+<td>[^xy]</td>
+<td>不匹配x或y</td>
+</tr>
+<tr>
+<td>[A-Za-z0-9]</td>
+<td>匹配所有字母和数字</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>数字</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>非 \d</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>不可见字符（空格，tab，换行）</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>非 \s</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>包括下划线的任何字符</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>非 \w</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1-3-正则匹配-字符串的基本函数"><a href="#1-3-正则匹配-字符串的基本函数" class="headerlink" title="1.3 正则匹配 字符串的基本函数"></a>1.3 正则匹配 字符串的基本函数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.regex.Matcher;</div><div class="line"><span class="keyword">import</span> java.util.regex.Pattern;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Regex</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="comment">//// 字符串正则匹配</span></div><div class="line">        <span class="comment">// 字符串 和 匹配模式</span></div><div class="line">        String text = <span class="string">"123456789-a12354-54-"</span>;</div><div class="line">        String pattern = <span class="string">"(\\d*)-"</span>;</div><div class="line">        <span class="comment">// 获得 matcher对象</span></div><div class="line">        Matcher matcher = Pattern.compile(pattern).matcher(text);</div><div class="line">        <span class="comment">// 有多少个组(pattern中的小括号数)，group()默认为0，表示正常全匹配</span></div><div class="line">        System.out.println(matcher.groupCount());</div><div class="line">        <span class="comment">// 输出匹配的结果</span></div><div class="line">        <span class="keyword">while</span>(matcher.find())&#123;</div><div class="line">            System.out.println(matcher.group());</div><div class="line">            System.out.println(matcher.group(<span class="number">1</span>));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//// 字符串划分，字符串替换  </span></div><div class="line">        String str = <span class="string">"ab,cd, dsg."</span>;</div><div class="line">        String[] fields = str.replace(<span class="string">"."</span>, <span class="string">""</span>).split(<span class="string">"\\s*,\\s*"</span>);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;fields.length; ++i)</div><div class="line">            System.out.println(fields[i]);</div><div class="line"></div><div class="line">        <span class="comment">//// 字符串操作</span></div><div class="line">        String s1 = <span class="string">"123ajioin145a"</span>;</div><div class="line">        String s2 = <span class="string">"321aniiia"</span>;</div><div class="line">        <span class="comment">// 字符串比较</span></div><div class="line">        s1.equals(s2);</div><div class="line">        <span class="comment">// 忽略大小写比较</span></div><div class="line">        s1.equalsIgnoreCase(s2);</div><div class="line">        <span class="comment">// 返回index=3的字符</span></div><div class="line">        s1.charAt(<span class="number">3</span>);</div><div class="line">        <span class="comment">// 返回字母a在字符创s1中，第一次出现的位置，从0位置开始找</span></div><div class="line">        System.out.println(s1.indexOf(<span class="string">"a"</span>));  </div><div class="line">        <span class="comment">// 区别是，从5位置开始找</span></div><div class="line">        System.out.println(s1.indexOf(<span class="string">'a'</span>,<span class="number">5</span>));</div><div class="line">        <span class="comment">//截取s1第6个字符到末尾的字符串</span></div><div class="line">        s1.substring(<span class="number">6</span>);</div><div class="line">        <span class="comment">//截取s1第6个字符到第8个字符，不包括第8，类似python</span></div><div class="line">        s1.substring(<span class="number">6</span>,<span class="number">8</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="1-4-String变为int的三种方法"><a href="#1-4-String变为int的三种方法" class="headerlink" title="1.4 String变为int的三种方法"></a>1.4 String变为int的三种方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a1 = Integer.parseInt(s1);</div><div class="line"><span class="keyword">int</span> a2 = <span class="keyword">new</span> Integer(s1).intValue();</div><div class="line"><span class="keyword">int</span> a3 = Integer.valueOf(s3).intValue()</div></pre></td></tr></table></figure>
+<h3 id="2-基本类型-包装类型"><a href="#2-基本类型-包装类型" class="headerlink" title="2 基本类型 包装类型"></a>2 基本类型 包装类型</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>基本类型</th>
+<th>包装类</th>
+<th>字符串str -&gt; 基本类型</th>
+<th>包装类 -&gt; 基本类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>Xxx包装类.parseXxx(str)</td>
+<td>Xxx包装类对象.xxxValue()</td>
+</tr>
+<tr>
+<td>整型</td>
+<td>byte</td>
+<td>Byte</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>short</td>
+<td>Short</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>int</td>
+<td>Integer</td>
+<td>Integer.parseInt(str)</td>
+<td>New Integer(s1).intValue()</td>
+</tr>
+<tr>
+<td></td>
+<td>long</td>
+<td>Long</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>浮点型</td>
+<td>float</td>
+<td>Float</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>double</td>
+<td>Double</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>char型</td>
+<td>char</td>
+<td>Character</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>boolean型</td>
+<td>boolean</td>
+<td>Boolean</td>
+<td>Boolean.getBoolean(str)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-ArraySort"><a href="#3-ArraySort" class="headerlink" title="3 ArraySort"></a>3 ArraySort</h3><p>java中已经有写好的排序算法，只需调用Arrays.sort()即可。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArraySort</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="comment">//// int数组只能升序排序</span></div><div class="line">        <span class="keyword">int</span>[] a = &#123;<span class="number">4</span>,<span class="number">3</span>,<span class="number">1</span>&#125;;</div><div class="line">        Arrays.sort(a);</div><div class="line">        <span class="comment">// 输出数组</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;a.length; i++)</div><div class="line">            System.out.print(a[i]+<span class="string">" "</span>);</div><div class="line">        System.out.println();</div><div class="line"></div><div class="line">        <span class="comment">//// Integer数组排序，可以顺序排，也可以逆序排</span></div><div class="line">        Integer[] b = &#123;<span class="number">4</span>,<span class="number">3</span>,<span class="number">1</span>&#125;;</div><div class="line">        <span class="comment">// 逆序比较器</span></div><div class="line">        Arrays.sort(b);</div><div class="line">        <span class="comment">// 逆序1</span></div><div class="line">        Arrays.sort(b, Collections.reverseOrder());  </div><div class="line">        <span class="comment">// 逆序2  自己构造比较器</span></div><div class="line">        Comparator&lt;Integer&gt; cmp1 = <span class="keyword">new</span> Comparator&lt;Integer&gt;()&#123;</div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Integer i, Integer j)</span></span>&#123;</div><div class="line">                <span class="keyword">return</span> -i.compareTo(j);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">        Arrays.sort(b, cmp1);</div><div class="line"></div><div class="line"></div><div class="line">        <span class="comment">//// String数组排序，可以顺序，也可以逆序</span></div><div class="line">        String[] strArr = &#123;<span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"A"</span>&#125;;</div><div class="line">        <span class="comment">// 字典顺序</span></div><div class="line">        Arrays.sort(strArr);</div><div class="line">        <span class="comment">// 字典逆序1</span></div><div class="line">        Arrays.sort(strArr,Collections.reverseOrder());</div><div class="line">        <span class="comment">// 字典逆序2  自己构造比较器</span></div><div class="line">        Comparator&lt;String&gt; cmp2 = <span class="keyword">new</span> Comparator&lt;String&gt;()&#123;</div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String i, String j)</span></span>&#123;</div><div class="line">                <span class="keyword">return</span> -i.compareTo(j);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">        Arrays.sort(strArr,cmp2);</div><div class="line">        <span class="comment">// 输出数组</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;strArr.length; i++)</div><div class="line">            System.out.print(strArr[i]+<span class="string">" "</span>);</div><div class="line">        System.out.println();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="4-List"><a href="#4-List" class="headerlink" title="4 List"></a>4 List</h3><h4 id="4-1-ArrayList-LinkedList的基本函数"><a href="#4-1-ArrayList-LinkedList的基本函数" class="headerlink" title="4.1 ArrayList LinkedList的基本函数"></a>4.1 ArrayList LinkedList的基本函数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">List</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="comment">// 有序，底层为数组</span></div><div class="line">        ArrayList&lt;Integer&gt; list1 = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">        <span class="comment">// 有序，底层为链表</span></div><div class="line">        LinkedList&lt;Integer&gt; list2 = <span class="keyword">new</span> LinkedList&lt;Integer&gt;();</div><div class="line"></div><div class="line">        <span class="comment">//// 以下方法，ArrayList和LinkedList都适用</span></div><div class="line">        <span class="comment">// add(value)</span></div><div class="line">        list1.add(<span class="number">4</span>); list1.add(<span class="number">3</span>); list1.add(<span class="number">1</span>);list1.add(<span class="number">5</span>);</div><div class="line">        <span class="comment">// remove(index)</span></div><div class="line">        list1.remove(<span class="number">3</span>);</div><div class="line">        <span class="comment">// list1的最大值</span></div><div class="line">        Collections.max(list1);</div><div class="line">        <span class="comment">// list1的最小值</span></div><div class="line">        Collections.min(list1);</div><div class="line">        <span class="comment">// list1中的3替换为30</span></div><div class="line">        Collections.replaceAll(list1, <span class="number">3</span>, <span class="number">30</span>);</div><div class="line">        <span class="comment">// list1的clone</span></div><div class="line">        ArrayList&lt;Integer&gt; list1Clone = (ArrayList&lt;Integer&gt;) list1.clone();</div><div class="line">        <span class="comment">// list1的swap</span></div><div class="line">        Collections.swap(list1, <span class="number">0</span>, <span class="number">2</span>);</div><div class="line">        <span class="comment">// list1的全填充</span></div><div class="line">        Collections.fill(list1, <span class="number">100</span>);</div><div class="line">        <span class="comment">// list1的排序</span></div><div class="line">        Collections.sort(list1);</div><div class="line">        <span class="comment">// list1的逆序</span></div><div class="line">        Collections.reverse(list1);</div><div class="line">        <span class="comment">// list1 向右旋转1个单位</span></div><div class="line">        Collections.rotate(list1, <span class="number">1</span>);</div><div class="line">        <span class="comment">// 输出ArrayList</span></div><div class="line">        System.out.println(list1.toString()); <span class="comment">//中括号[100, 100, 100]</span></div><div class="line"></div><div class="line">        <span class="comment">//// 遍历</span></div><div class="line">        <span class="comment">// ArrayList 适合1</span></div><div class="line">        <span class="keyword">int</span> size = list1.size();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;size; ++i)</div><div class="line">            System.out.println(list1.get(i));</div><div class="line">        <span class="comment">// ArrayList 适合2</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;list1.size(); ++i)</div><div class="line">            System.out.println(list1.get(i));</div><div class="line"></div><div class="line">        <span class="comment">// LinkedList 非常适合1</span></div><div class="line">        Iterator&lt;Integer&gt; it = list2.iterator();</div><div class="line">        <span class="keyword">while</span>(it.hasNext())</div><div class="line">            System.out.println(it.next());</div><div class="line"></div><div class="line">        <span class="comment">// LinkedList 非常适合2</span></div><div class="line">        <span class="keyword">for</span>(Integer i: list2)</div><div class="line">            System.out.println(i);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="4-2-Vector-ArrayList"><a href="#4-2-Vector-ArrayList" class="headerlink" title="4.2 Vector ArrayList"></a>4.2 Vector ArrayList</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>Vector</th>
+<th>ArrayList</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>synchronized否</td>
+<td>同步</td>
+<td>非同步</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-Set"><a href="#5-Set" class="headerlink" title="5 Set"></a>5 Set</h3><h4 id="5-1-HashSet-LinkedHashSet-TreeSet"><a href="#5-1-HashSet-LinkedHashSet-TreeSet" class="headerlink" title="5.1 HashSet LinkedHashSet TreeSet"></a>5.1 HashSet LinkedHashSet TreeSet</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>HashSet</th>
+<th>LinkedHashSet</th>
+<th>TreeSet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实现</td>
+<td>hash表</td>
+<td>hash表+双链表</td>
+<td>红黑树</td>
+</tr>
+<tr>
+<td>基本操作(add,remove,contains,size)时间复杂度</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>O(log(n))</td>
+</tr>
+<tr>
+<td>元素有序否</td>
+<td>无序</td>
+<td>插入序</td>
+<td>升序</td>
+</tr>
+<tr>
+<td>多线程同步否</td>
+<td>不同步</td>
+<td>不同步</td>
+<td>不同步</td>
+</tr>
+<tr>
+<td>允许插入null否</td>
+<td>允许,但多次add(null),也只能放入一个null</td>
+<td>不允许</td>
+<td>允许,但多次add(null),也只能放入一个null</td>
+</tr>
+</tbody>
+</table>
+<p>在每个覆盖了equals方法的类中，也必须覆盖hashCode方法。<br>hashcode在集合中会用到，将一个对象放入集合的流程：</p>
+<ol>
+<li>判断该对象的hashcode与集合中的任意对象的hashcode是否相等</li>
+<li>如果不等，放入该对象；如果相等，比较equals()是否相等</li>
+<li>如果不等，放入该元素；如果相等，不放入集合</li>
+</ol>
+<h4 id="5-2-Set的基本函数"><a href="#5-2-Set的基本函数" class="headerlink" title="5.2 Set的基本函数"></a>5.2 Set的基本函数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Set</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="comment">// 无序，无重复，可以add(null)   // 遍历速度中等，无论哪种遍历方法</span></div><div class="line">        HashSet&lt;Integer&gt; set1 = <span class="keyword">new</span> HashSet&lt;Integer&gt;();</div><div class="line">        <span class="comment">// 无序，无重复，可以add(null)   // 遍历速度最快，无论哪种遍历方法</span></div><div class="line">        LinkedHashSet&lt;Integer&gt; set2 = <span class="keyword">new</span> LinkedHashSet&lt;Integer&gt;();</div><div class="line">        <span class="comment">// 升序，无重复，不能add(null)   // 遍历速度最慢，无论哪种遍历方法</span></div><div class="line">        TreeSet&lt;Integer&gt; set3 = <span class="keyword">new</span> TreeSet&lt;Integer&gt;();</div><div class="line"></div><div class="line">        <span class="comment">// add(value)</span></div><div class="line">        set1.add(<span class="number">4</span>); set2.add(<span class="number">3</span>); set3.add(<span class="number">3</span>);set2.add(<span class="keyword">null</span>);</div><div class="line">        <span class="comment">// remove(value)</span></div><div class="line">        set2.remove(<span class="keyword">null</span>);</div><div class="line">        <span class="comment">// 如果两个集合无交集，则返回true</span></div><div class="line">        Collections.disjoint(set1, set3);</div><div class="line">        <span class="comment">// 集合最大值</span></div><div class="line">        Collections.max(set1);</div><div class="line">        <span class="comment">// 集合最小值</span></div><div class="line">        Collections.min(set1);</div><div class="line">        <span class="comment">// 直接输出</span></div><div class="line">        System.out.println(set1.toString()); <span class="comment">// 中括号[]</span></div><div class="line"></div><div class="line">        <span class="comment">//// 迭代输出</span></div><div class="line">        <span class="comment">// Set迭代输出1</span></div><div class="line">        <span class="keyword">for</span>(Integer i: set3)&#123;</div><div class="line">            System.out.println(i);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// Set迭代输出2</span></div><div class="line">        Iterator&lt;Integer&gt; it1 = set3.iterator();</div><div class="line">        <span class="keyword">while</span>(it1.hasNext())&#123;</div><div class="line">            System.out.println(it1.next());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// TreeSet多一种的降序迭代输出</span></div><div class="line">        Iterator&lt;Integer&gt; it2 = set3.descendingIterator();</div><div class="line">        <span class="keyword">while</span>(it2.hasNext())</div><div class="line">            System.out.println(it2.next());            </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="6-Map"><a href="#6-Map" class="headerlink" title="6 Map"></a>6 Map</h3><h4 id="6-1-HashMap-LinkedHashMap-TreeMap-的基本函数"><a href="#6-1-HashMap-LinkedHashMap-TreeMap-的基本函数" class="headerlink" title="6.1 HashMap LinkedHashMap TreeMap 的基本函数"></a>6.1 HashMap LinkedHashMap TreeMap 的基本函数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"><span class="keyword">import</span> java.util.Map.Entry;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Map</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="comment">// key用hashset存储，value都是Collection</span></div><div class="line">        HashMap&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;Integer, Integer&gt;();</div><div class="line">        <span class="comment">// key用hashset加linkedlist存储</span></div><div class="line">        LinkedHashMap&lt;Integer, Integer&gt; map2 = <span class="keyword">new</span> LinkedHashMap&lt;Integer, Integer&gt;();</div><div class="line">        <span class="comment">// key用红黑树有序存储</span></div><div class="line">        TreeMap&lt;Integer, Integer&gt; map3 = <span class="keyword">new</span> TreeMap&lt;Integer, Integer&gt;();</div><div class="line"></div><div class="line">        <span class="comment">//// 以下方法对于HashMap，LinkedHashMap，TreeMap都适用</span></div><div class="line">        <span class="comment">// 添加key value</span></div><div class="line">        map.put(<span class="number">2</span>, <span class="number">20</span>);  map.put(<span class="number">1</span>, <span class="number">10</span>); map.put(<span class="number">3</span>, <span class="number">30</span>);</div><div class="line">        <span class="comment">// 移除 key</span></div><div class="line">        map.remove(<span class="number">3</span>);</div><div class="line">        <span class="comment">// map的size()，这里不是用length</span></div><div class="line">        map.size();</div><div class="line">        <span class="comment">// 判断是否存在key=1的Entry</span></div><div class="line">        map.containsKey(<span class="number">1</span>);</div><div class="line">        <span class="comment">// 返回key的Set</span></div><div class="line">        map.keySet();</div><div class="line">        <span class="comment">// 返回values的Collection</span></div><div class="line">        map.values();</div><div class="line">        <span class="comment">// 返回Set&lt;Entry&lt;Key, Value&gt;&gt;</span></div><div class="line">        map.entrySet();</div><div class="line">        <span class="comment">// 替换key=1，对应的value值为100</span></div><div class="line">        map.replace(<span class="number">1</span>, <span class="number">100</span>);</div><div class="line">        <span class="comment">// AbstractMap的都可以equals比较</span></div><div class="line">        map2.put(<span class="number">2</span>, <span class="number">20</span>);  map2.put(<span class="number">1</span>, <span class="number">100</span>);</div><div class="line">        <span class="comment">// 只要key和value都相等就行，HashMap,LinkedHashMap,TreeSet都可以equals比较</span></div><div class="line">        System.out.println(map.equals(map2));</div><div class="line">        map3.put(<span class="number">2</span>, <span class="number">20</span>);  map3.put(<span class="number">1</span>, <span class="number">100</span>);</div><div class="line">        <span class="comment">// 只要key和value都相等就行，HashMap,LinkedHashMap,TreeSet都可以equals比较</span></div><div class="line">        System.out.println(map.equals(map3));</div><div class="line">        <span class="comment">// 输出</span></div><div class="line">        System.out.println(map.toString());  <span class="comment">//大括号&#123;1=100, 2=20&#125;</span></div><div class="line"></div><div class="line">        <span class="comment">//// 迭代输出</span></div><div class="line">        <span class="comment">// HashMap 迭代的三种方式</span></div><div class="line">        <span class="comment">// 1 key和value单独遍历</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> key: map.keySet())&#123; <span class="comment">//Set</span></div><div class="line">            System.out.println(key);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> value: map.values())&#123; <span class="comment">// Collection</span></div><div class="line">            System.out.println(value);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 2 key和value一起得到</span></div><div class="line">        <span class="keyword">for</span>(Entry&lt;Integer, Integer&gt; entry : map.entrySet())&#123; <span class="comment">// Entry</span></div><div class="line">            System.out.println(entry);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 3 迭代</span></div><div class="line">        Iterator&lt;Integer&gt; iter = map.keySet().iterator(); <span class="comment">//Set</span></div><div class="line">        <span class="keyword">while</span>(iter.hasNext())&#123;</div><div class="line">            System.out.println(iter.next());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="6-2-HashMap-Hashtable"><a href="#6-2-HashMap-Hashtable" class="headerlink" title="6.2 HashMap Hashtable"></a>6.2 HashMap Hashtable</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>HashMap</th>
+<th>Hashtable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>synchronized 否</td>
+<td>非同步</td>
+<td>同步</td>
+</tr>
+<tr>
+<td>允许nul否</td>
+<td>允许</td>
+<td>不允许</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">HashMap&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;Integer, Integer&gt;();</div><div class="line">Hashtable&lt;Integer, Integer&gt; tab = <span class="keyword">new</span> Hashtable&lt;Integer, Integer&gt;();</div><div class="line">map.put(<span class="number">2</span>, <span class="number">20</span>);</div><div class="line">map.put(<span class="number">1</span>, <span class="number">10</span>);</div><div class="line">map.put(<span class="number">3</span>, <span class="number">30</span>);</div><div class="line"></div><div class="line">tab.put(<span class="number">2</span>, <span class="number">20</span>);</div><div class="line">tab.put(<span class="number">1</span>, <span class="number">10</span>);</div><div class="line">tab.put(<span class="number">3</span>, <span class="number">30</span>);</div><div class="line"><span class="comment">// HashMap 迭代的三种方式</span></div><div class="line"><span class="comment">// 1</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> key: map.keySet())&#123; <span class="comment">//Set</span></div><div class="line">    System.out.println(key);</div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> value: map.values())&#123; <span class="comment">// Collection</span></div><div class="line">    System.out.println(value);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 2</span></div><div class="line"><span class="keyword">for</span>(Entry&lt;Integer, Integer&gt; entry : map.entrySet())&#123; <span class="comment">// Entry</span></div><div class="line">    System.out.println(entry);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 3</span></div><div class="line">Iterator iter = map.keySet().iterator();</div><div class="line"><span class="keyword">while</span>(iter.hasNext())&#123;</div><div class="line">    System.out.println(iter.next());</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Hashtable 多一种迭代的方式</span></div><div class="line">Enumeration e = tab.keys(); <span class="comment">// Enumeration</span></div><div class="line"><span class="keyword">while</span>(e.hasMoreElements())&#123;</div><div class="line">    System.out.println(e.nextElement());</div><div class="line">&#125;</div><div class="line">Enumeration e1 = tab.elements(); <span class="comment">// Enumeration</span></div><div class="line"><span class="keyword">while</span>(e1.hasMoreElements())&#123;</div><div class="line">    System.out.println(e1.nextElement());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="7-格式化"><a href="#7-格式化" class="headerlink" title="7 格式化"></a>7 格式化</h3><h4 id="7-1-取2位小数"><a href="#7-1-取2位小数" class="headerlink" title="7.1 取2位小数"></a>7.1 取2位小数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 四舍五入  1.17</span></div><div class="line">System.out.println(String.format(<span class="string">"%.2f"</span>, <span class="number">1.1675</span>));</div><div class="line"><span class="comment">// 向上取小数 1.17</span></div><div class="line">System.out.println(Math.ceil(<span class="number">1.1675</span>*<span class="number">100</span>)/<span class="number">100</span>);</div><div class="line">System.out.println(String.format(<span class="string">"%.2f"</span>, Math.ceil(<span class="number">1.1675</span>*<span class="number">100</span>)/<span class="number">100</span>));</div><div class="line"><span class="comment">// 向下取小数 1.16</span></div><div class="line">System.out.println(Math.floor(<span class="number">1.1675</span>*<span class="number">100</span>)/<span class="number">100</span>);</div><div class="line">System.out.println(String.format(<span class="string">"%.2f"</span>, Math.floor(<span class="number">1.1675</span>*<span class="number">100</span>)/<span class="number">100</span>));</div></pre></td></tr></table></figure>
+<h4 id="7-2-取整"><a href="#7-2-取整" class="headerlink" title="7.2 取整"></a>7.2 取整</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 四舍五入 12</span></div><div class="line">System.out.println(Math.round(<span class="number">11.675</span>));  <span class="comment">// round返回的是long</span></div><div class="line"><span class="comment">// 向上取整 12</span></div><div class="line">System.out.println((<span class="keyword">int</span>)Math.ceil(<span class="number">11.675</span>)); <span class="comment">// ceil返回的是double</span></div><div class="line"><span class="comment">// 向下取整 11</span></div><div class="line">System.out.println((<span class="keyword">int</span>)Math.floor(<span class="number">11.675</span>)); <span class="comment">// floor返回的是double</span></div></pre></td></tr></table></figure>
+<h3 id="8-java计时"><a href="#8-java计时" class="headerlink" title="8 java计时"></a>8 java计时</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">long</span> startMili=System.currentTimeMillis(); <span class="comment">// 当前时间对应的毫秒数</span></div><div class="line">System.out.println(startMili);</div><div class="line"><span class="comment">// 执行一段代码,求一百万次随机值</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">1000000</span>;i++)&#123;</div><div class="line">    Math.random();  <span class="comment">// [0,1) double</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">long</span> endMili=System.currentTimeMillis();</div><div class="line">System.out.println(endMili);</div><div class="line">System.out.println(endMili-startMili);</div></pre></td></tr></table></figure>
+<h3 id="9-随机数"><a href="#9-随机数" class="headerlink" title="9 随机数"></a>9 随机数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Math.random(); <span class="comment">// [0,1) double</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Random;</div><div class="line">Random r = <span class="keyword">new</span> Random();</div><div class="line">r.setSeed(<span class="number">0</span>); <span class="comment">// 设种子</span></div><div class="line">r.nextInt();  <span class="comment">// [-2147483648,2147483647] int</span></div><div class="line">r.nextInt(<span class="number">10</span>);  <span class="comment">// [0,9] int</span></div><div class="line">r.nextInt(<span class="number">10</span>)+<span class="number">1</span>; <span class="comment">// [1,10] int</span></div></pre></td></tr></table></figure>
+<h3 id="10-Math类"><a href="#10-Math类" class="headerlink" title="10 Math类"></a>10 Math类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">Math.abs(-<span class="number">1.1</span>); <span class="comment">// 绝对值</span></div><div class="line">Math.ceil(-<span class="number">1.1</span>); <span class="comment">// 顶函数  -1.0</span></div><div class="line">Math.round(-<span class="number">1.1</span>); <span class="comment">// 四舍五入 - 1</span></div><div class="line">Math.floor(-<span class="number">1.1</span>); <span class="comment">// 底函数  -2.0</span></div><div class="line"></div><div class="line"><span class="comment">// 都是以弧度计算的</span></div><div class="line">Math.sin(<span class="number">1.57</span>);</div><div class="line">Math.cos(<span class="number">1</span>);</div><div class="line">Math.tan(<span class="number">1</span>);</div><div class="line">Math.toDegrees(Math.PI); <span class="comment">// 180.0</span></div><div class="line">Math.toRadians(<span class="number">180</span>); <span class="comment">// 3.141592653589793</span></div><div class="line"></div><div class="line"><span class="keyword">double</span> e = Math.E;</div><div class="line"><span class="keyword">double</span> p = Math.PI;</div><div class="line">Math.exp(<span class="number">1</span>); <span class="comment">// e的1次</span></div><div class="line">Math.pow(<span class="number">2</span>, <span class="number">5</span>); <span class="comment">// 2的5次</span></div><div class="line">Math.log(<span class="number">1</span>); <span class="comment">// e为底，1的对数</span></div><div class="line">Math.log10(<span class="number">1</span>); <span class="comment">// 10 为底，1的对数</span></div><div class="line"><span class="keyword">double</span> l = Math.log(<span class="number">5</span>) / Math.log(<span class="number">2</span>); <span class="comment">// log以2为底，5的对数</span></div><div class="line"></div><div class="line">Math.sqrt(<span class="number">1</span>); <span class="comment">// 开根号</span></div><div class="line">Math.pow(<span class="number">8</span>, <span class="number">1.0</span>/<span class="number">3</span>);  <span class="comment">// 开3次方，注意必须1.0/3，否则1/3=0</span></div></pre></td></tr></table></figure>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ol>
+<li><a href="http://stackoverflow.com/questions/8962459/java-collections-keyset-vs-entryset-in-map" target="_blank" rel="external">http://stackoverflow.com/questions/8962459/java-collections-keyset-vs-entryset-in-map</a></li>
+<li><a href="http://stackoverflow.com/questions/1463284/hashset-vs-treeset" target="_blank" rel="external">http://stackoverflow.com/questions/1463284/hashset-vs-treeset</a></li>
+<li><a href="http://www.cnblogs.com/Terry-greener/archive/2011/12/02/2271707.html" target="_blank" rel="external">http://www.cnblogs.com/Terry-greener/archive/2011/12/02/2271707.html</a></li>
+<li><a href="http://blog.csdn.net/afgasdg/article/details/6889383" target="_blank" rel="external">http://blog.csdn.net/afgasdg/article/details/6889383</a></li>
+<li><a href="http://www.importnew.com/8773.html" target="_blank" rel="external">http://www.importnew.com/8773.html</a></li>
+<li><a href="http://www.programcreek.com/2013/03/hashset-vs-treeset-vs-linkedhashset/" target="_blank" rel="external">http://www.programcreek.com/2013/03/hashset-vs-treeset-vs-linkedhashset/</a></li>
+<li><a href="http://blog.csdn.net/rmn190/article/details/1492013" target="_blank" rel="external">http://blog.csdn.net/rmn190/article/details/1492013</a></li>
+<li><a href="http://www.cnblogs.com/interdrp/p/5004000.html" target="_blank" rel="external">http://www.cnblogs.com/interdrp/p/5004000.html</a></li>
+</ol>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/09/20/java IO/" data-toggle="tooltip" data-placement="top" title="java IO">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "/2016/09/23/java API/";
+    var disqus_url = "/2016/09/23/java API/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; ZhengYang&#39;s Blog 2016 
+                    <br>
+		Driver - <a href="https://hexo.io/">Hexo</a> | 
+                    Theme - <a href="https://github.com/Kaijun/hexo-theme-huxblog">Hux</a> 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'zhengyangcs.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work --><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+
+</html>
