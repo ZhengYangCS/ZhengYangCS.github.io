@@ -90,13 +90,6 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -105,6 +98,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -191,7 +191,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="隐马尔科夫模型"><a href="#隐马尔科夫模型" class="headerlink" title="隐马尔科夫模型"></a>隐马尔科夫模型</h2><p>隐马尔科夫模型是常用在语音识别，词性标注，主要是通过观测序列来学习模型参数，并对隐藏的状态进行推断。</p>
+                <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># coding:utf-8</span></div><div class="line"></div><div class="line"><span class="comment">## viterbi算法</span></div><div class="line"><span class="comment"># 根据观测，求最优状态</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> copy</div><div class="line"></div><div class="line">A = np.array([<span class="number">0.5</span>,<span class="number">0.3</span>,<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.5</span>,<span class="number">0.3</span>,<span class="number">0.3</span>,<span class="number">0.2</span>,<span class="number">0.5</span>]).reshape((<span class="number">3</span>,<span class="number">3</span>),order=<span class="string">'F'</span>)</div><div class="line">B = np.array([<span class="number">0.5</span>,<span class="number">0.4</span>,<span class="number">0.7</span>,<span class="number">0.5</span>,<span class="number">0.6</span>,<span class="number">0.3</span>]).reshape((<span class="number">3</span>,<span class="number">2</span>),order=<span class="string">'F'</span>)</div><div class="line">P = np.array([<span class="number">0.2</span>,<span class="number">0.4</span>,<span class="number">0.4</span>])</div><div class="line">O = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>])</div><div class="line"><span class="comment"># A ：状态转移矩阵</span></div><div class="line"><span class="comment"># B ：观测矩阵</span></div><div class="line"><span class="comment"># P ：初始状态概率</span></div><div class="line"><span class="comment"># O ：观测序列</span></div><div class="line"></div><div class="line"></div><div class="line">laststate = P*B[:,O[<span class="number">0</span>]]</div><div class="line">tmp = np.zeros(len(laststate))</div><div class="line">dp = np.zeros((len(A), len(O)),dtype=<span class="string">'int'</span>)</div><div class="line"><span class="keyword">print</span> laststate <span class="comment"># 初始状态</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">1</span>,len(O)): <span class="comment"># 序列长度</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(A)): <span class="comment"># 状态数</span></div><div class="line">        state = laststate*A[:,i]*B[i,O[t]] <span class="comment"># 这里B只用一个值，从状态i观测O[t]</span></div><div class="line">        dp[i][t] = state.argmax()</div><div class="line">        tmp[i] = state.max()</div><div class="line"></div><div class="line">    laststate = copy.copy(tmp)</div><div class="line"></div><div class="line">end = laststate.argmax()</div><div class="line"></div><div class="line"><span class="comment"># 输出最优序列</span></div><div class="line">end = <span class="number">0</span></div><div class="line">res = []</div><div class="line">res.append(end)</div><div class="line">cnt = len(dp[<span class="number">0</span>])<span class="number">-1</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(cnt,<span class="number">0</span>,<span class="number">-1</span>):</div><div class="line">    res.append(dp[end,cnt])</div><div class="line">    end = dp[end,cnt]</div><div class="line">    cnt = cnt - <span class="number">1</span></div><div class="line"></div><div class="line">res.reverse()</div><div class="line"><span class="keyword">print</span> res</div></pre></td></tr></table></figure>
+<h2 id="隐马尔科夫模型"><a href="#隐马尔科夫模型" class="headerlink" title="隐马尔科夫模型"></a>隐马尔科夫模型</h2><p>隐马尔科夫模型是常用在语音识别，词性标注，主要是通过观测序列来学习模型参数，并对隐藏的状态进行推断。</p>
 <p>总结隐马尔科夫模型的概率计算，参数学习，隐状态推断。</p>
 <p><img src="http://oavdwoegd.bkt.clouddn.com/hmm1.jpg" alt=""></p>
 <p><img src="http://oavdwoegd.bkt.clouddn.com/hmm2.jpg" alt=""></p>
